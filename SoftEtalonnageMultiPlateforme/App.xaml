@@ -10,5 +10,12 @@
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="{DynamicResource GlobalFontSize}" />
+        </Style>
+        <x:Double x:Key="GlobalFontSize"> 16 </x:Double>
+        <x:Double x:Key="TitleFontSize"> 25 </x:Double>
+        
     </Application.Resources>
 </Application>
