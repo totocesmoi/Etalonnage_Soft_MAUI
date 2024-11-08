@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftEtalonnageMultiPlateforme", "SoftEtalonnageMultiPlateforme.csproj", "{53DCB068-6482-489F-B51A-5351DED4813D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DCB068-6482-489F-B51A-5351DED4813D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C7715A2-A50A-461D-8E26-83FC97FE2A8C}
+	EndGlobalSection
+EndGlobal
