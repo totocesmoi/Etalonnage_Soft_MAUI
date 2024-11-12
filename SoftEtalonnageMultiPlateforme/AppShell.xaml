@@ -4,8 +4,31 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme"
-    Shell.FlyoutBehavior="Disabled"
-    Title="SoftEtalonnageMultiPlateforme">
+    xmlns:Flyout="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant.Flyout"
+    xmlns:picker="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Picker"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.BackgroundColor="{DynamicResource Navigation}"
+    Shell.TitleColor="{DynamicResource Text2}" 
+    Loaded="PreferenceLoading">
+
+    <Shell.FlyoutHeader>
+        <Flyout:Header />
+    </Shell.FlyoutHeader>
+
+    <Shell.FlyoutContent>
+        <ContentView BackgroundColor="{DynamicResource Background}">
+            <StackLayout>
+                <Label Text="{DynamicResource ThemePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                <picker:PickerTheme />
+
+                <Label Text="{DynamicResource LanguagePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                <picker:PickerLanguage LanguageVM="{Binding LanguageViewModel}"/>
+
+                <Label Text="{DynamicResource FontSizePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                <picker:PickerFontSize />
+            </StackLayout>
+        </ContentView>
+    </Shell.FlyoutContent>
 
     <ShellContent
         Title="Home"

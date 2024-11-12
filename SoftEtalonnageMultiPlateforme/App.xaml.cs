@@ -1,4 +1,8 @@
-﻿namespace SoftEtalonnageMultiPlateforme
+﻿using System.Globalization;
+using SoftEtalonnageMultiPlateforme.Resources.Theme;
+using VMService;
+
+namespace SoftEtalonnageMultiPlateforme
 {
     public partial class App : Application
     {
@@ -8,5 +12,7 @@
 
             MainPage = new AppShell();
         }
+
+        
     }
 }

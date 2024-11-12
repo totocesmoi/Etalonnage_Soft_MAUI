@@ -14,6 +14,12 @@
     <Color x:Key="Text1">#262626</Color>
     <Color x:Key="Text2">#404040</Color>
     <Color x:Key="Text3">#5c5c5c</Color>
+
+
+    <Color x:Key="Warning">#ef9c2c</Color>
+    <Color x:Key="Important">#f11c19</Color>
+    
+    
     
     
 </ResourceDictionary>

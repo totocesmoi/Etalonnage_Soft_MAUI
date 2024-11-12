@@ -17,7 +17,7 @@
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Dark</x:String>
                     <x:String>Light</x:String>
-                    <x:String>Odin</x:String>
+                    <x:String>Dufournier</x:String>
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>

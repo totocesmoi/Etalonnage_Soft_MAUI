@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
 {
@@ -21,6 +23,7 @@ namespace SoftEtalonnageMultiPlateforme
 
 #if DEBUG
             builder.Logging.AddDebug();
+            builder.Services.AddSingleton<LanguageVM>();
 #endif
 
             return builder.Build();

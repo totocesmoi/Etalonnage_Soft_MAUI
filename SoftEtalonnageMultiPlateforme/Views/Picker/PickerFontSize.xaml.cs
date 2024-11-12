@@ -7,7 +7,7 @@ public partial class PickerFontSize : ContentView
 		InitializeComponent();
 	}
 
-    private void pickerPolice_SelectedIndexChanged(object sender, EventArgs e)
+    private void pickerFontSize_SelectedIndexChanged(object sender, EventArgs e)
     {
         var selectedFontSize = pickerFontSize.SelectedItem.ToString();
         double fontSize = selectedFontSize switch
@@ -25,8 +25,8 @@ public partial class PickerFontSize : ContentView
             12 => 24,
             16 => 32,
             20 => 40,
-            24 => 48,
-            28 => 52,
+            24 => 44,
+            28 => 48,
             _ => 32
         };
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.Flyout.Header"
+             >
+    
+    <VerticalStackLayout>
+
+        <Grid ColumnDefinitions="3*, 7*" BackgroundColor="DarkGrey">
+            <Image
+                Grid.Column="0"
+                Source="logo_dufournier.png"/>
+
+            <Grid Grid.Column="1" RowDefinitions="*,*">
+
+                <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                    <Label 
+                        Grid.Column="0"
+                        Text="Nom"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label 
+                        Grid.Column="1"
+                        Text="Prénom"
+                        VerticalTextAlignment="Center"
+                        HorizontalTextAlignment="Center"/>
+                </Grid>
+
+                <Label 
+                    Grid.Row="1"
+                    Text="Mon role"
+                    VerticalTextAlignment="Center"
+                    HorizontalTextAlignment="Center"/>
+
+            </Grid>
+        </Grid>
+
+    </VerticalStackLayout>
+    
+</ContentView>
