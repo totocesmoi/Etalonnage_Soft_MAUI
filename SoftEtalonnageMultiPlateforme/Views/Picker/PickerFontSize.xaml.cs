@@ -5,7 +5,26 @@ public partial class PickerFontSize : ContentView
 	public PickerFontSize()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
+    }
+
+    public string SizeDefault { get; set; } = TextPickerFontSize();
+
+    private static string TextPickerFontSize()
+    {
+        var fontSize = Application.Current.Resources["GlobalFontSize"];
+
+        var size = (double)fontSize;
+        return size switch
+        {
+            12 => "Petit",
+            16 => "Moyen",
+            20 => "Grand",
+            24 => "Papi",
+            28 => "Mikael",
+            _ => "Moyen"
+        };
+    }
 
     private void pickerFontSize_SelectedIndexChanged(object sender, EventArgs e)
     {

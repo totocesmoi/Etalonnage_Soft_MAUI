@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="8.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+    <ProjectReference Include="..\VMWrapper\VMWrapper.csproj" />
+  </ItemGroup>
+
 </Project>

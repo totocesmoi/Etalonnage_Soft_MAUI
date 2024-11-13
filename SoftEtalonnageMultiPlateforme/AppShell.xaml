@@ -10,24 +10,26 @@
     Shell.BackgroundColor="{DynamicResource Navigation}"
     Shell.TitleColor="{DynamicResource Text2}" 
     Loaded="PreferenceLoading">
-
+    
     <Shell.FlyoutHeader>
         <Flyout:Header />
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutContent>
-        <ContentView BackgroundColor="{DynamicResource Background}">
-            <StackLayout>
-                <Label Text="{DynamicResource ThemePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
-                <picker:PickerTheme />
+        <ScrollView>
+            <ContentView BackgroundColor="{DynamicResource Background}">
+                <StackLayout>
+                    <Label Text="{DynamicResource ThemePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                    <picker:PickerTheme />
 
-                <Label Text="{DynamicResource LanguagePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
-                <picker:PickerLanguage LanguageVM="{Binding LanguageViewModel}"/>
+                    <Label Text="{DynamicResource LanguagePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                    <picker:PickerLanguage />
 
-                <Label Text="{DynamicResource FontSizePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
-                <picker:PickerFontSize />
-            </StackLayout>
-        </ContentView>
+                    <Label Text="{DynamicResource FontSizePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
+                    <picker:PickerFontSize />
+                </StackLayout>
+            </ContentView>
+        </ScrollView>
     </Shell.FlyoutContent>
 
     <ShellContent

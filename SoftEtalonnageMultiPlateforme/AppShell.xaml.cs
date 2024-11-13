@@ -1,19 +1,13 @@
 ﻿using System.Globalization;
 using SoftEtalonnageMultiPlateforme.Resources.Theme;
-using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
 {
     public partial class AppShell : Shell
     {
-        public LanguageVM LanguageViewModel { get; set; }
-
         public AppShell()
         {
-            LanguageViewModel = new LanguageVM();
             InitializeComponent();
-
-            BindingContext = this;
         }
 
         private void PreferenceLoading(object sender, EventArgs e)

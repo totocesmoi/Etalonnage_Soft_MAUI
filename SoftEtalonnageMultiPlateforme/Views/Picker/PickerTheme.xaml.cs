@@ -7,7 +7,10 @@ public partial class PickerTheme : ContentView
 	public PickerTheme()
 	{
 		InitializeComponent();
-	}
+        BindingContext = this;
+    }
+
+    public string ThemeDefault { get; set; } = Preferences.Default.Get("Theme", "chosenTheme");
 
     void pickerColor_SelectedIndexChanged(object sender, EventArgs e)
     {

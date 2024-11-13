@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using SoftEtalonnageMultiPlateforme.Resources.Theme;
-using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
 {

@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
+using Shared;
+using Model;
+using DAL.Stub;
 using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
@@ -23,7 +26,8 @@ namespace SoftEtalonnageMultiPlateforme
 
 #if DEBUG
             builder.Logging.AddDebug();
-            builder.Services.AddSingleton<LanguageVM>();
+            builder.Services.AddSingleton<IDataService<User>, StubbedData>();
+            builder.Services.AddSingleton<UserServiceVM>();
 #endif
 
             return builder.Build();

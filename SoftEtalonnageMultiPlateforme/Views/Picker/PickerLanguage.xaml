@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              x:Class="SoftEtalonnageMultiPlateforme.Views.Picker.PickerLanguage">
     <VerticalStackLayout>
 
+        <Label  Text="{language:LocalizedStringExtension Key=LanguagePickerTitle}" 
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text1}" />
+
         <Picker
             HorizontalTextAlignment="Center"
-            Title="{DynamicResource LanguagePickerTitle}"
+            Title="{language:LocalizedStringExtension Key=current_language}"
             TitleColor="{DynamicResource Text1}"
-            ItemsSource="{Binding LanguageVM.AvailableLanguages}"
-            SelectedItem="{Binding LanguageVM.SelectedLanguage, Mode=TwoWay}"
-            TextColor="{DynamicResource Text2}"
+            FontSize="{DynamicResource GlobalFontSize}" 
+            SelectedItem="{Binding Culture, Source={StaticResource Localization}}"
+            TextColor="{DynamicResource Text1}"
             BackgroundColor="Transparent">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>en-US</x:String>
+                    <x:String>fr-FR</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
         </Picker>
 
     </VerticalStackLayout>

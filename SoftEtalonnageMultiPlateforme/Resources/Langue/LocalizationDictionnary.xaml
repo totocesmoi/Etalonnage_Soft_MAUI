@@ -2,10 +2,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="SoftEtalonnageMultiPlateforme.Resources.Langue.LocalizationDictionnary"
-                    xmlns:loc="clr-namespace:VMService;assembly=VMService"
-                    xmlns:converter="clr-namespace:SoftEtalonnageMultiPlateforme.Converteur" >
+                    xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue" >
 
-    <loc:LanguageVM x:Key="AppResources"/>
-    <converter:CultureInfo2StringConverter x:Key="CultureInfo2StringConverter"/>
+    <local:Localization x:Key="Localization"/>
 
 </ResourceDictionary>
