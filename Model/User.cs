@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Model
 {
@@ -100,13 +101,13 @@ namespace Model
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="role"></param>
-        public User(string nom, string prenom, string mdp, Role? role, Picture picture = null, string signatureName = "")
+        public User(string nom, string prenom, string mdp, Role role = Role.Operator, Picture picture = null!, string signatureName = "")
         {
             Name = nom;
             Surname = prenom;
             Login = GenerateLogin(prenom, nom);
             Password = mdp;
-            UserRole = role ?? Role.Operator;
+            UserRole = role;
             actionsList = new List<Action>();
             Signature = picture ?? new Picture();
             SignatureName = signatureName;

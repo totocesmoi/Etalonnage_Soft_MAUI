@@ -26,7 +26,7 @@ namespace Model
         public Task<bool> DeleteUser(string login) => Service.DeleteAsyncUser(login);
 
         // Gestion de la connexion / déconnexion
-        public void Login(string login, string password) => Service.login(login, password);
+        public bool Login(string login, string password) => Service.login(login, password);
         public void Logout() => Service.logout();
 
 

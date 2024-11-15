@@ -1,9 +1,16 @@
+using VMService;
+
 namespace SoftEtalonnageMultiPlateforme.Views;
 
 public partial class LoginPage : ContentPage
 {
-	public LoginPage()
+	private readonly LoginServiceVM _loginServiceVM;
+
+    public LoginPage(LoginServiceVM loginServiceVM)
 	{
-		InitializeComponent();
+		_loginServiceVM = loginServiceVM;
+        InitializeComponent();
+
+		BindingContext = this;
 	}
 }

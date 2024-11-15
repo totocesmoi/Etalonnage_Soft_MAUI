@@ -4,7 +4,7 @@
         where U : class /* Pour User */
     {
         // Gestion des utilisateurs
-        void login(string login, string password);
+        bool login(string login, string password);
         void logout();
         Task<U?> GetAsyncCurrentUser();
         Task<Pagination<U>> GetAsyncAllUser(int index, int count);

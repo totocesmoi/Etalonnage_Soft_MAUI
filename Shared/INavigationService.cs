@@ -10,5 +10,25 @@ namespace Shared
     {
         Task NavigateToLoginAsync();
         Task NavigateToMainPageAsync();
-    }   
+    }
+
+    public class NavigationService : INavigationService
+    {
+        private readonly IServiceProvider _serviceProvider;
+
+        public NavigationService(IServiceProvider serviceProvider)
+        {
+            _serviceProvider = serviceProvider;
+        }
+
+        public async Task NavigateToLoginAsync()
+        {
+            await Shell.Current.GoToAsync("//LoginPage");
+        }
+
+        public async Task NavigateToMainPageAsync()
+        {
+            await Shell.Current.GoToAsync("//MainPage");
+        }
+    }
 }

@@ -14,39 +14,45 @@ namespace DAL.Stub
             UserService = new StubbedUser();
         }
 
-        public void login(string login, string password)
+        public bool login(string login, string password)
         {
-            throw new NotImplementedException();
+            var user = UserService.GetAsyncUserByLogin(login).Result;
+            if (user != null && user.Password == password)
+            {
+                currentUser = user;
+                return true;
+            }
+            return false;
         }
 
         public void logout()
         {
-            throw new NotImplementedException();
+            currentUser = null;
         }
 
         public Task<Pagination<User>> GetAsyncAllUser(int index, int count)
         {
-            throw new NotImplementedException();
+            return UserService.GetAsyncAllUser(index, count);
         }
 
         public Task<User?> GetAsyncCurrentUser()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(currentUser) ?? null!;
         }
 
         public Task<User> GetAsyncUserByLogin(string login)
         {
-            throw new NotImplementedException();
+            return UserService.GetAsyncUserByLogin(login);
         }
 
         public Task<bool> CreateAsyncUser(User user)
         {
-            throw new NotImplementedException();
+            return UserService.CreateUser(user);
         }
 
         public Task<User> UpdateAsyncUser(User user, string login)
         {
-            throw new NotImplementedException();
+            return UserService.UpdateUser(user, login);
         }
 
         public Task<bool> DeleteAsyncUser(string login)

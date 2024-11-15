@@ -57,9 +57,9 @@ namespace VMService
         /// Constructeur 
         /// </summary>
         /// <param name="service"></param>
-        public UserServiceVM(IDataService<User> service)
+        public UserServiceVM(Manager manager)
         {
-            this.service = new Manager(service);
+            service = manager;
             CreateCommands();
         }
 

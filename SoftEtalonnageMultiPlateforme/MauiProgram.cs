@@ -5,6 +5,7 @@ using Shared;
 using Model;
 using DAL.Stub;
 using VMService;
+using SoftEtalonnageMultiPlateforme.Views;
 
 namespace SoftEtalonnageMultiPlateforme
 {
@@ -36,6 +37,16 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddSingleton<Manager>();
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
+            // Ajout des commandes de connexion
+            builder.Services.AddSingleton<LoginServiceVM>();
+
+
+            // Gestion des injection de views 
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<LoginPage>();
+            
+
+
 #endif
 
             return builder.Build();

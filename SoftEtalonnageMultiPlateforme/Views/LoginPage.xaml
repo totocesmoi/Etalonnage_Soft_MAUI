@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.LoginPage"
-             Title="LoginPage">
+             Title="LoginPage"
+             BackgroundColor="{DynamicResource Navigation}"
+             Shell.NavBarIsVisible="False" >
     
     <ScrollView>
         <VerticalStackLayout
@@ -19,16 +21,22 @@
 
             <Entry
                 x:Name="LogiEntry"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
                 Placeholder="{Binding EnterLogin}"
                 Keyboard="Default" />
 
             <Entry
                 x:Name="PasswordEntry"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
                 Placeholder="{Binding EnterPasswd}"
                 IsPassword="True" />
 
             <Button
                 Text="{Binding Login}"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
                 Command="{Binding LoginCommand}"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>

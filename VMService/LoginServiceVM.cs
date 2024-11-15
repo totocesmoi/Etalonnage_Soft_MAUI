@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Shared;
 
 namespace VMService
 {
@@ -17,7 +19,8 @@ namespace VMService
         /// <summary>
         /// Permet de manager l'ensemble de mes commandes utilisables dans l'application
         /// </summary>
-        private Manager service;
+        private readonly Manager _service;
+        private readonly INavigationService _navigationService;
 
         [ObservableProperty]
         private string login;
@@ -25,8 +28,10 @@ namespace VMService
         [ObservableProperty]
         private string password;
 
-        public LoginServiceVM()
+        public LoginServiceVM(Manager service, INavigationService navigationService)
         {
+            _service = service;
+            _navigationService = navigationService;
             LoginCommand = new AsyncRelayCommand(OnLoginAsync, CanLogin);
         }
 
@@ -34,25 +39,17 @@ namespace VMService
 
         private async Task OnLoginAsync()
         {
-            // Remplacez cette logique par la validation réelle de l'utilisateur
-            var user = ValidateUser(Login, Password);
-            if (user != null)
+            if (_service.Login(Login, Password))
             {
-                // Naviguer vers la page principale après une connexion réussie
-                //await Application.Current.MainPage.Navigation.PushAsync(new MainPage());
+                await _navigationService.NavigateToMainPageAsync();
                 return;
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", "Nom d'utilisateur ou mot de passe incorrect", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Login or password incorrect !", "OK");
             }
         }
 
-        private bool CanLogin() => !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && service.CurrentUser == null;
-
-        private User ValidateUser(string login, string password)
-        {
-            throw new NotImplementedException();
-        }
+        private bool CanLogin() => !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) && _service.CurrentUser == null;
     }
 }

@@ -14,8 +14,10 @@ namespace VMService
         private Manager service;
         private readonly INavigationService _navigationService;
 
-        public NavigationServiceVM() 
+        public NavigationServiceVM(INavigationService navigationService, Manager service) 
         {
+            _navigationService = navigationService;
+            this.service = service;
             CreateCommands();
         }
 

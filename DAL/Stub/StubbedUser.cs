@@ -3,20 +3,56 @@ using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace DAL.Stub
 {
     public class StubbedUser : IUserService<User>
     {
-        public static UserCollection UserCollection { get; set; } = new UserCollection();
+        public static UserCollection UserCollection { get; set; }
 
         static StubbedUser()
         {
-            InitializeUsers();
+            string directoryPath = @"C:\Soft_Etalonnage\Configuration\";
+            string filePathUsers = @"C:\Soft_Etalonnage\Configuration\users.xml";
+            UserCollection = new UserCollection();
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Console.WriteLine($"Directory not found: {directoryPath}");
+                Directory.CreateDirectory(directoryPath);
+                InitializeUsers();
+                UserCollection.SaveUserFile(filePathUsers);
+            }
+            else
+            {
+                if (!File.Exists(filePathUsers))
+                {
+                    Console.WriteLine($"File not found: {filePathUsers}");
+                    Directory.CreateDirectory(directoryPath);
+                    InitializeUsers();
+                    UserCollection.SaveUserFile(filePathUsers);
+                }
+                else
+                {
+                    UserCollection.LoadUserFile(filePathUsers);
+                    if (UserCollection.UsersList.Count == 0)
+                    {
+                        Console.WriteLine("No user found, creating default users");
+                        InitializeUsers();
+                        UserCollection.SaveUserFile(filePathUsers);
+                    }
+                }
+            }
         }
 
+        /// <summary>
+        /// Utilisateurs par défaut pour ne pas bloqué la connexion durant les tests
+        /// </summary>
         private static void InitializeUsers()
         {
             // Création d'une image de signature (facultatif)
@@ -30,8 +66,10 @@ namespace DAL.Stub
                 mdp: "azerty",
                 role: Role.Administrator,
                 picture: signaturePicture,
-                signatureName: "Jean Dupont"
+                signatureName: "Toto l'artiste"
             );
+
+            SetPasswd(newUser, newUser.Password);
 
             // Ajout de l'utilisateur à la collection
             UserCollection.UsersList.Add(newUser);
@@ -39,29 +77,116 @@ namespace DAL.Stub
             Console.WriteLine("User created: " + newUser.Login);
         }
 
-        public Task<Pagination<User>> GetAsyncAllUser(int index, int count)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public async Task<Pagination<User>> GetAsyncAllUser(int index, int count)
         {
-            throw new NotImplementedException();
+            var users = UserCollection.UsersList.Skip(index * count).Take(count).ToList();
+            var pagination = new Pagination<User>
+            {
+                TotalCount = UserCollection.UsersList.Count,
+                Index = index,
+                Cout = count,
+                Items = users
+            };
+            return await Task.FromResult(pagination);
         }
 
-        public Task<User> GetAsyncUserByLogin(string login)
+        public async Task<User> GetAsyncUserByLogin(string login)
         {
-            throw new NotImplementedException();
+            var user = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+            return await Task.FromResult(user);
         }
 
-        public Task<bool> CreateUser(User user)
+        public async Task<bool> CreateUser(User user)
         {
-            throw new NotImplementedException();
+            if (UserCollection.UsersList.Any(u => u.Login == user.Login))
+            {
+                return await Task.FromResult(false);
+            }
+
+            SetPasswd(user, user.Password);
+            UserCollection.UsersList.Add(user);
+            return await Task.FromResult(true);
         }
 
-        public Task<User> UpdateUser(User user)
+        public async Task<User> UpdateUser(User user, string login)
         {
-            throw new NotImplementedException();
+            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+            if (existingUser != null)
+            {
+                existingUser.Name = user.Name;
+                existingUser.Surname = user.Surname;
+                existingUser.UserRole = user.UserRole;
+                existingUser.Signature = user.Signature;
+                existingUser.SignatureName = user.SignatureName;
+
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    SetPasswd(existingUser, user.Password);
+                }
+
+                return await Task.FromResult(existingUser);
+            }
+            return await Task.FromResult<User>(null!);
         }
 
-        public Task<bool> DeleteUser(User user)
+        public async Task<bool> DeleteUser(User user)
         {
-            throw new NotImplementedException();
+            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
+            if (existingUser != null)
+            {
+                UserCollection.UsersList.Remove(existingUser);
+                return await Task.FromResult(true);
+            }
+            return await Task.FromResult(false);
+        }
+
+        /// <summary>
+        /// Vérifie le mot de passe avec le hachage et le sel stockés
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="motDePasse"></param>
+        /// <returns></returns>
+        public static async Task<bool> VerifyMotDePasse(User user, string motDePasse)
+        {
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: motDePasse,
+                salt: user.Sel,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            return await Task.FromResult(hashed == user.Password);
+        }
+
+        /// <summary>
+        /// Setteur du mot de passe avec génération de clé de hachage
+        /// </summary>
+        /// <param name="motDePasse"></param>
+        public static void SetPasswd(User user, string motDePasse)
+        {
+            // Générer un sel aléatoire
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            // Hacher le mot de passe
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: motDePasse,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            user.Sel = salt;
+            user.Password = hashed;
         }
     }
 }
