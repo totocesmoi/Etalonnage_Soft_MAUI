@@ -26,7 +26,15 @@ namespace SoftEtalonnageMultiPlateforme
 
 #if DEBUG
             builder.Logging.AddDebug();
+            // Gestion des injections de dépendances
+
+            // Ajout des services de données
             builder.Services.AddSingleton<IDataService<User>, StubbedData>();
+            // Ajout de la navigation
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
+            // Ajout des commandes utilisables dans l'application
+            builder.Services.AddSingleton<Manager>();
+            // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
 #endif
 

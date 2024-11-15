@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme"
     xmlns:Flyout="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant.Flyout"
     xmlns:picker="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Picker"
+    xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
     Shell.FlyoutBehavior="Flyout"
     Shell.BackgroundColor="{DynamicResource Navigation}"
     Shell.TitleColor="{DynamicResource Text2}" 
@@ -32,9 +33,9 @@
         </ScrollView>
     </Shell.FlyoutContent>
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    
+    <!-- Informations sur mes routes -->
+    <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
+    <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
 
 </Shell>

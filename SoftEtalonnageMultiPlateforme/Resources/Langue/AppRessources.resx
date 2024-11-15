@@ -129,4 +129,13 @@
   <data name="LanguagePickerTitle" xml:space="preserve">
     <value>Choose your language :</value>
   </data>
+  <data name="EnterPasswd" xml:space="preserve">
+    <value>Enter your password</value>
+  </data>
+  <data name="EnterLogin" xml:space="preserve">
+    <value>Enter your login</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
 </root>

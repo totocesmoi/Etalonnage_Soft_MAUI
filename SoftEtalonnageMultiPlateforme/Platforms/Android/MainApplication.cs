@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Microsoft.Maui;
 using Android.Runtime;
 
 namespace SoftEtalonnageMultiPlateforme
