@@ -5,9 +5,9 @@ using System.Resources;
 
 namespace SoftEtalonnageMultiPlateforme.Resources.Langue;
 
-public partial class LocalizationDictionnary : ResourceDictionary
+public partial class LocalizationDictionary : ResourceDictionary
 {
-    public LocalizationDictionnary()
+    public LocalizationDictionary()
     {
         InitializeComponent();
     }

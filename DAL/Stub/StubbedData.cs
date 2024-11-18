@@ -17,6 +17,7 @@ namespace DAL.Stub
         public bool login(string login, string password)
         {
             var user = UserService.GetAsyncUserByLogin(login).Result;
+            password = UserService.VerifyPassword(user, password).Result;
             if (user != null && user.Password == password)
             {
                 currentUser = user;
@@ -57,7 +58,7 @@ namespace DAL.Stub
 
         public Task<bool> DeleteAsyncUser(string login)
         {
-            throw new NotImplementedException();
+            return UserService.DeleteUser(login);
         }
     }
 }

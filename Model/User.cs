@@ -164,5 +164,10 @@ namespace Model
         {
             return new List<Action> { Action.DataPostTraitement };
         }
+
+        public override string ToString()
+        {
+            return $"nom : {Name} \nprénom : {Surname} \nlogin : {Login}";
+        }
     }
 }

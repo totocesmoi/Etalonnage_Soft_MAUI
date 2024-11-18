@@ -12,12 +12,12 @@
         <Picker
             x:Name="pickerFontSize" 
             HorizontalTextAlignment="Center"
-            Title="{Binding SizeDefault}"
+            Title="{language:LocalizedStringExtension Key=SizeDefault}"
             TitleColor="{DynamicResource Text1}"
             FontSize="{DynamicResource GlobalFontSize}" 
             SelectedIndexChanged="pickerFontSize_SelectedIndexChanged"
             TextColor="{DynamicResource Text1}"
-            BackgroundColor="Transparent">
+            BackgroundColor="{DynamicResource Navigation}">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Petit</x:String>

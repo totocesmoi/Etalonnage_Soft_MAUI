@@ -6,6 +6,7 @@ using Model;
 using DAL.Stub;
 using VMService;
 using SoftEtalonnageMultiPlateforme.Views;
+using SoftEtalonnageMultiPlateforme.Resources.Langue;
 
 namespace SoftEtalonnageMultiPlateforme
 {
@@ -16,9 +17,7 @@ namespace SoftEtalonnageMultiPlateforme
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                // Initialize the .NET MAUI Community Toolkit by adding the below line of code
                 .UseMauiCommunityToolkit()
-                // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -38,7 +37,7 @@ namespace SoftEtalonnageMultiPlateforme
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
             // Ajout des commandes de connexion
-            builder.Services.AddSingleton<LoginServiceVM>();
+            builder.Services.AddTransient<LoginServiceVM>();
 
 
             // Gestion des injection de views 

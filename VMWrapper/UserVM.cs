@@ -3,7 +3,7 @@ using Model;
 
 namespace VMWrapper
 {
-    public class UserVM : ObservableObject, IEquatable<UserVM>
+    public partial class UserVM : ObservableObject, IEquatable<UserVM>
     {
         private User userModel;
         public User UserModel 
@@ -22,51 +22,30 @@ namespace VMWrapper
             UserModel = new User();
         }
 
-        public string Name
-        {
-            get => UserModel.Name;
-            set => SetProperty (Name, value, newValue => { UserModel.Name = newValue; });
-        }
+        [ObservableProperty]
+        private string name;
 
-        public string Surname
-        {
-            get => UserModel.Surname;
-            set => SetProperty(Surname, value, newValue => { UserModel.Surname = newValue; });
-        }
+        [ObservableProperty]
+        private string surname;
 
-        public string Login
-        {
-            get => UserModel.Login;
-            set => SetProperty(Login, value, newValue => { UserModel.Login = newValue; });
-        }
+        [ObservableProperty]
+        private string login;
 
-        public string Password
-        {
-            get => UserModel.Password;
-            set => SetProperty(Password, value, newValue => { UserModel.Password = newValue; });
-        }
+        [ObservableProperty]
+        private string password;
 
-        public Role UserRole
-        {
-            get => UserModel.UserRole;
-            set => SetProperty(UserRole, value, newValue => { UserModel.UserRole = newValue; });
-        }
+        [ObservableProperty]
+        private Role userRole;
 
-        public string SignatureName
-        {
-            get => UserModel.SignatureName;
-            set => SetProperty(SignatureName, value, newValue => { UserModel.SignatureName = newValue; });
-        }
+        [ObservableProperty]
+        private string signatureName;
 
-        public Picture Signature
-        {
-            get => UserModel.Signature;
-            set => SetProperty(Signature, value, newValue => { UserModel.Signature = newValue; });
-        }
+        [ObservableProperty]
+        private Picture signature;
 
         public bool Equals(UserVM? other)
         {
-            return Login.Equals(other.Login);
+            return login.Equals(other.login);
         }
     }
 }
