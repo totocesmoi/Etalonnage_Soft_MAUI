@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -58,7 +57,7 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue
         private string GetLocalizedValue()
         {
             var value = typeof(AppRessources).GetProperty(Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)?.GetValue(null) as string;
-            Debug.WriteLine($"Localized value for key '{Key}': {value}");
+            // Console.WriteLine($"Localized value for key '{Key}': {value}");
             return value ?? "";
         }
 

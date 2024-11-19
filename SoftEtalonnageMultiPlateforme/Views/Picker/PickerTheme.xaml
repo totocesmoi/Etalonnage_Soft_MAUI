@@ -12,12 +12,12 @@
         <Picker
             x:Name="pickerTheme"
             HorizontalTextAlignment="Center"
-            Title="{language:LocalizedStringExtension Key=ThemeDefault}"
+            Title="{Binding ThemeDefault}"
             FontSize="{DynamicResource GlobalFontSize}" 
             TitleColor="{DynamicResource Text1}"
             SelectedIndexChanged="pickerColor_SelectedIndexChanged"
             TextColor="{DynamicResource Text1}"
-            BackgroundColor="{DynamicResource Navigation}">
+            BackgroundColor="Transparent">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>Dark</x:String>

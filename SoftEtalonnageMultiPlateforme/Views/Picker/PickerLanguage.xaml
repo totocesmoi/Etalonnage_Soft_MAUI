@@ -3,19 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              x:Class="SoftEtalonnageMultiPlateforme.Views.Picker.PickerLanguage">
+    <VerticalStackLayout>
 
-    <VerticalStackLayout  Padding="10">
         <Label  Text="{language:LocalizedStringExtension Key=LanguagePickerTitle}" 
                 FontSize="{DynamicResource GlobalFontSize}" 
                 TextColor="{DynamicResource Text1}" />
 
         <Picker
             HorizontalTextAlignment="Center"
+            Title="{language:LocalizedStringExtension Key=current_language}"
             TitleColor="{DynamicResource Text1}"
             FontSize="{DynamicResource GlobalFontSize}" 
             SelectedItem="{Binding Culture, Source={StaticResource Localization}}"
             TextColor="{DynamicResource Text1}"
-            BackgroundColor="{DynamicResource Navigation}">
+            BackgroundColor="Transparent">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
                     <x:String>en-US</x:String>

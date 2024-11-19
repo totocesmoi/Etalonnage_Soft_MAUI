@@ -74,12 +74,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\Langue\LocalizationDictionary.xaml.cs">
-	    <DependentUpon>LocalizationDictionary.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 		<EmbeddedResource Update="Resources\Langue\AppRessources.fr.resx">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -89,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Resources\Langue\LocalizationDictionary.xaml">
+	  <MauiXaml Update="Resources\Langue\LocalizationDictionnary.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Theme\DarkTheme.xaml">
