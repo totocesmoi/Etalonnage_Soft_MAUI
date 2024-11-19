@@ -2,11 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.LoginPage"
-             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              Title="LoginPage"
              BackgroundColor="{DynamicResource Background}"
              Shell.TabBarIsVisible="False">
-
     <ScrollView>
         <VerticalStackLayout
         Padding="30,0"
@@ -21,18 +19,26 @@
             SemanticProperties.Description="Logo de Dufournier" />
 
             <Entry
-                Text="{Binding Login, Mode=TwoWay}"
-                Placeholder="{language:LocalizedStringExtension Key=EnterLogin}"
+                x:Name="LogiEntry"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
+                Placeholder="{Binding EnterLogin}"
                 Keyboard="Default" />
 
             <Entry
-                Text="{Binding Password, Mode=TwoWay}"
-                Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}"
+                x:Name="PasswordEntry"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
+                Placeholder="{Binding EnterPasswd}"
                 IsPassword="True" />
 
             <Button
-                Text="{language:LocalizedStringExtension Key=Login}"
-                Command="{Binding LoginCommand}" />
+                Text="{Binding Login}"
+                FontSize="{DynamicResource GlobalFontSize}" 
+                TextColor="{DynamicResource Text2}"
+                Command="{Binding LoginCommand}"
+                HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
+
 </ContentPage>

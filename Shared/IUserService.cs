@@ -13,8 +13,6 @@ namespace Shared
         public Task<T> GetAsyncUserByLogin(string login);
         public Task<bool> CreateUser(T user);
         public Task<T> UpdateUser(T user, string login);
-        public Task<bool> DeleteUser(string login);
-
-        public Task<string> VerifyPassword(T user, string password);
+        public Task<bool> DeleteUser(T user);
     }
 }

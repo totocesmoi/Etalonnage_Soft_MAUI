@@ -11,7 +11,7 @@ namespace VMService
 {
     public partial class NavigationServiceVM
     {
-        private readonly Manager service;
+        private Manager service;
         private readonly INavigationService _navigationService;
 
         public NavigationServiceVM(INavigationService navigationService, Manager service) 
@@ -52,6 +52,6 @@ namespace VMService
         /// Condition pour naviguer vers la page principale
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanNavigateToMainPage() => service != null;
+        private bool CanNavigateToMainPage() => service != null && service.CurrentUser != null;
     }
 }

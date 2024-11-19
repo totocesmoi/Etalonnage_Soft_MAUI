@@ -1,0 +1,32 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserSection">
+    <VerticalStackLayout Padding="10">
+        <Label Text="Add or Update User"
+               FontSize="24"
+               TextColor="White"
+               HorizontalOptions="Center" />
+        <VerticalStackLayout>
+            <Label Text="Name:" TextColor="DeepSkyBlue" />
+            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName}" />
+
+            <Label Text="Surname:" TextColor="DeepSkyBlue" />
+            <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{DynamicResource EnterSurname}" />
+
+            <Label Text="Login:" TextColor="DeepSkyBlue" />
+            <Entry Text="{Binding SelectedUser.Login, Mode=TwoWay}" Placeholder="{DynamicResource EnterLogin}" />
+
+            <Label Text="Password:" TextColor="DeepSkyBlue" />
+            <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{DynamicResource EnterPasswd }" />
+
+            <Label Text="Role:" TextColor="DeepSkyBlue" />
+            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay}">
+                <Picker.Items>
+                    <x:String>Administrator</x:String>
+                    <x:String>MeasurementExpert</x:String>
+                    <x:String>Operator</x:String>
+                </Picker.Items>
+            </Picker>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

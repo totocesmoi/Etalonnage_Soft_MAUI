@@ -1,5 +1,5 @@
 ﻿using System.Globalization;
-using SoftEtalonnageMultiPlateforme.Resources.Langue;
+using SoftEtalonnageMultiPlateforme.Resources.Theme;
 
 namespace SoftEtalonnageMultiPlateforme
 {

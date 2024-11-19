@@ -39,13 +39,11 @@ namespace SoftEtalonnageMultiPlateforme
             // Ajout des commandes de connexion
             builder.Services.AddTransient<LoginServiceVM>();
 
-
             // Gestion des injection de views 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<UserInfo>();
             builder.Services.AddTransient<UserUpdate>();
-
 
 
 #endif
