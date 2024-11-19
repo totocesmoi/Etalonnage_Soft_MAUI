@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme"
+    xmlns:Langues="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue" 
     xmlns:Flyout="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant.Flyout"
     xmlns:picker="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Picker"
     xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
@@ -28,15 +29,21 @@
 
                     <Label Text="{DynamicResource FontSizePickerTitle}" FontSize="{DynamicResource GlobalFontSize}" TextColor="{DynamicResource Text2}" />
                     <picker:PickerFontSize />
+
+                   
                 </StackLayout>
             </ContentView>
+            
         </ScrollView>
     </Shell.FlyoutContent>
 
     
     <!-- Informations sur mes routes -->
-    <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
+    <ShellContent Title="Personal Info" ContentTemplate="{DataTemplate views:PersonalInfo}" Route="PersonalInfo" />
     <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
+    <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
     
+
+
 
 </Shell>

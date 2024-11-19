@@ -138,4 +138,10 @@
   <data name="Login" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Saisir votre nom</value>
+  </data>
+  <data name="EnterSurname" xml:space="preserve">
+    <value>Saisir votre surname</value>
+  </data>
 </root>
