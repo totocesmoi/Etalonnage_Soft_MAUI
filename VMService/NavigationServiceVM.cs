@@ -25,6 +25,7 @@ namespace VMService
         {
             NavigateToLoginCommand = new AsyncRelayCommand(NavigateToLoginAsync, CanNavigateToLogin);
             NavigateToMainPageCommand = new AsyncRelayCommand(NavigateToMainPageAsync, CanNavigateToMainPage);
+            NavigateToUserUpdateCommand = new AsyncRelayCommand(NavigateToUserUpdateAsync, CanNavigateToUserUpdatePage);
         }
 
         // Gestion de navigation vers la page de connexion
@@ -53,5 +54,17 @@ namespace VMService
         /// </summary>
         /// <returns> bool </returns>
         private bool CanNavigateToMainPage() => service != null;
+
+        public IAsyncRelayCommand NavigateToUserUpdateCommand { get; private set; }
+        private async Task NavigateToUserUpdateAsync()
+        {
+            await _navigationService.NavigateToUpdateUserAsync();
+        }
+
+        /// <summary>
+        /// Condition pour naviguer vers la page principale
+        /// </summary>
+        /// <returns> bool </returns>
+        private bool CanNavigateToUserUpdatePage() => service != null;
     }
 }

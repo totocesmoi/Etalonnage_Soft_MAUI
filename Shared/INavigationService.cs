@@ -10,6 +10,7 @@ namespace Shared
     {
         Task NavigateToLoginAsync();
         Task NavigateToMainPageAsync();
+        Task NavigateToUpdateUserAsync();
     }
 
     public class NavigationService : INavigationService
@@ -29,6 +30,11 @@ namespace Shared
         public async Task NavigateToMainPageAsync()
         {
             await Shell.Current.GoToAsync("//MainPage");
+        }
+
+        public async Task NavigateToUpdateUserAsync()
+        {
+            await Shell.Current.GoToAsync("//UserUpdate");
         }
     }
 }

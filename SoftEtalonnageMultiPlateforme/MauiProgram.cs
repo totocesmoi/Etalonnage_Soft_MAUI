@@ -7,6 +7,7 @@ using DAL.Stub;
 using VMService;
 using SoftEtalonnageMultiPlateforme.Views;
 using SoftEtalonnageMultiPlateforme.Resources.Langue;
+using SoftEtalonnageMultiPlateforme.Views.Composant;
 
 namespace SoftEtalonnageMultiPlateforme
 {
@@ -42,11 +43,11 @@ namespace SoftEtalonnageMultiPlateforme
 
             // Gestion des injection de views 
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<UserCatalogue>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<UserInfo>();
             builder.Services.AddTransient<UserUpdate>();
-
-
+            
 
 #endif
 

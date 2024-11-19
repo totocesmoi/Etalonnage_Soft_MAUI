@@ -138,4 +138,7 @@
   <data name="Login" xml:space="preserve">
     <value>联系</value>
   </data>
+  <data name="EnterSurname" xml:space="preserve">
+    <value>SOS</value>
+  </data>
 </root>

@@ -5,16 +5,20 @@ namespace VMWrapper
 {
     public partial class UserVM : ObservableObject, IEquatable<UserVM>
     {
+        [ObservableProperty]
         private User userModel;
-        public User UserModel 
-        {
-            get => userModel;
-            set => SetProperty(ref userModel, value);
-        }
 
         public UserVM(User userModel)
         {
             UserModel = userModel ?? throw new ArgumentNullException(nameof(userModel));
+
+            Name = userModel.Name;
+            Surname = userModel.Surname;
+            Login = userModel.Login;
+            Password = userModel.Password;
+            userRole = userModel.UserRole;
+            signature = userModel.Signature;
+            signatureName = userModel.SignatureName;
         }
 
         public UserVM()
@@ -46,6 +50,10 @@ namespace VMWrapper
         public bool Equals(UserVM? other)
         {
             return login.Equals(other.login);
+        }
+        public override string ToString()
+        {
+            return $"nom : {Name} \nprénom : {Surname} \nlogin : {Login}";
         }
     }
 }

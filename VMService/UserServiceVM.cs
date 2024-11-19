@@ -11,6 +11,7 @@ using Shared;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Converters;
+using System.Diagnostics;
 
 namespace VMService
 {
@@ -28,6 +29,8 @@ namespace VMService
         /// Ceci ajoute une couche d'abstraction pour éviter une écriture d'accés trop longue.
         /// </summary>
         private Manager service;
+
+        private readonly INavigationService _navigationService;
 
         /// <summary>
         /// Permet d'avoir ma propriété observable qui va notifier le modèle en cas de 
@@ -57,10 +60,12 @@ namespace VMService
         /// Constructeur 
         /// </summary>
         /// <param name="service"></param>
-        public UserServiceVM(Manager manager)
+        public UserServiceVM(Manager manager, INavigationService navigationService)
         {
+            _navigationService = navigationService;
             service = manager;
             CreateCommands();
+            
         }
 
         /// <summary>
@@ -85,6 +90,7 @@ namespace VMService
         /// </summary>
         /// <param name="index"></param>
         /// <param name="count"></param>
+        /// 
         /// <returns> Une partie ou l'entière liste des utilisateurs </returns>
         private async Task<IEnumerable<UserVM>> GetUsersAsync(int index, int count)
         {
@@ -99,6 +105,8 @@ namespace VMService
                 users.Add(new UserVM(user));
             }
 
+            foreach (var user in Users)
+                Debug.WriteLine(user.ToString());
             return Users;
         }
 
@@ -140,6 +148,7 @@ namespace VMService
         {
             var user = await service.GetUserByLogin(login);
             SelectedUser = new UserVM(user);
+            await _navigationService.NavigateToUpdateUserAsync();
             return SelectedUser;
         }
 
