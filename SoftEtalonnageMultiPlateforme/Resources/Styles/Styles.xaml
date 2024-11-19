@@ -8,7 +8,7 @@
 
     <Style TargetType="Button">
         <Setter Property="TextColor" Value="{DynamicResource Text2}" />
-        <Setter Property="BackgroundColor" Value="{DynamicResource Navigation}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Button}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="{DynamicResource GlobalFontSize}"/>
         <Setter Property="BorderWidth" Value="0"/>

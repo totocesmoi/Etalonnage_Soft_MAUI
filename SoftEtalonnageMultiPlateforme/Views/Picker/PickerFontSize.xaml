@@ -20,10 +20,10 @@
             BackgroundColor="{DynamicResource Navigation}">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
-                    <x:String>Petit</x:String>
-                    <x:String>Moyen</x:String>
-                    <x:String>Grand</x:String>
-                    <x:String>Papi</x:String>
+                    <x:String>Small</x:String>
+                    <x:String>Medium</x:String>
+                    <x:String>Large</x:String>
+                    <x:String>X-Large</x:String>
                     <x:String>Mikael</x:String>
                 </x:Array>
             </Picker.ItemsSource>

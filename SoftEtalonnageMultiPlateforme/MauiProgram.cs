@@ -43,7 +43,9 @@ namespace SoftEtalonnageMultiPlateforme
             // Gestion des injection de views 
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<LoginPage>();
-            
+            builder.Services.AddTransient<UserInfo>();
+            builder.Services.AddTransient<UserUpdate>();
+
 
 
 #endif

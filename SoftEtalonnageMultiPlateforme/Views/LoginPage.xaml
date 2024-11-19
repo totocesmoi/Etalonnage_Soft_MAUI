@@ -5,7 +5,7 @@
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              Title="LoginPage"
              BackgroundColor="{DynamicResource Background}"
-             Shell.NavBarIsVisible="False">
+             Shell.TabBarIsVisible="False">
 
     <ScrollView>
         <VerticalStackLayout
