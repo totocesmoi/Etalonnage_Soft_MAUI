@@ -17,9 +17,21 @@ namespace DAL.Stub
 
         static StubbedUser()
         {
-            string directoryPath = @"C:\Soft_Etalonnage\Configuration\";
-            string filePathUsers = @"C:\Soft_Etalonnage\Configuration\users.xml";
+            string directoryPath;
+            string filePathUsers;
+
+#if WINDOWS
+            directoryPath = Path.Combine("C:", "Soft_Etalonnage", "Configuration");
+            filePathUsers = Path.Combine(directoryPath, "users.xml");
+#else
+            directoryPath = FileSystem.AppDataDirectory;
+            filePathUsers = Path.Combine(directoryPath, "users.xml");
+#endif
+
             UserCollection = new UserCollection();
+
+            Console.WriteLine($"Checking directory: {directoryPath}");
+            Console.WriteLine($"Checking file: {filePathUsers}");
 
             if (!Directory.Exists(directoryPath))
             {
@@ -30,10 +42,10 @@ namespace DAL.Stub
             }
             else
             {
+                Console.WriteLine($"Directory exists: {directoryPath}");
                 if (!File.Exists(filePathUsers))
                 {
                     Console.WriteLine($"File not found: {filePathUsers}");
-                    Directory.CreateDirectory(directoryPath);
                     InitializeUsers();
                     UserCollection.SaveUserFile(filePathUsers);
                 }
@@ -48,6 +60,11 @@ namespace DAL.Stub
                     }
                 }
             }
+
+            foreach (var user in UserCollection.UsersList)
+            {
+                Console.WriteLine("User loaded: " + user.ToString());
+            }
         }
 
         /// <summary>
@@ -55,25 +72,18 @@ namespace DAL.Stub
         /// </summary>
         private static void InitializeUsers()
         {
-            // Création d'une image de signature (facultatif)
-            byte[] imageData = File.ReadAllBytes("dotnet_bot.png");
-            Picture signaturePicture = new Picture(imageData);
-
-            // Création d'un utilisateur
             User newUser = new User(
                 nom: "muzard",
                 prenom: "thomas",
                 mdp: "azerty",
                 role: Role.Administrator,
-                picture: signaturePicture,
+                picture: new Picture(),
                 signatureName: "Toto l'artiste"
             );
 
             SetPasswd(newUser, newUser.Password);
 
-            // Ajout de l'utilisateur à la collection
             UserCollection.UsersList.Add(newUser);
-
             Console.WriteLine("User created: " + newUser.Login);
         }
 
@@ -135,9 +145,9 @@ namespace DAL.Stub
             return await Task.FromResult<User>(null!);
         }
 
-        public async Task<bool> DeleteUser(User user)
+        public async Task<bool> DeleteUser(string login)
         {
-            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
+            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
             if (existingUser != null)
             {
                 UserCollection.UsersList.Remove(existingUser);
@@ -187,6 +197,18 @@ namespace DAL.Stub
 
             user.Sel = salt;
             user.Password = hashed;
+        }
+
+        public async Task<string> VerifyPassword(User user, string password)
+        {
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: user.Sel,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            return await Task.FromResult(hashed == user.Password ? hashed : String.Empty);
         }
     }
 }

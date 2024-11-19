@@ -10,8 +10,8 @@
 
 namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
     using System;
-    
-    
+
+
     /// <summary>
     ///   Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
     /// </summary>
@@ -22,77 +22,117 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AppRessources {
-        
+    internal class AppRessources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppRessources() {
+        internal AppRessources()
+        {
         }
-        
+
         /// <summary>
         ///   Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SoftEtalonnageMultiPlateforme.Resources.Langue.AppRessources", typeof(AppRessources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Remplace la propriété CurrentUICulture du thread actuel pour toutes
         ///   les recherches de ressources à l'aide de cette classe de ressource fortement typée.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à en-US.
         /// </summary>
-        internal static string current_language {
-            get {
+        internal static string current_language
+        {
+            get
+            {
                 return ResourceManager.GetString("current_language", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose your FontSize :.
         /// </summary>
-        internal static string FontSizePickerTitle {
-            get {
+        internal static string FontSizePickerTitle
+        {
+            get
+            {
                 return ResourceManager.GetString("FontSizePickerTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose your language :.
         /// </summary>
-        internal static string LanguagePickerTitle {
-            get {
+        internal static string LanguagePickerTitle
+        {
+            get
+            {
                 return ResourceManager.GetString("LanguagePickerTitle", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Choose your theme :.
         /// </summary>
-        internal static string ThemePickerTitle {
-            get {
+        internal static string ThemePickerTitle
+        {
+            get
+            {
                 return ResourceManager.GetString("ThemePickerTitle", resourceCulture);
+            }
+        }
+
+        internal static string Login
+        {
+            get
+            {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+
+        internal static string EnterLogin
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterLogin", resourceCulture);
+            }
+        }
+
+        internal static string EnterPasswd
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterPasswd", resourceCulture);
             }
         }
     }
