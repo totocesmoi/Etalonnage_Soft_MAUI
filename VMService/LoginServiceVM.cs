@@ -53,14 +53,20 @@ namespace VMService
         public IAsyncRelayCommand LoginCommand { get; private set; }
         private async Task OnLoginAsync()
         {
-            if (_service.Login(Login, Password))
+            try
             {
-                await _navigationService.NavigateToMainPageAsync();
-                return;
+                if (_service.Login(Login, Password))
+                {
+                    await _navigationService.NavigateToMainPageAsync();
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Erreur", "Login ou mot de passe incorrect !", "OK");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Login or password incorrect !", "OK");
+                await Application.Current.MainPage.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
 
@@ -72,8 +78,15 @@ namespace VMService
         public IAsyncRelayCommand LogoutCommand { get; private set; }
         private async Task OnLogoutAsync()
         {
-            _service.Logout();
-            await _navigationService.NavigateToLoginAsync();
+            try
+            {
+                _service.Logout();
+                await _navigationService.NavigateToLoginAsync();
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
+            }
         }
 
         private bool CanLogout()
