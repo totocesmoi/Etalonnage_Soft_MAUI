@@ -7,9 +7,12 @@ namespace Model
         // Gestion des services + constructeur
         public IDataService<User> Service { get; set; }
 
-        public Manager(IDataService<User> service)
+        public INavigationService Navigation { get; set; }
+
+        public Manager(IDataService<User> service, INavigationService navigation)
         {
             Service = service;
+            Navigation = navigation;
         }
 
         // Propriété pour l'utilisateur courant

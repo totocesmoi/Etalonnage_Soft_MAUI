@@ -141,4 +141,34 @@
   <data name="EnterSurname" xml:space="preserve">
     <value>Enter your surname</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Passwd" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create an user</value>
+  </data>
+  <data name="BackPage" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="UserNameSignature" xml:space="preserve">
+    <value>User name signature</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete user</value>
+  </data>
 </root>

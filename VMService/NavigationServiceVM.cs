@@ -9,49 +9,61 @@ using System.Threading.Tasks;
 
 namespace VMService
 {
-    public partial class NavigationServiceVM
+    public partial class NavigationServiceVM : IServiceVM
     {
         private readonly Manager service;
-        private readonly INavigationService _navigationService;
 
-        public NavigationServiceVM(INavigationService navigationService, Manager service) 
+        public NavigationServiceVM(Manager service) 
         {
-            _navigationService = navigationService;
             this.service = service;
             CreateCommands();
         }
 
         public void CreateCommands()
         {
-            NavigateToLoginCommand = new AsyncRelayCommand(NavigateToLoginAsync, CanNavigateToLogin);
-            NavigateToMainPageCommand = new AsyncRelayCommand(NavigateToMainPageAsync, CanNavigateToMainPage);
+            NavigateTo = new AsyncRelayCommand<string>(NavigateToPage, CanNavigateTo);
+            NavigateToBack = new AsyncRelayCommand(NavigateToBackAsync, CanNavigateToBack);
         }
 
-        // Gestion de navigation vers la page de connexion
-        public IAsyncRelayCommand NavigateToLoginCommand { get; private set; }
-
-        private async Task NavigateToLoginAsync()
+        // Gestion de navigation d'une page à une autre
+        public IAsyncRelayCommand NavigateTo { get; private set; }
+        private async Task NavigateToPage(string page)
         {
-            await _navigationService.NavigateToLoginAsync();
+            try
+            {
+                await service.Navigation.NavigateToAsync(page);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current!.MainPage!.DisplayAlert("Erreur", $"An error occured during navigation : {ex.Message}", "OK");
+            }
         }
 
         /// <summary>
-        /// Condition pour naviguer vers la page de connexion
+        /// Condition pour naviguer vers la page correspondante
         /// </summary>
-        /// <returns> bool </returns>
-        private bool CanNavigateToLogin() => service != null && service.CurrentUser == null;
+        /// <param name="page"></param>
+        /// <returns></returns>
+        private bool CanNavigateTo(string page) => service.CurrentUser == null && page != null || page != String.Empty;
 
         // Gestions de navigation vers la page principale
-        public IAsyncRelayCommand NavigateToMainPageCommand { get; private set; }
-        private async Task NavigateToMainPageAsync()
+        public IAsyncRelayCommand NavigateToBack { get; private set; }
+        private async Task NavigateToBackAsync()
         {
-            await _navigationService.NavigateToMainPageAsync();
+            try
+            {
+                await service.Navigation.GoBackAsync();
+            }
+            catch (Exception ex)
+            {
+                await Application.Current!.MainPage!.DisplayAlert("Erreur", $"An error occured during navigation : {ex.Message}", "OK");
+            }
         }
 
         /// <summary>
         /// Condition pour naviguer vers la page principale
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanNavigateToMainPage() => service != null;
+        private bool CanNavigateToBack() => service != null;
     }
 }

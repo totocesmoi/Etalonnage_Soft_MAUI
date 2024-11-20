@@ -18,8 +18,8 @@ namespace UnitTest
         {
             _dataServiceMock = new Mock<IDataService<User>>();
             _navigationServiceMock = new Mock<INavigationService>();
-            _manager = new Manager(_dataServiceMock.Object);
-            _loginServiceVM = new LoginServiceVM(_manager, _navigationServiceMock.Object);
+            _manager = new Manager(_dataServiceMock.Object, _navigationServiceMock.Object);
+            _loginServiceVM = new LoginServiceVM(_manager);
         }
 
         [Fact]
@@ -31,10 +31,10 @@ namespace UnitTest
             _dataServiceMock.Setup(ds => ds.login(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
 
             // Act
-            await _loginServiceVM.LoginCommand.ExecuteAsync(null);
+            await _loginServiceVM.LoginCommand.ExecuteAsync("MainPage");
 
             // Assert
-            _navigationServiceMock.Verify(ns => ns.NavigateToMainPageAsync(), Times.Once);
+            _navigationServiceMock.Verify(ns => ns.NavigateToAsync("MainPage"), Times.Once);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace UnitTest
             _dataServiceMock.Setup(ds => ds.login(It.IsAny<string>(), It.IsAny<string>())).Returns(false);
 
             // Act
-            var exception = await Record.ExceptionAsync(() => _loginServiceVM.LoginCommand.ExecuteAsync(null));
+            var exception =  await Record.ExceptionAsync(() => _loginServiceVM.LoginCommand.ExecuteAsync("MainPage"));
 
             // Assert
             Assert.IsType<NullReferenceException>(exception);
@@ -58,13 +58,15 @@ namespace UnitTest
             // Arrange
             _loginServiceVM.Login = "admin";
             _loginServiceVM.Password = "password";
-            _dataServiceMock.Setup(ds => ds.login(It.IsAny<string>(), It.IsAny<string>())).Throws(new NullReferenceException("Service error"));
+            _dataServiceMock.Setup(ds => ds.login(It.IsAny<string>(), It.IsAny<string>())).Throws(new Exception("Service error"));
 
+
+            
             // Act
-            var exception = await Record.ExceptionAsync(() => _loginServiceVM.LoginCommand.ExecuteAsync(null));
+            var exception = await Record.ExceptionAsync(() => _loginServiceVM.LoginCommand.ExecuteAsync("MainPage"));
 
             // Assert
-            Assert.IsType<NullReferenceException>(exception);
+            Assert.IsType<NullReferenceException>(exception); 
         }
 
         [Fact]
@@ -78,7 +80,7 @@ namespace UnitTest
             await _loginServiceVM.LogoutCommand.ExecuteAsync(null);
 
             // Assert
-            _navigationServiceMock.Verify(ns => ns.NavigateToLoginAsync(), Times.Once);
+            _navigationServiceMock.Verify(ns => ns.NavigateToAsync("Login"), Times.Once);
         }
 
         [Fact]
@@ -86,7 +88,7 @@ namespace UnitTest
         {
             // Arrange
             _dataServiceMock.Setup(ds => ds.GetAsyncCurrentUser()).ReturnsAsync(new User());
-            _dataServiceMock.Setup(ds => ds.logout()).Throws(new NullReferenceException("Service error"));
+            _dataServiceMock.Setup(ds => ds.logout()).Throws(new Exception("Service error"));
             _manager.Login("admin", "password");
 
             // Act
@@ -104,7 +106,7 @@ namespace UnitTest
             _loginServiceVM.Password = "password";
 
             // Act
-            var canLogin = _loginServiceVM.LoginCommand.CanExecute(null);
+            var canLogin = _loginServiceVM.LoginCommand.CanExecute("MainPage");
 
             // Assert
             Assert.True(canLogin);
@@ -118,7 +120,7 @@ namespace UnitTest
             _loginServiceVM.Password = "";
 
             // Act
-            var canLogin = _loginServiceVM.LoginCommand.CanExecute(null);
+            var canLogin = _loginServiceVM.LoginCommand.CanExecute("MainPage");
 
             // Assert
             Assert.False(canLogin);

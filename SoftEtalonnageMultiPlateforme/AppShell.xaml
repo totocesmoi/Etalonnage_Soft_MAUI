@@ -36,11 +36,14 @@
 
     <!-- Informations sur mes routes -->
     <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
+
+    
     
     <TabBar>
         <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
         <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate views:UserInfo}" Route="UserInfo"/>
         <ShellContent Title="User Update" ContentTemplate="{DataTemplate views:UserUpdate}" Route="UserUpdate"/>
+        <ShellContent Title="CreateUserPage" ContentTemplate="{DataTemplate views:CreateUserPage}" Route="CreateUserPage"/>
     </TabBar>
 
     

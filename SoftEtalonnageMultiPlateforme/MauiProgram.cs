@@ -45,6 +45,7 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<UserInfo>();
             builder.Services.AddTransient<UserUpdate>();
+            builder.Services.AddTransient<CreateUserPage>();
 
 
 

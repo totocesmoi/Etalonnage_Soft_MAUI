@@ -31,8 +31,11 @@
                 IsPassword="True" />
 
             <Button
-                Text="{language:LocalizedStringExtension Key=Login}"
-                Command="{Binding LoginCommand}" />
+                Text="{language:LocalizedStringExtension Key=Login}">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LoginCommand}" CommandParameter="MainPage"/>
+                </Button.GestureRecognizers>
+            </Button>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
