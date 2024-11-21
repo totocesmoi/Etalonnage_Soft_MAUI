@@ -22,7 +22,7 @@ namespace VMService
     /// Ici lorsque je vais faire une modification, ajout ou suppression d'un utilisateur, je vais passer par SelectedUser pour notifier la vue.
     /// Quand dans la view je vais cliquer sur un utilisateurs par exemple, les informations de l'utilisateur vont être copié dans SelectedUser.
     /// </remarks>
-    public class UserServiceVM : ObservableObject
+    public class UserServiceVM : ObservableObject, IServiceVM
     {
         /// <summary>
         /// Permet de manager l'ensemble de mes commandes utilisables dans l'application

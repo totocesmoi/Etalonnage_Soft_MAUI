@@ -128,11 +128,99 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string EnterSurname
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterSurname", resourceCulture);
+            }
+        }
+
         internal static string EnterPasswd
         {
             get
             {
                 return ResourceManager.GetString("EnterPasswd", resourceCulture);
+            }
+        }
+
+        internal static string Name
+        {
+            get
+            {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+
+        internal static string Surname
+        {
+            get
+            {
+                return ResourceManager.GetString("Surname", resourceCulture);
+            }
+        }
+
+        internal static string Passwd
+        {
+            get
+            {
+                return ResourceManager.GetString("Passwd", resourceCulture);
+            }
+        }
+
+        internal static string UserNameSignature
+        {
+            get
+            {
+                return ResourceManager.GetString("UserNameSignature", resourceCulture);
+            }
+        }
+
+        internal static string Role
+        {
+            get
+            {
+                return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+
+        internal static string AddUser
+        {
+            get
+            {
+                return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+
+        internal static string CreateUser
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+
+        internal static string DeleteUser
+        {
+            get
+            {
+                return ResourceManager.GetString("DeleteUser", resourceCulture);
+            }
+        }
+
+        internal static string BackPage
+        {
+            get
+            {
+                return ResourceManager.GetString("BackPage", resourceCulture);
+            }
+        }
+
+        internal static string Cancel
+        {
+            get
+            {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
     }

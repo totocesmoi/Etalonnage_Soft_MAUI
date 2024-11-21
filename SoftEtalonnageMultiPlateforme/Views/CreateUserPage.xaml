@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.CreateUserPage"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             Title="Créer un utilisateur">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Grid ColumnDefinitions="1*, 5*">
+                    <Button 
+                        Text="{language:LocalizedStringExtension Key=BackPage}" />
+
+                    <Label 
+                        Text="{language:LocalizedStringExtension Key=CreateUser}" 
+                        HorizontalOptions="Center" />            
+                </Grid>
+
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Name}"
+                    Text="{Binding SelectedUser.Name}"/>
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Surname}" 
+                    Text="{Binding SelectedUser.Surname}"/>
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Passwd}" 
+                    IsPassword="True" 
+                    Text="{Binding SelectedUser.Password}"/>
+
+                <Picker 
+                    Title="{language:LocalizedStringExtension Key=Role}"
+                    SelectedItem="{Binding SelectedUser.UserRole}">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Administrator</x:String>
+                            <x:String>MeasurementExpert</x:String>
+                            <x:String>Operator</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=UserNameSignature}" 
+                    Text="{Binding SelectedUser.SignatureName}"/>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button 
+                        Text="{language:LocalizedStringExtension Key=AddUser}">
+                        <Button.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InsertUser}" />
+                        </Button.GestureRecognizers>
+                    </Button>
+                        
+                        
+                    <Button 
+                        Text="{language:LocalizedStringExtension Key=Cancel}" />
+
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

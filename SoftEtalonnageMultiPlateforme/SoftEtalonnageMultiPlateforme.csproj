@@ -110,6 +110,9 @@
 	  <MauiXaml Update="Views\Composant\Flyout\Item.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\CreateUserPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Composant\UserItem.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
