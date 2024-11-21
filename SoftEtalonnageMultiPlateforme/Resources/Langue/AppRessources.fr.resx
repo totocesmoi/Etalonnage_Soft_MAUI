@@ -169,7 +169,10 @@
     <value>Ajouter l'utilisateur</value>
   </data>
   <data name="DeleteUser" xml:space="preserve">
-    <value>Suprimmer l'utilisateur</value>
+    <value>Suprimer l'utilisateur</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Saisir votre nom</value>
   </data>
   <data name="EnterName" xml:space="preserve">
     <value>Saisir votre nom</value>

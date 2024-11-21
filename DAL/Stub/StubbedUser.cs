@@ -119,9 +119,10 @@ namespace DAL.Stub
             return await Task.FromResult(true);
         }
 
-        public async Task<User> UpdateUser(User user, string login)
+        public async Task<User> UpdateUser(User user)
         {
-            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+
+            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
             if (existingUser != null)
             {
                 existingUser.Name = user.Name;

@@ -144,7 +144,7 @@ namespace VMService
         /// <returns> L'utilisateur rechercher </returns>
         private async Task GetUserAsync(OptionCommand<object> options)
         {
-            /*try 
+            try 
             {
                 var login = options[0] as string;
                 var navigate = (bool)options[1];
@@ -172,9 +172,9 @@ namespace VMService
             catch (Exception ex)
             {
                 Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
-            }*/
+            }
 
-            try
+           /* try
             {
                 var login = options[0] as string;
                 var navigate = (bool)options[1];
@@ -192,7 +192,7 @@ namespace VMService
             catch (Exception ex)
             {
                 Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
-            }
+            }*/
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace VMService
         /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
         private async Task UpdateAnUserAsync(UserVM user)
         {
-            if (await service.UpdateUser(user.UserModel, user.UserModel.Login) != null)
+            if (await service.UpdateUser(user.UserModel) != null)
             {
                 await LoadEquipementAfterUpdateAsync();
             }

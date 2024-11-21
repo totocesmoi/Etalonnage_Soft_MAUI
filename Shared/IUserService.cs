@@ -12,7 +12,7 @@ namespace Shared
         public Task<Pagination<T>> GetAsyncAllUser(int index, int count);
         public Task<T> GetAsyncUserByLogin(string login);
         public Task<bool> CreateUser(T user);
-        public Task<T> UpdateUser(T user, string login);
+        public Task<T> UpdateUser(T user);
         public Task<bool> DeleteUser(string login);
 
         public Task<string> VerifyPassword(T user, string password);

@@ -51,9 +51,9 @@ namespace DAL.Stub
             return UserService.CreateUser(user);
         }
 
-        public Task<User> UpdateAsyncUser(User user, string login)
+        public Task<User> UpdateAsyncUser(User user)
         {
-            return UserService.UpdateUser(user, login);
+            return UserService.UpdateUser(user);
         }
 
         public Task<bool> DeleteAsyncUser(string login)
