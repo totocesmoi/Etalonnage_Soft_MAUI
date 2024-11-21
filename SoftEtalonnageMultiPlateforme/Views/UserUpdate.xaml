@@ -4,6 +4,7 @@
              x:Class="SoftEtalonnageMultiPlateforme.Views.UserUpdate"
              xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}"
              Shell.TabBarIsVisible="False">
     
@@ -24,12 +25,14 @@
             <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
 
             <Label Text="Role:"/>
-            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay}">
-                <Picker.Items>
-                    <x:String>Administrator</x:String>
-                    <x:String>MeasurementExpert</x:String>
-                    <x:String>Operator</x:String>
-                </Picker.Items>
+            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay, Converter={StaticResource converters:RoleToStringConverter}}">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Administrator</x:String>
+                        <x:String>MeasurementExpert</x:String>
+                        <x:String>Operator</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
             </Picker>
         </VerticalStackLayout>
         
