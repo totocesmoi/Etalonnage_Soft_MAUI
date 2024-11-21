@@ -12,9 +12,6 @@
         Task<bool> CreateAsyncUser(U user);
         Task<U> UpdateAsyncUser(U user, string login);
         Task<bool> DeleteAsyncUser(string login);
-
-
-
     }
     
 }

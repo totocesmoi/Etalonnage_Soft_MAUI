@@ -11,6 +11,16 @@ namespace VMWrapper
 {
     public partial class HeaderUserVM : ObservableObject
     {
+        private readonly Manager _manager; 
+
+        public HeaderUserVM(Manager manager)
+        {
+            _manager = manager;
+
+
+            UpdateUserInfo();
+        }
+
         [ObservableProperty]
         private string name;
 
@@ -20,11 +30,15 @@ namespace VMWrapper
         [ObservableProperty]
         private Role userRole;
 
-        public HeaderUserVM()
+        private void UpdateUserInfo()
         {
-            Name = "";
-            Surname = "";
-            UserRole = new Role();
+            var currentUser = _manager.GetCurrentUser().Result; 
+            if (currentUser != null)
+            {
+                Name = currentUser.Name;
+                Surname = currentUser.Surname;
+                UserRole = currentUser.UserRole;
+            }
         }
     }
 }
