@@ -174,4 +174,7 @@
   <data name="EnterName" xml:space="preserve">
     <value>Saisir votre nom</value>
   </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Saisir votre nom</value>
+  </data>
 </root>
