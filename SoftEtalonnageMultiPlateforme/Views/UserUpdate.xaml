@@ -34,6 +34,21 @@
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
+
+
+            <Button
+                Text="{language:LocalizedStringExtension Key=UpdateUser}">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdateUser}" CommandParameter="SelectedUser"/>
+                </Button.GestureRecognizers>
+            </Button>
+            <Button
+                Margin="15"
+                Text="{language:LocalizedStringExtension Key=DeleteUser}">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
+                </Button.GestureRecognizers>
+            </Button>
         </VerticalStackLayout>
         
     </VerticalStackLayout>

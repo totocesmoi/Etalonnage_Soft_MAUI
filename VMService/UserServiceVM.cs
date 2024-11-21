@@ -76,7 +76,7 @@ namespace VMService
             LoadUsers = new AsyncRelayCommand(LoadMoreUsersAsync, CanLoadMoreUsers);
             GetAnUser = new AsyncRelayCommand<OptionCommand<object>>(GetUserAsync, CanGetUser);
             GetCurrentUser = new AsyncRelayCommand(GetCurrentAsync, CanGetCurrentUser);
-            CreateUser = new RelayCommand(CreateAnUserAsync, CanCreateUser);
+            CreateUser = new AsyncRelayCommand<string>(CreateAnUserAsync, CanCreateUser);
             InsertUser = new AsyncRelayCommand(InsertAnUserAsync, CanInsertUser);
             UpdateUser = new AsyncRelayCommand<UserVM>(UpdateAnUserAsync, CanUpdateUser);
             DeleteUser = new AsyncRelayCommand(DeleteAnUserAsync, CanDeleteUser);
@@ -144,7 +144,7 @@ namespace VMService
         /// <returns> L'utilisateur rechercher </returns>
         private async Task GetUserAsync(OptionCommand<object> options)
         {
-            /*try 
+            try 
             {
                 var login = options[0] as string;
                 var navigate = (bool)options[1];
@@ -167,26 +167,6 @@ namespace VMService
 
                     var user = await service.GetUserByLogin(login);
                     SelectedUser = new UserVM(user);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
-            }*/
-
-            try
-            {
-                var login = options[0] as string;
-                var navigate = (bool)options[1];
-                if (login == null)
-                    throw new ArgumentNullException("Missing required parameters");
-
-                var user = await service.GetUserByLogin(login);
-                SelectedUser = new UserVM(user);
-
-                if (navigate)
-                {
-                    await _navigationService.NavigateToAsync("UserUpdate");
                 }
             }
             catch (Exception ex)
@@ -228,21 +208,30 @@ namespace VMService
         private bool CanGetCurrentUser() => service != null && service.CurrentUser != null;
 
         // Gestion de la commande pour créer un utilisateur
-        public RelayCommand CreateUser { get; private set; }
+        public IAsyncRelayCommand<string> CreateUser { get; private set; }
+
         /// <summary>
         /// Méthode qui permet de créer un utilisateur
         /// </summary>
         /// <returns></returns>
-        private void CreateAnUserAsync()
+        private async Task CreateAnUserAsync(string page)
         {
             SelectedUser = new UserVM();
+            if (!string.IsNullOrEmpty(page))
+            {
+                await service.Navigation.NavigateToAsync(page);
+            }
         }
 
         /// <summary>
         /// Condition pour savoir si on peut créer un utilisateur
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanCreateUser() => service != null;
+        private bool CanCreateUser(string page)
+        {
+            return service != null && !string.IsNullOrEmpty(page);
+        }
+
 
         public IAsyncRelayCommand InsertUser { get; private set; }
         /// <summary>
@@ -265,7 +254,7 @@ namespace VMService
         /// Condition pour savoir si on peut ajouter un utilisateur
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Login) && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
+        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Name) && !string.IsNullOrEmpty(SelectedUser.Surname) && !string.IsNullOrEmpty(SelectedUser.Password) && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
 
         // Gestion de la commande pour mettre à jour un utilisateur
         public IAsyncRelayCommand UpdateUser { get; private set; }
@@ -277,7 +266,7 @@ namespace VMService
         /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
         private async Task UpdateAnUserAsync(UserVM user)
         {
-            if (await service.UpdateUser(user.UserModel, user.UserModel.Login) != null)
+            if (await service.UpdateUser(user.UserModel) != null)
             {
                 await LoadEquipementAfterUpdateAsync();
             }

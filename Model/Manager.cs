@@ -25,7 +25,7 @@ namespace Model
         public Task<Pagination<User>> GetAllUser(int index, int count) => Service.GetAsyncAllUser(index, count);
         public Task<User> GetUserByLogin(string login) => Service.GetAsyncUserByLogin(login);
         public Task<bool> CreateUser(User user) => Service.CreateAsyncUser(user);
-        public Task<User> UpdateUser(User user, string login) => Service.UpdateAsyncUser(user, login);
+        public Task<User> UpdateUser(User user) => Service.UpdateAsyncUser(user);
         public Task<bool> DeleteUser(string login) => Service.DeleteAsyncUser(login);
 
         // Gestion de la connexion / déconnexion

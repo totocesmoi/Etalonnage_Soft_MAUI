@@ -11,6 +11,7 @@ namespace SoftEtalonnageMultiPlateforme
             InitializeComponent();
 
             Routing.RegisterRoute("UserUpdate", typeof(UserUpdate));
+            Routing.RegisterRoute("CreateUserPage", typeof(CreateUserPage));
         }
 
         private void PreferenceLoading(object sender, EventArgs e)
