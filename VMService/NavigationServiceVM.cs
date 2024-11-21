@@ -44,7 +44,7 @@ namespace VMService
         /// </summary>
         /// <param name="page"></param>
         /// <returns></returns>
-        private bool CanNavigateTo(string page) => service.CurrentUser == null && page != null || page != String.Empty;
+        private bool CanNavigateTo(string page) => page != null || page != String.Empty;
 
         // Gestions de navigation vers la page principale
         public IAsyncRelayCommand NavigateToBack { get; private set; }

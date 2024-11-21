@@ -74,7 +74,7 @@ namespace VMService
         public void CreateCommands()
         {
             LoadUsers = new AsyncRelayCommand(LoadMoreUsersAsync, CanLoadMoreUsers);
-            GetAnUser = new AsyncRelayCommand<string>(GetUserAsync, CanGetUser);
+            GetAnUser = new AsyncRelayCommand<OptionCommand<object>>(GetUserAsync, CanGetUser);
             GetCurrentUser = new AsyncRelayCommand(GetCurrentAsync, CanGetCurrentUser);
             CreateUser = new RelayCommand(CreateAnUserAsync, CanCreateUser);
             InsertUser = new AsyncRelayCommand(InsertAnUserAsync, CanInsertUser);
@@ -105,8 +105,6 @@ namespace VMService
                 users.Add(new UserVM(user));
             }
 
-            foreach (var user in Users)
-                Debug.WriteLine(user.ToString());
             return Users;
         }
 
@@ -144,12 +142,57 @@ namespace VMService
         /// </summary>
         /// <param name="login"></param>
         /// <returns> L'utilisateur rechercher </returns>
-        private async Task<UserVM> GetUserAsync(string login)
+        private async Task GetUserAsync(OptionCommand<object> options)
         {
-            var user = await service.GetUserByLogin(login);
-            SelectedUser = new UserVM(user);
-            await _navigationService.NavigateToUpdateUserAsync();
-            return SelectedUser;
+            /*try 
+            {
+                var login = options[0] as string;
+                var navigate = (bool)options[1];
+                if (navigate)
+                {
+                    var pageName = options[2] as string;
+
+                    if (login == null || pageName == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var user = await service.GetUserByLogin(login);
+                    SelectedUser = new UserVM(user);
+
+                    await _navigationService.NavigateToAsync(pageName);
+                }
+                else
+                {
+                    if (login == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var user = await service.GetUserByLogin(login);
+                    SelectedUser = new UserVM(user);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
+            }*/
+
+            try
+            {
+                var login = options[0] as string;
+                var navigate = (bool)options[1];
+                if (login == null)
+                    throw new ArgumentNullException("Missing required parameters");
+
+                var user = await service.GetUserByLogin(login);
+                SelectedUser = new UserVM(user);
+
+                if (navigate)
+                {
+                    await _navigationService.NavigateToAsync("UserUpdate");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -157,8 +200,13 @@ namespace VMService
         /// </summary>
         /// <param name="login"></param>
         /// <returns> bool </returns>
-        private bool CanGetUser(string login) => service != null && !string.IsNullOrEmpty(login) && service.CurrentUser != null;
-
+        private bool CanGetUser(OptionCommand<object> options)
+        {
+            var login = options[0] as string;
+            var canExecute = !string.IsNullOrEmpty(login) && service.CurrentUser != null;
+            Debug.WriteLine($"CanGetUser: {canExecute}");
+            return canExecute;
+        }
 
         // Gestion de la commande pour récupérer l'utilisateur courant
         public IAsyncRelayCommand GetCurrentUser { get; private set; }

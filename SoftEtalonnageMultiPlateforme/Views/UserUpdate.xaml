@@ -5,29 +5,26 @@
              xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
              Background="{DynamicResource Background}"
              BindingContext="{Binding Source={RelativeSource AncestorType={x:Type local:UserCatalogue}}, Path=.}"
-             Shell.TabBarIsVisible="True">
+             Shell.TabBarIsVisible="False">
     
     <VerticalStackLayout Padding="10">
-        <Label Text="Add or Update User"
-               FontSize="24"
-               TextColor="White"
-               HorizontalOptions="Center" />
-            
+        <Label Text="Add or Update User" />
+        
         <VerticalStackLayout>
             <Label Text="Name:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding UserServiceVM.SelectedUser.Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName}" />
+            <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName}" />
 
             <Label Text="Surname:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding UserServiceVM.SelectedUser.Surname, Mode=TwoWay}" Placeholder="{DynamicResource EnterSurname}" />
+            <Entry Text="{Binding Surname, Mode=TwoWay}" Placeholder="{DynamicResource EnterSurname}" />
 
             <Label Text="Login:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding UserServiceVM.SelectedUser.Login, Mode=TwoWay}" Placeholder="{DynamicResource EnterLogin}" />
+            <Entry Text="{Binding Login, Mode=TwoWay}" Placeholder="{DynamicResource EnterLogin}" />
 
             <Label Text="Password:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding UserServiceVM.SelectedUser.Password, Mode=TwoWay}" Placeholder="{DynamicResource EnterPasswd }" />
+            <Entry Text="{Binding Password, Mode=TwoWay}" Placeholder="{DynamicResource EnterPasswd }" />
 
             <Label Text="Role:" TextColor="DeepSkyBlue" />
-            <Picker SelectedItem="{Binding UserServiceVM.SelectedUser.UserRole, Mode=TwoWay}">
+            <Picker SelectedItem="{Binding UserRole, Mode=TwoWay}">
                 <Picker.Items>
                     <x:String>Administrator</x:String>
                     <x:String>MeasurementExpert</x:String>
@@ -35,6 +32,7 @@
                 </Picker.Items>
             </Picker>
         </VerticalStackLayout>
+        
     </VerticalStackLayout>
     
 </ContentPage>

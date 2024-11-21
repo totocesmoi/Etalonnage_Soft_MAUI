@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using SoftEtalonnageMultiPlateforme.Resources.Theme;
+using SoftEtalonnageMultiPlateforme.Views;
 
 namespace SoftEtalonnageMultiPlateforme
 {
@@ -8,6 +9,8 @@ namespace SoftEtalonnageMultiPlateforme
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute("UserUpdate", typeof(UserUpdate));
         }
 
         private void PreferenceLoading(object sender, EventArgs e)

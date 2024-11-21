@@ -70,6 +70,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DAL\DAL.csproj" />
+	  <ProjectReference Include="..\Shared\Shared.csproj" />
 	  <ProjectReference Include="..\VMService\VMService.csproj" />
 	</ItemGroup>
 

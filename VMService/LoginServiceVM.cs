@@ -52,7 +52,8 @@ namespace VMService
             {
                 if (_service.Login(Login, Password))
                 {
-                    await _service.Navigation.NavigateToAsync("MainPage");
+                    // On ne passe pas par le système de navigation, ici on redirige directement vers la page principale
+                    await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
                 {

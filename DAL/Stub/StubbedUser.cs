@@ -60,11 +60,6 @@ namespace DAL.Stub
                     }
                 }
             }
-
-            foreach (var user in UserCollection.UsersList)
-            {
-                Console.WriteLine("User loaded: " + user.ToString());
-            }
         }
 
         /// <summary>
@@ -109,7 +104,7 @@ namespace DAL.Stub
         public async Task<User> GetAsyncUserByLogin(string login)
         {
             var user = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
-            return await Task.FromResult(user);
+            return await Task.FromResult(user) ?? null!;
         }
 
         public async Task<bool> CreateUser(User user)

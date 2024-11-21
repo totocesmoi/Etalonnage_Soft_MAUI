@@ -5,5 +5,6 @@ public partial class UserItem : ContentView
 	public UserItem()
 	{
 		InitializeComponent();
+		BindingContext = this;
 	}
 }

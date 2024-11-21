@@ -36,16 +36,17 @@
 
     <!-- Informations sur mes routes -->
     <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
-    <ShellContent Title="UserUpdate" ContentTemplate="{DataTemplate views:UserUpdate}" Route="UserUpdate"/>
+
     <ShellContent Title="CreateUserPage" ContentTemplate="{DataTemplate views:CreateUserPage}" Route="CreateUserPage"/>
+
+    <ShellContent Title="UserUpdate" ContentTemplate="{DataTemplate views:UserUpdate}" Route="UserUpdate"/>
+
 
 
     <TabBar>
         <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
-
-        <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate views:UserCatalogue}" Route="UserCatalogue"/>
-        
         <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate views:UserInfo}" Route="UserInfo"/>
+        <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate views:UserCatalogue}" Route="UserCatalogue"/>
     </TabBar>
 
     

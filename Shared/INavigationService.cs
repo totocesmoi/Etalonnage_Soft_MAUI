@@ -23,17 +23,12 @@ namespace Shared
 
         public async Task NavigateToAsync(string page)
         {
-            await Shell.Current.GoToAsync($"//{page}");
+            await Shell.Current.GoToAsync(page);
         }
 
         public async Task GoBackAsync()
         {
             await Shell.Current.GoToAsync("..");
-        }
-
-        public async Task NavigateToUpdateUserAsync()
-        {
-            await Shell.Current.GoToAsync("//UserUpdate");
         }
     }
 }
