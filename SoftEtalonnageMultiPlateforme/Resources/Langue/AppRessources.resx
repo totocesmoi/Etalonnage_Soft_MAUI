@@ -171,4 +171,7 @@
   <data name="DeleteUser" xml:space="preserve">
     <value>Delete user</value>
   </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Enter your name</value>
+  </data>
 </root>

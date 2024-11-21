@@ -3,34 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.UserUpdate"
              xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              Background="{DynamicResource Background}"
-             BindingContext="{Binding Source={RelativeSource AncestorType={x:Type local:UserCatalogue}}, Path=.}"
              Shell.TabBarIsVisible="False">
     
     <VerticalStackLayout Padding="10">
         <Label Text="Add or Update User" />
         
         <VerticalStackLayout>
-            <Label Text="Name:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName}" />
+            <Label Text="Name:"/>
+            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
-            <Label Text="Surname:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding Surname, Mode=TwoWay}" Placeholder="{DynamicResource EnterSurname}" />
+            <Label Text="Surname:"/>
+            <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
-            <Label Text="Login:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding Login, Mode=TwoWay}" Placeholder="{DynamicResource EnterLogin}" />
+            <Label Text="Login:"/>
+            <Entry Text="{Binding SelectedUser.Login, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterLogin}" />
 
-            <Label Text="Password:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding Password, Mode=TwoWay}" Placeholder="{DynamicResource EnterPasswd }" />
+            <Label Text="Password:"/>
+            <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
 
-            <Label Text="Role:" TextColor="DeepSkyBlue" />
-            <Picker SelectedItem="{Binding UserRole, Mode=TwoWay}">
+            <Label Text="Role:"/>
+            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay}">
                 <Picker.Items>
                     <x:String>Administrator</x:String>
                     <x:String>MeasurementExpert</x:String>
                     <x:String>Operator</x:String>
                 </Picker.Items>
             </Picker>
+
+
+            <Button
+                Text="{language:LocalizedStringExtension Key=UpdateUser}">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding UpdateUser}" CommandParameter="SelectedUser"/>
+                </Button.GestureRecognizers>
+            </Button>
+            <Button
+                Margin="15"
+                Text="{language:LocalizedStringExtension Key=DeleteUser}">
+                <Button.GestureRecognizers>
+                    <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
+                </Button.GestureRecognizers>
+            </Button>
         </VerticalStackLayout>
         
     </VerticalStackLayout>
