@@ -30,5 +30,10 @@ namespace Shared
         {
             await Shell.Current.GoToAsync("..");
         }
+
+        public async Task NavigateToUpdateUserAsync()
+        {
+            await Shell.Current.GoToAsync("//UserUpdate");
+        }
     }
 }
