@@ -128,6 +128,14 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string EnterName
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterName", resourceCulture);
+            }
+        }
+
         internal static string EnterSurname
         {
             get

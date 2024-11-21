@@ -4,10 +4,9 @@ namespace SoftEtalonnageMultiPlateforme.Views;
 
 public partial class UserUpdate : ContentPage
 {
-	public UserUpdate()
-	{
-		InitializeComponent();
-
-		BindingContext = this;
-	}
+    public UserUpdate(UserServiceVM userServiceVM)
+    {
+        InitializeComponent();
+        BindingContext = userServiceVM;
+    }
 }
