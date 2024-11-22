@@ -270,7 +270,7 @@ namespace VMService
         /// <param name="user"></param>
         /// <returns></returns>
         /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
-        private async Task UpdateAnUserAsync(UserVM user)
+        /*private async Task UpdateAnUserAsync(UserVM user)
         {
             try
             {
@@ -287,6 +287,34 @@ namespace VMService
                 Debug.WriteLine($"An error occured during the user update : {ex.Message}");
             }
                 
+        }*/
+
+        private async Task UpdateAnUserAsync(UserVM user)
+        {
+            try
+            {
+                var updatedUser = await service.UpdateUser(user.UserModel);
+                if (updatedUser != null)
+                {
+                    // Remplace l'objet dans la collection
+                    var index = users.IndexOf(user);
+                    if (index >= 0)
+                    {
+                        users[index] = new UserVM(updatedUser);
+                    }
+
+                    // Recharge les données si nécessaire
+                    await service.Navigation.GoBackAsync();
+                }
+                else
+                {
+                    throw new Exception("An error occurred during the User update");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occurred during the user update: {ex.Message}");
+            }
         }
 
         /// <summary>
