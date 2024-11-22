@@ -16,9 +16,9 @@ namespace VMWrapper
             Surname = userModel.Surname;
             Login = userModel.Login;
             Password = userModel.Password;
-            userRole = userModel.UserRole;
-            signature = userModel.Signature;
-            signatureName = userModel.SignatureName;
+            UserRole = userModel.UserRole;
+            Signature = userModel.Signature;
+            SignatureName = userModel.SignatureName;
         }
 
         public UserVM()
@@ -29,8 +29,18 @@ namespace VMWrapper
         [ObservableProperty]
         private string name;
 
+        partial void OnNameChanged(string value)
+        {
+            UserModel.Name = value;
+        }
+
         [ObservableProperty]
         private string surname;
+
+        partial void OnSurnameChanged(string value)
+        {
+            UserModel.Surname = value;
+        }
 
         [ObservableProperty]
         private string login;
@@ -38,19 +48,40 @@ namespace VMWrapper
         [ObservableProperty]
         private string password;
 
+        partial void OnPasswordChanged(string value)
+        {
+            UserModel.Password = value;
+        }
+
         [ObservableProperty]
         private Role userRole;
+
+        partial void OnUserRoleChanged(Role value)
+        {
+            UserModel.UserRole = value;
+        }
 
         [ObservableProperty]
         private string signatureName;
 
+        partial void OnSignatureNameChanged(string value)
+        {
+            UserModel.SignatureName = value;
+        }
+
         [ObservableProperty]
         private Picture signature;
 
+        partial void OnSignatureChanged(Picture value)
+        {
+            UserModel.Signature = value;
+        }
+
         public bool Equals(UserVM? other)
         {
-            return login.Equals(other.login);
+            return Login.Equals(other?.Login);
         }
+
         public override string ToString()
         {
             return $"nom : {Name} \nprénom : {Surname} \nlogin : {Login}";
