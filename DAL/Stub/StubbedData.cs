@@ -3,15 +3,21 @@ using Shared;
 
 namespace DAL.Stub
 {
-    public class StubbedData : IDataService<User>
+    public class StubbedData : IDataService<User, Customer>
     {
         private User ? currentUser = null;
 
+        private Customer? currentCustomer = null;
+
         public IUserService<User> UserService { get; set; }
+
+        public ICustomerService<Customer> CustomerService { get; set; }
+
 
         public StubbedData()
         {
             UserService = new StubbedUser();
+            CustomerService = new StubbedCustomer();
         }
 
         public bool login(string login, string password)
@@ -59,6 +65,31 @@ namespace DAL.Stub
         public Task<bool> DeleteAsyncUser(string login)
         {
             return UserService.DeleteUser(login);
+        }
+
+        public Task<Pagination<Customer>> GetAsyncAllCustomer(int index, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Customer> GetAsyncByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> CreateAsyncCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Customer> UpdateAsyncCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsyncCustomer(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

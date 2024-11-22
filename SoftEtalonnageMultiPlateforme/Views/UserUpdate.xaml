@@ -13,46 +13,25 @@
         
         <VerticalStackLayout>
             <Label Text="Name:"/>
-            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
+            <Entry Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" Placeholder="" />
 
-            <Label Text="Surname:"/>
-            <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
+            <Label Text="Email:"/>
+            <Entry Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" Placeholder="" />
 
-            <Label Text="Login:"/>
+            <Label Text="Address:"/>
             <Entry 
-                Text="{Binding SelectedUser.Login, Mode=TwoWay}" 
-                IsEnabled="False"/>
-
-            <Label Text="Signature Name:"/>
-            <Entry 
-                Text="{Binding SelectedUser.SigntureName, Mode=TwoWay}" 
-                IsEnabled="False"/>
-
-            <Label Text="Password:"/>
-            <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
-
-            <Label Text="Role:"/>
-            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay, Converter={StaticResource converters:RoleToStringConverter}}">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Administrator</x:String>
-                        <x:String>MeasurementExpert</x:String>
-                        <x:String>Operator</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
-
+                Text="{Binding SelectedUser.Address, Mode=TwoWay}" Placeholder=""/>
+                
             <Button
                 Text="{language:LocalizedStringExtension Key=UpdateUser}"
-                Command="{Binding UpdateUser}"
-                CommandParameter="{Binding SelectedUser}" />
+                Command="{Binding UpdateCustomer}"
+                CommandParameter="{Binding SelectedCustomer}" />
             
             <Button
                 Margin="15"
-                Text="{language:LocalizedStringExtension Key=DeleteUser}">
+                Text="{language:LocalizedStringExtension Key=DeleteCustomer}">
                 <Button.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
+                    <TapGestureRecognizer  Command="{Binding DeleteCustomer}"/>
                 </Button.GestureRecognizers>
             </Button>
         </VerticalStackLayout>
