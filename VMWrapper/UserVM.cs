@@ -3,7 +3,7 @@ using Model;
 
 namespace VMWrapper
 {
-    public partial class UserVM : ObservableObject, IEquatable<UserVM>
+    public partial class UserVM : ObservableObject
     {
         [ObservableProperty]
         private User userModel;
@@ -45,6 +45,11 @@ namespace VMWrapper
         [ObservableProperty]
         private string login;
 
+        partial void OnLoginChanged(string value)
+        {
+            UserModel.Login = value;
+        }
+
         [ObservableProperty]
         private string password;
 
@@ -77,10 +82,7 @@ namespace VMWrapper
             UserModel.Signature = value;
         }
 
-        public bool Equals(UserVM? other)
-        {
-            return Login.Equals(other?.Login);
-        }
+        
 
         public override string ToString()
         {

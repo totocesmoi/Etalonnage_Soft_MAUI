@@ -230,7 +230,7 @@ namespace VMService
         /// <returns> bool </returns>
         private bool CanCreateUser(string page)
         {
-            return service != null && !string.IsNullOrEmpty(page);
+            return service != null && !string.IsNullOrEmpty(page) && service.CurrentUser.UserRole == Role.Administrator;
         }
 
 
@@ -244,6 +244,10 @@ namespace VMService
         {
             if (await service.CreateUser(SelectedUser.UserModel))
             {
+                // Pour être sur que le SelectedUser contient bien les informations auto généré.
+                SelectedUser = new UserVM(await service.GetUserByLogin(SelectedUser.UserModel.Login));
+
+
                 users.Add(SelectedUser);
                 await service.Navigation.GoBackAsync();
                 return SelectedUser;
@@ -256,7 +260,7 @@ namespace VMService
         /// Condition pour savoir si on peut ajouter un utilisateur
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Name) && !string.IsNullOrEmpty(SelectedUser.Surname) && !string.IsNullOrEmpty(SelectedUser.Password) && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
+        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Name) && !string.IsNullOrEmpty(SelectedUser.Surname) && !string.IsNullOrEmpty(SelectedUser.Password) ;
 
         // Gestion de la commande pour mettre à jour un utilisateur
         public IAsyncRelayCommand UpdateUser { get; private set; }
