@@ -174,4 +174,7 @@
   <data name="EnterName" xml:space="preserve">
     <value>Enter your name</value>
   </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update user</value>
+  </data>
 </root>

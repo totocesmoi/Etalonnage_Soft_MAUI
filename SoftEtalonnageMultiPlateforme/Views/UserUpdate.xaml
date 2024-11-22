@@ -19,7 +19,14 @@
             <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
             <Label Text="Login:"/>
-            <Entry Text="{Binding SelectedUser.Login, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterLogin}" />
+            <Entry 
+                Text="{Binding SelectedUser.Login, Mode=TwoWay}" 
+                IsEnabled="False"/>
+
+            <Label Text="Signature Name:"/>
+            <Entry 
+                Text="{Binding SelectedUser.SigntureName, Mode=TwoWay}" 
+                IsEnabled="False"/>
 
             <Label Text="Password:"/>
             <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
@@ -37,11 +44,10 @@
 
 
             <Button
-                Text="{language:LocalizedStringExtension Key=UpdateUser}">
-                <Button.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding UpdateUser}" CommandParameter="SelectedUser"/>
-                </Button.GestureRecognizers>
-            </Button>
+                Text="{language:LocalizedStringExtension Key=UpdateUser}"
+                Command="{Binding UpdateUser}"
+                CommandParameter="{Binding SelectedUser}" />
+            
             <Button
                 Margin="15"
                 Text="{language:LocalizedStringExtension Key=DeleteUser}">

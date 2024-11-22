@@ -208,6 +208,14 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string UpdateUser
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateUser", resourceCulture);
+            }
+        }
+
         internal static string DeleteUser
         {
             get
