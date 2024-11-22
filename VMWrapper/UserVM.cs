@@ -21,6 +21,11 @@ namespace VMWrapper
             SignatureName = userModel.SignatureName;
         }
 
+        public UserVM()
+        {
+            UserModel = new User();
+        }
+
         [ObservableProperty]
         private string name;
 
@@ -77,14 +82,10 @@ namespace VMWrapper
             UserModel.Signature = value;
         }
 
-<<<<<<< HEAD
         public bool Equals(UserVM? other)
         {
             return string.IsNullOrEmpty(other?.Login) ? false : UserModel.Login!.Equals(other.Login);
         }
-=======
-        
->>>>>>> 443b54e6cce8b999bf7111548510e1a1f1f874a0
 
         public override string ToString()
         {
