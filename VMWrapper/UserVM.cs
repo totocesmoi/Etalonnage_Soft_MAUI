@@ -45,6 +45,11 @@ namespace VMWrapper
         [ObservableProperty]
         private string login;
 
+        partial void OnLoginChanged(string value)
+        {
+            UserModel.Login = value;
+        }
+
         [ObservableProperty]
         private string password;
 
@@ -79,7 +84,7 @@ namespace VMWrapper
 
         public bool Equals(UserVM? other)
         {
-            return Login.Equals(other?.Login);
+            return string.IsNullOrEmpty(other?.Login) ? false : Login.Equals(other?.Login);
         }
 
         public override string ToString()
