@@ -174,7 +174,7 @@
   <data name="EnterName" xml:space="preserve">
     <value>Saisir votre nom</value>
   </data>
-  <data name="EnterName" xml:space="preserve">
-    <value>Saisir votre nom</value>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Modifier l'utilisateur</value>
   </data>
 </root>

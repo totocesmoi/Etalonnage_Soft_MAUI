@@ -12,7 +12,7 @@
     </ContentPage.Behaviors>
     
     <VerticalStackLayout>
-        <ScrollView>
+        <ScrollView HorizontalOptions="FillAndExpand" HorizontalScrollBarVisibility="Default">
             <CollectionView ItemsSource="{Binding Users}"
                             RemainingItemsThresholdReachedCommand="{Binding LoadUsers}"
                             RemainingItemsThreshold="3">

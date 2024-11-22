@@ -15,6 +15,9 @@ namespace DAL.Stub
     {
         public static UserCollection UserCollection { get; set; }
 
+
+        private static string userPath;
+
         static StubbedUser()
         {
             string directoryPath;
@@ -60,6 +63,8 @@ namespace DAL.Stub
                     }
                 }
             }
+            // On sauvearde le Path de manière globale a l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'applcation
+            userPath = filePathUsers;
         }
 
         /// <summary>
@@ -83,7 +88,7 @@ namespace DAL.Stub
         }
 
         /// <summary>
-        /// 
+        /// Permet de récupérer tout les utilsateurs
         /// </summary>
         /// <param name="index"></param>
         /// <param name="count"></param>
@@ -101,14 +106,25 @@ namespace DAL.Stub
             return await Task.FromResult(pagination);
         }
 
+        /// <summary>
+        /// Permet de récupérer un utilisateur par son login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<User> GetAsyncUserByLogin(string login)
         {
             var user = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
             return await Task.FromResult(user) ?? null!;
         }
 
+        /// <summary>
+        /// Permet de créer un utilisateur
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<bool> CreateUser(User user)
         {
+            user.Login = user.GenerateLogin(user.Surname, user.Name);
             if (UserCollection.UsersList.Any(u => u.Login == user.Login))
             {
                 return await Task.FromResult(false);
@@ -116,9 +132,15 @@ namespace DAL.Stub
 
             SetPasswd(user, user.Password);
             UserCollection.UsersList.Add(user);
+            UserCollection.SaveUserFile(userPath);
             return await Task.FromResult(true);
         }
 
+        /// <summary>
+        /// Permet de mettre à jour un utilisateur
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns> l'utilsateur modifier</returns>
         public async Task<User> UpdateUser(User user)
         {
 
@@ -136,17 +158,24 @@ namespace DAL.Stub
                     SetPasswd(existingUser, user.Password);
                 }
 
+                UserCollection.SaveUserFile(userPath);
                 return await Task.FromResult(existingUser);
             }
             return await Task.FromResult<User>(null!);
         }
 
+        /// <summary>
+        /// Permet de supprimer un utilisateur
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>true ou false</returns>
         public async Task<bool> DeleteUser(string login)
         {
             var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
             if (existingUser != null)
             {
                 UserCollection.UsersList.Remove(existingUser);
+                UserCollection.SaveUserFile(userPath);
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);

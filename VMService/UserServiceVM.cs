@@ -125,6 +125,7 @@ namespace VMService
         /// <returns></returns>
         private async Task LoadEquipementAfterUpdateAsync()
         {
+
             await GetUsersAsync(currentPageIndex, pageSize);
         }
 
@@ -244,6 +245,7 @@ namespace VMService
             if (await service.CreateUser(SelectedUser.UserModel))
             {
                 users.Add(SelectedUser);
+                await service.Navigation.GoBackAsync();
                 return SelectedUser;
             }
             else
@@ -266,12 +268,21 @@ namespace VMService
         /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
         private async Task UpdateAnUserAsync(UserVM user)
         {
-            if (await service.UpdateUser(user.UserModel) != null)
+            try
             {
-                await LoadEquipementAfterUpdateAsync();
+                if (await service.UpdateUser(user.UserModel) != null)
+                {
+                    await LoadEquipementAfterUpdateAsync();
+                    await service.Navigation.GoBackAsync();
+                }
+                else
+                    throw new Exception("An error occured during the User update");
             }
-            else
-                throw new Exception("An error occured during the User update");
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user update : {ex.Message}");
+            }
+                
         }
 
         /// <summary>
@@ -290,14 +301,27 @@ namespace VMService
         /// <exception cref="Exception"> Problème lors de la suppression de l'utilisateur </exception>
         private async Task<bool> DeleteAnUserAsync()
         {
-            if (await service.DeleteUser(SelectedUser.UserModel.Login))
+            try
             {
-                users.Remove(SelectedUser);
-                SelectedUser = null!;
-                return true;
+                if (await service.DeleteUser(SelectedUser.UserModel.Login))
+                {
+                    users.Remove(SelectedUser);
+                    SelectedUser = null!;
+                    await service.Navigation.GoBackAsync();
+                    return true;
+                }
+
+                await Application.Current.MainPage.DisplayAlert("Erreur", "An error occured during the user deletion !", "OK");
+                await service.Navigation.GoBackAsync();
+                return false;
+
             }
-            else
-                throw new Exception("An error occured during the User deletion");
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user deletion : {ex.Message}");
+                return false;
+            }
+                
         }
 
         /// <summary>
