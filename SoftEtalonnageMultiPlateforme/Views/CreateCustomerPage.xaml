@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.CreateCustomerPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             BackgroundColor="{DynamicResource Background}"
              Title="Créer un client">
 
     <ContentPage.Content>

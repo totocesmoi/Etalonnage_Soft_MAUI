@@ -33,9 +33,7 @@ namespace Model
         public bool Login(string login, string password) => Service.login(login, password);
         public void Logout() => Service.logout();
 
-        //Gestion des clients
-
-        // Gestion des utilisateurs
+        // Gestion des clients
         public Task<Pagination<Customer>> GetAllCustomer(int index, int count) => Service.GetAsyncAllCustomer(index, count);
         public Task<Customer> GetUserByNme(string name) => Service.GetAsyncByName(name);
         public Task<bool> CreateCustomer(Customer customer) => Service.CreateAsyncCustomer(customer);

@@ -37,6 +37,7 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddSingleton<Manager>();
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
+            builder.Services.AddSingleton<CustomerServiceVM>();
             // Ajout des commandes de l'utilisateur courant
             builder.Services.AddSingleton<CurrentUserServiceVM>();
             // Ajout des commandes de connexion

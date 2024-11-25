@@ -73,6 +73,12 @@ namespace DAL.Stub
             return await Task.FromResult(pagination);
         }
 
+        public async Task<Customer> GetAsyncByName(string name)
+        {
+            var customer = CustomerCollection.CustomersList.FirstOrDefault(u => u.Name == name);
+            return await Task.FromResult(customer ?? null!);
+        }
+
         public async Task<bool> CreateCustomer(Customer customer)
         {
 

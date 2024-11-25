@@ -5,9 +5,7 @@ namespace DAL.Stub
 {
     public class StubbedData : IDataService<User, Customer>
     {
-        private User ? currentUser = null;
-
-        private Customer? currentCustomer = null;
+        private User? currentUser = null;
 
         public IUserService<User> UserService { get; set; }
 
@@ -69,27 +67,27 @@ namespace DAL.Stub
 
         public Task<Pagination<Customer>> GetAsyncAllCustomer(int index, int count)
         {
-            throw new NotImplementedException();
+            return CustomerService.GetAsyncAllCustomer(index, count);
         }
 
         public Task<Customer> GetAsyncByName(string name)
         {
-            throw new NotImplementedException();
+            return CustomerService.GetAsyncByName(name);
         }
 
         public Task<bool> CreateAsyncCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            return CustomerService.CreateCustomer(customer);
         }
 
         public Task<Customer> UpdateAsyncCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            return CustomerService.UpdateCustomer(customer);
         }
 
         public Task<bool> DeleteAsyncCustomer(string name)
         {
-            throw new NotImplementedException();
+            return CustomerService.DeleteCustomer(name);
         }
     }
 }

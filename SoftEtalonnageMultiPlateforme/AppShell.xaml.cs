@@ -17,6 +17,9 @@ namespace SoftEtalonnageMultiPlateforme
             Routing.RegisterRoute("UserUpdate", typeof(UserUpdate));
             Routing.RegisterRoute("CreateUserPage", typeof(CreateUserPage));
 
+            Routing.RegisterRoute("CustomerUpdate", typeof(CustomerUpdate));
+            Routing.RegisterRoute("CreateCustomerPage", typeof(CreateCustomerPage));
+
             FlyoutHeader.BindingContext = currentUserServiceVM;
             FlyoutFooter.BindingContext = loginServiceVM;
         }
