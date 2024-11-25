@@ -20,12 +20,12 @@
         
         <VerticalStackLayout>
             <Label Text="Name:"/>
-            <Entry Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" Placeholder="" />
+            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
-            <Label Text="Email:"/>
-            <Entry Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" Placeholder="" />
+            <Label Text="Surname:"/>
+            <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
-            <Label Text="Address:"/>
+            <Label Text="Login:"/>
             <Entry 
                 Text="{Binding SelectedUser.Login, Mode=TwoWay}" 
                 IsEnabled="False"/>
@@ -52,14 +52,14 @@
 
             <Button
                 Text="{language:LocalizedStringExtension Key=UpdateUser}"
-                Command="{Binding UpdateCustomer}"
-                CommandParameter="{Binding SelectedCustomer}" />
+                Command="{Binding UpdateUser}"
+                CommandParameter="{Binding SelectedUser}" />
             
             <Button
                 Margin="15"
-                Text="{language:LocalizedStringExtension Key=DeleteCustomer}">
+                Text="{language:LocalizedStringExtension Key=DeleteUser}">
                 <Button.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding DeleteCustomer}"/>
+                    <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
                 </Button.GestureRecognizers>
             </Button>
         </VerticalStackLayout>
