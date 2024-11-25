@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.CreateUserPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
-             Title="Créer un utilisateur">
-    
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
+             Title="{language:LocalizedStringExtension Key=CreateUserPage}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <ScrollView>
             <VerticalStackLayout Padding="20" Spacing="15">
@@ -33,7 +40,7 @@
 
                 <Picker 
                     Title="{language:LocalizedStringExtension Key=Role}"
-                    SelectedItem="{Binding SelectedUser.UserRole}">
+                    SelectedItem="{Binding SelectedUser.UserRole, Converter={StaticResource RoleToStringConverter}}">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Administrator</x:String>

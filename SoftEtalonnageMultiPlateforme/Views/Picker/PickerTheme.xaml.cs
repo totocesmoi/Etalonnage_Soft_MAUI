@@ -25,7 +25,7 @@ public partial class PickerTheme : ContentView
             _ => new DufournierTheme()
         };
 
-        ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+        ICollection<ResourceDictionary> mergedDictionaries = Application.Current!.Resources.MergedDictionaries;
         if (mergedDictionaries != null)
         {
             foreach (var dico in mergedDictionaries.Where(d => d is IThemeManager).ToList())

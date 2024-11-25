@@ -10,8 +10,11 @@ namespace SoftEtalonnageMultiPlateforme.Converters
 {
     public class RoleToStringConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
+            if (value == null)
+                return string.Empty;
+
             if (value is Role role)
             {
                 return role.ToString();
@@ -19,13 +22,13 @@ namespace SoftEtalonnageMultiPlateforme.Converters
             return string.Empty;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is string roleString && Enum.TryParse(typeof(Role), roleString, out var role))
             {
                 return role;
             }
-            return Role.Operator; // Default value
+            return Role.Operator;
         }
     }
 }

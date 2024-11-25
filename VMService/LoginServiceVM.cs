@@ -18,11 +18,8 @@ namespace VMService
     /// </summary>
     public partial class LoginServiceVM : ObservableObject, IServiceVM
     {
-        /// <summary>
-        /// Permet de manager l'ensemble de mes commandes utilisables dans l'application
-        /// </summary>
         private readonly Manager _service;
-
+        private readonly CurrentUserServiceVM _currentUserServiceVM;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
@@ -32,19 +29,24 @@ namespace VMService
         [NotifyCanExecuteChangedFor(nameof(LoginCommand))]
         private string password;
 
-        public LoginServiceVM(Manager service)
+        public LoginServiceVM(Manager service, CurrentUserServiceVM currentUserServiceVM)
         {
             _service = service;
+            _currentUserServiceVM = currentUserServiceVM;
 
-            CreateCommands(); 
+            CreateCommands();
         }
 
         public void CreateCommands()
         {
             LoginCommand = new AsyncRelayCommand<string>(OnLoginAsync, CanLogin);
             LogoutCommand = new AsyncRelayCommand(OnLogoutAsync, CanLogout);
+            ResetLogin = new AsyncRelayCommand(ResetLoginAsync);
         }
 
+        /// <summary>
+        /// Commande pour se connecter
+        /// </summary>
         public IAsyncRelayCommand LoginCommand { get; private set; }
         private async Task OnLoginAsync(string page)
         {
@@ -52,44 +54,67 @@ namespace VMService
             {
                 if (_service.Login(Login, Password))
                 {
-                    // On ne passe pas par le système de navigation, ici on redirige directement vers la page principale
+                    await _currentUserServiceVM.GetCurrentAsync();
                     await Shell.Current.GoToAsync("//MainPage");
                 }
                 else
                 {
-                    await Application.Current.MainPage.DisplayAlert("Erreur", "Login ou mot de passe incorrect !", "OK");
+                    await Application.Current!.MainPage!.DisplayAlert("Erreur", "Login ou mot de passe incorrect !", "OK");
                 }
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
+                await Application.Current!.MainPage!.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
 
+        /// <summary>
+        /// Condition pour savoir si on peut se connecter
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         private bool CanLogin(string page)
         {
-            return !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password) 
+            return !string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password)
                 && _service.CurrentUser == null
                 && page != null || page == String.Empty;
         }
 
+        /// <summary>
+        /// Commande pour se déconnecter
+        /// </summary>
         public IAsyncRelayCommand LogoutCommand { get; private set; }
         private async Task OnLogoutAsync()
         {
             try
             {
                 _service.Logout();
-                await _service.Navigation.NavigateToAsync("Login");
+                await _currentUserServiceVM.ResetCurrentUserAsync();
+                Shell.Current.FlyoutIsPresented = false;
+                await Shell.Current.GoToAsync("//LoginPage");
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
+                await Application.Current!.MainPage!.DisplayAlert("Erreur", $"Une erreur s'est produite : {ex.Message}", "OK");
             }
         }
 
+        /// <summary>
+        /// Condition pour savoir si on peut se déconnecter
+        /// </summary>
+        /// <returns></returns>
         private bool CanLogout()
         {
             return _service.CurrentUser != null;
+        }
+
+        /// <summary>
+        /// Méthode pour réinitialiser les champs de connexion
+        /// </summary>
+        public IAsyncRelayCommand ResetLogin { get; private set; }
+        private async Task ResetLoginAsync()
+        {
+            await Task.FromResult(Login = Password = string.Empty);
         }
     }
 }

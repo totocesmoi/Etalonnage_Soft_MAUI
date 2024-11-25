@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.MainPage"
-             >
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+            Title="{language:LocalizedStringExtension Key=MainPage}">
 
     <ScrollView>
         <VerticalStackLayout
@@ -23,7 +25,6 @@
             <Button
                 x:Name="CounterBtn"
                 Text="Click me" 
-                Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView> 

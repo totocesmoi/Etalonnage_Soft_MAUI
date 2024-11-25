@@ -37,14 +37,15 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddSingleton<Manager>();
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
-
-            builder.Services.AddSingleton<CustomerServiceVM>();
+            // Ajout des commandes de l'utilisateur courant
+            builder.Services.AddSingleton<CurrentUserServiceVM>();
             // Ajout des commandes de connexion
             builder.Services.AddTransient<LoginServiceVM>();
 
 
             // Gestion des injection de views 
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<UserCatalogue>();
             builder.Services.AddSingleton<CustomerCatalogue>();
             builder.Services.AddTransient<LoginPage>();

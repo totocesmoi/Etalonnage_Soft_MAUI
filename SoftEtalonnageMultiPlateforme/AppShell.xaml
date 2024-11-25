@@ -13,7 +13,7 @@
     Loaded="PreferenceLoading">
     
     <Shell.FlyoutHeader>
-        <Flyout:Header />
+        <Flyout:Header x:Name="FlyoutHeader"/>
     </Shell.FlyoutHeader>
 
     <Shell.FlyoutContent>
@@ -33,6 +33,10 @@
         </ScrollView>
     </Shell.FlyoutContent>
 
+    <Shell.FlyoutFooter>
+        <Flyout:Footer x:Name="FlyoutFooter"/>
+    </Shell.FlyoutFooter>
+
 
     <!-- Informations sur mes routes -->
     <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
@@ -41,20 +45,10 @@
 
     <ShellContent Title="UserUpdate" ContentTemplate="{DataTemplate views:UserUpdate}" Route="UserUpdate"/>
 
-    <ShellContent Title="CreateCustomerPage" ContentTemplate="{DataTemplate views:CreateCustomerPage}" Route="CreateCustomerPage"/>
-
-
-
     <TabBar>
         <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
         <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate views:UserInfo}" Route="UserInfo"/>
         <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate views:UserCatalogue}" Route="UserCatalogue"/>
         <ShellContent Title="CustomerCatalogue" ContentTemplate="{DataTemplate views:CustomerCatalogue}" Route="CustomerCatalogue"/>
     </TabBar>
-
-    
-    
-    
-    
-
 </Shell>

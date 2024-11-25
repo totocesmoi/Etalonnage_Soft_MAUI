@@ -27,7 +27,7 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue
 
     public class LocalizedStringExtension : IMarkupExtension<string>
     {
-        public string Key { get; set; }
+        public string? Key { get; set; }
         public static string Culture
         {
             get => culture;
@@ -57,7 +57,7 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue
 
         private string GetLocalizedValue()
         {
-            var value = typeof(AppRessources).GetProperty(Key, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)?.GetValue(null) as string;
+            var value = typeof(AppRessources).GetProperty(Key!, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)?.GetValue(null) as string;
             Debug.WriteLine($"Localized value for key '{Key}': {value}");
             return value ?? "";
         }

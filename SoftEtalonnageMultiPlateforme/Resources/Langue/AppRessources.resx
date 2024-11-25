@@ -177,4 +177,34 @@
   <data name="UpdateUser" xml:space="preserve">
     <value>Update user</value>
   </data>
+  <data name="UpdatePasswd" xml:space="preserve">
+    <value>Modify your password if you forget it </value>
+  </data>
+  <data name="EnterSignatureName" xml:space="preserve">
+    <value>Enter your signature name</value>
+  </data>
+  <data name="UserCatalogue" xml:space="preserve">
+    <value>User Catalogue</value>
+  </data>
+  <data name="PersonalInfo" xml:space="preserve">
+    <value>Personal Informations</value>
+  </data>
+  <data name="LoginPage" xml:space="preserve">
+    <value>Login Page</value>
+  </data>
+  <data name="UpdateUserPage" xml:space="preserve">
+    <value>Update User Page</value>
+  </data>
+  <data name="CreateUserPae" xml:space="preserve">
+    <value>Create User Page</value>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>Main Page</value>
+  </data>
+  <data name="UploadSignature" xml:space="preserve">
+    <value>Upload Signature</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
 </root>

@@ -2,36 +2,48 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.UserInfo"
-             Title="PersonalInfo">
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             Title="{language:LocalizedStringExtension Key=PersonalInfo}"
+             Background="{DynamicResource Background}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <VerticalStackLayout Padding="10">
-        <Label Text="Personal Informations"
-           FontSize="24"
-           TextColor="White"
-           HorizontalOptions="Center" />
         <VerticalStackLayout>
             <Label Text="Name:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName}" />
+            <Entry Text="{Binding CurrentUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
             <Label Text="Surname:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{DynamicResource EnterSurname}" />
+            <Entry Text="{Binding CurrentUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
             <Label Text="Login:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding SelectedUser.Login, Mode=TwoWay}" Placeholder="{DynamicResource EnterLogin}" />
+            <Entry Text="{Binding CurrentUser.Login, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterLogin}" />
 
             <Label Text="Password:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{DynamicResource EnterPasswd }" />
+            <Entry Text="{Binding CurrentUser.PlainPassword, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=UpdatePasswd}" />
 
             <Label Text="Signature Name:" TextColor="DeepSkyBlue" />
-            <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{DynamicResource EnterName }" />
+            <Entry Text="{Binding CurrentUser.SignatureName, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSignatureName}" />
 
             <Label Text="Signature:" TextColor="DeepSkyBlue" />
-            <HorizontalStackLayout>
-                <Button Text="Upload Signature"
-                        TextColor="White"
-                        BackgroundColor="DeepSkyBlue"
-                        />
-            </HorizontalStackLayout>
+            <Image Source="{Binding CurrentUser.Signature.ImageData, Converter={StaticResource ByteArrayToImageConverter}}" HeightRequest="100" WidthRequest="100" />
 
+            <HorizontalStackLayout>
+                <Button Text="{language:LocalizedStringExtension Key=UploadSignature}"
+                        Command="{Binding SelectSignatureCommand}" />
+                <Button
+                    Text="{language:LocalizedStringExtension Key=UpdateUser}"
+                    Command="{Binding UpdateCurrentUser}"
+                    CommandParameter="{Binding CurrentUser}" 
+                    Margin="15"/>
+                
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

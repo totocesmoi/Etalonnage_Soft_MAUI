@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using DAL.Stub;
 using Model;
 
 namespace VMWrapper
 {
-    public partial class UserVM : ObservableObject
+    public partial class UserVM : ObservableObject, IEquatable<UserVM>
     {
         [ObservableProperty]
         private User userModel;
@@ -19,11 +20,20 @@ namespace VMWrapper
             UserRole = userModel.UserRole;
             Signature = userModel.Signature;
             SignatureName = userModel.SignatureName;
+            PlainPassword = string.Empty;
         }
 
         public UserVM()
         {
             UserModel = new User();
+            Name = "";
+            Surname = "";
+            Login = "";
+            Password = "";
+            UserRole = Role.Operator;
+            Signature = new Picture();
+            SignatureName = "";
+            PlainPassword = string.Empty;
         }
 
         [ObservableProperty]
@@ -82,7 +92,44 @@ namespace VMWrapper
             UserModel.Signature = value;
         }
 
-        
+        [ObservableProperty]
+        private string plainPassword;
+
+        partial void OnPlainPasswordChanged(string value)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {
+                UserModel.SetPasswd(value);
+            }
+        }
+
+        /// <summary>
+        /// Synchrone les données de la VM avec le modèle
+        /// Utiliser uniquement après un ajout, pour avoir les données générés par le modèle
+        /// </summary>
+        public void SyncWithModel()
+        {
+            Name = UserModel.Name;
+            Surname = UserModel.Surname;
+            // Pour le login plus précisément
+            Login = UserModel.Login;
+            Password = UserModel.Password;
+            UserRole = UserModel.UserRole;
+            Signature = UserModel.Signature;
+            SignatureName = UserModel.SignatureName;
+            PlainPassword = string.Empty;
+        }
+
+        /// <summary>
+        /// Protocole d'égalité entre mes UserVM nécéssaire pour la notification de changement dans la views
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns> true or false </returns>
+        public bool Equals(UserVM? other)
+        {
+            bool test = string.IsNullOrEmpty(other?.Login) ? false : other.Login.Equals(UserModel.Login);
+            return test;
+        }
 
         public override string ToString()
         {
