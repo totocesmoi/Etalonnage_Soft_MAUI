@@ -128,11 +128,195 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string EnterName
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterName", resourceCulture);
+            }
+        }
+
+        internal static string EnterSurname
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterSurname", resourceCulture);
+            }
+        }
+
+        internal static string EnterSignatureName
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterSignatureName", resourceCulture);
+            }
+        }
+
         internal static string EnterPasswd
         {
             get
             {
                 return ResourceManager.GetString("EnterPasswd", resourceCulture);
+            }
+        }
+
+        internal static string UpdatePasswd
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdatePasswd", resourceCulture);
+            }
+        }
+
+        internal static string Name
+        {
+            get
+            {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+
+        internal static string Surname
+        {
+            get
+            {
+                return ResourceManager.GetString("Surname", resourceCulture);
+            }
+        }
+
+        internal static string Passwd
+        {
+            get
+            {
+                return ResourceManager.GetString("Passwd", resourceCulture);
+            }
+        }
+
+        internal static string UserNameSignature
+        {
+            get
+            {
+                return ResourceManager.GetString("UserNameSignature", resourceCulture);
+            }
+        }
+
+        internal static string Role
+        {
+            get
+            {
+                return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+
+        internal static string AddUser
+        {
+            get
+            {
+                return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+
+        internal static string CreateUser
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateUser", resourceCulture);
+            }
+        }
+
+        internal static string UpdateUser
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateUser", resourceCulture);
+            }
+        }
+
+        internal static string DeleteUser
+        {
+            get
+            {
+                return ResourceManager.GetString("DeleteUser", resourceCulture);
+            }
+        }
+
+        internal static string Logout
+        {
+            get
+            {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+
+        internal static string BackPage
+        {
+            get
+            {
+                return ResourceManager.GetString("BackPage", resourceCulture);
+            }
+        }
+
+        internal static string Cancel
+        {
+            get
+            {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+
+        internal static string UserCatalogue
+        {
+            get
+            {
+                return ResourceManager.GetString("UserCatalogue", resourceCulture);
+            }
+        }
+
+        internal static string PersonalInfo
+        {
+            get
+            {
+                return ResourceManager.GetString("PersonalInfo", resourceCulture);
+            }
+        }
+
+        internal static string LoginPage
+        {
+            get
+            {
+                return ResourceManager.GetString("LoginPage", resourceCulture);
+            }
+        }
+
+        internal static string UpdateUserPage
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateUserPage", resourceCulture);
+            }
+        }
+
+        internal static string CreateUserPage
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateUserPage", resourceCulture);
+            }
+        }
+
+        internal static string MainPage
+        {
+            get
+            {
+                return ResourceManager.GetString("MainPage", resourceCulture);
+            }
+        }
+        
+        internal static string UploadSignature
+        {
+            get
+            {
+                return ResourceManager.GetString("UploadSignature", resourceCulture);
             }
         }
     }

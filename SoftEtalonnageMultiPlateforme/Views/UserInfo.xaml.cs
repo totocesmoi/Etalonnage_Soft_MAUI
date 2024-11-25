@@ -1,9 +1,12 @@
+using VMService;
+
 namespace SoftEtalonnageMultiPlateforme.Views;
 
 public partial class UserInfo : ContentPage
 {
-	public UserInfo()
+	public UserInfo(CurrentUserServiceVM currentUserServiceVM)
 	{
 		InitializeComponent();
-	}
+		BindingContext = currentUserServiceVM;
+    }
 }

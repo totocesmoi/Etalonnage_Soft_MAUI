@@ -10,7 +10,7 @@
         Task<Pagination<U>> GetAsyncAllUser(int index, int count);
         Task<U> GetAsyncUserByLogin(string login);
         Task<bool> CreateAsyncUser(U user);
-        Task<U> UpdateAsyncUser(U user, string login);
+        Task<U> UpdateAsyncUser(U user);
         Task<bool> DeleteAsyncUser(string login);
     }
     

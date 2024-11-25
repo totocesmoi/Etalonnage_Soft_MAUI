@@ -11,6 +11,8 @@ using Shared;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Maui.Converters;
+using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace VMService
 {
@@ -21,13 +23,15 @@ namespace VMService
     /// Ici lorsque je vais faire une modification, ajout ou suppression d'un utilisateur, je vais passer par SelectedUser pour notifier la vue.
     /// Quand dans la view je vais cliquer sur un utilisateurs par exemple, les informations de l'utilisateur vont être copié dans SelectedUser.
     /// </remarks>
-    public class UserServiceVM : ObservableObject
+    public class UserServiceVM : ObservableObject, IServiceVM
     {
         /// <summary>
         /// Permet de manager l'ensemble de mes commandes utilisables dans l'application
         /// Ceci ajoute une couche d'abstraction pour éviter une écriture d'accés trop longue.
         /// </summary>
         private Manager service;
+
+        private readonly INavigationService _navigationService;
 
         /// <summary>
         /// Permet d'avoir ma propriété observable qui va notifier le modèle en cas de 
@@ -57,10 +61,14 @@ namespace VMService
         /// Constructeur 
         /// </summary>
         /// <param name="service"></param>
-        public UserServiceVM(Manager manager)
+#pragma warning disable CS8618 
+        public UserServiceVM(Manager manager, INavigationService navigationService)
+#pragma warning restore CS8618
         {
+            _navigationService = navigationService;
             service = manager;
             CreateCommands();
+            
         }
 
         /// <summary>
@@ -69,11 +77,10 @@ namespace VMService
         public void CreateCommands()
         {
             LoadUsers = new AsyncRelayCommand(LoadMoreUsersAsync, CanLoadMoreUsers);
-            GetAnUser = new AsyncRelayCommand<string>(GetUserAsync, CanGetUser);
-            GetCurrentUser = new AsyncRelayCommand(GetCurrentAsync, CanGetCurrentUser);
-            CreateUser = new RelayCommand(CreateAnUserAsync, CanCreateUser);
+            GetAnUser = new AsyncRelayCommand<OptionCommand<object>>(GetUserAsync!, CanGetUser!);
+            CreateUser = new AsyncRelayCommand<string>(CreateAnUserAsync!, CanCreateUser!);
             InsertUser = new AsyncRelayCommand(InsertAnUserAsync, CanInsertUser);
-            UpdateUser = new AsyncRelayCommand<UserVM>(UpdateAnUserAsync, CanUpdateUser);
+            UpdateUser = new AsyncRelayCommand<UserVM>(UpdateAnUserAsync!, CanUpdateUser!);
             DeleteUser = new AsyncRelayCommand(DeleteAnUserAsync, CanDeleteUser);
         }
 
@@ -85,6 +92,7 @@ namespace VMService
         /// </summary>
         /// <param name="index"></param>
         /// <param name="count"></param>
+        /// 
         /// <returns> Une partie ou l'entière liste des utilisateurs </returns>
         private async Task<IEnumerable<UserVM>> GetUsersAsync(int index, int count)
         {
@@ -96,6 +104,8 @@ namespace VMService
 
             foreach (var user in paginationResult.Items)
             {
+                if (user.Login == service.CurrentUser!.Login)
+                    continue;
                 users.Add(new UserVM(user));
             }
 
@@ -114,15 +124,6 @@ namespace VMService
         }
 
         /// <summary>
-        /// Méthode qui permet de charger les utilisateurs après une mise à jour
-        /// </summary>
-        /// <returns></returns>
-        private async Task LoadEquipementAfterUpdateAsync()
-        {
-            await GetUsersAsync(currentPageIndex, pageSize);
-        }
-
-        /// <summary>
         /// Condition pour savoir si on peut charger plus d'utilisateurs
         /// </summary>
         /// <returns> bool </returns>
@@ -136,11 +137,37 @@ namespace VMService
         /// </summary>
         /// <param name="login"></param>
         /// <returns> L'utilisateur rechercher </returns>
-        private async Task<UserVM> GetUserAsync(string login)
+        private async Task GetUserAsync(OptionCommand<object> options)
         {
-            var user = await service.GetUserByLogin(login);
-            SelectedUser = new UserVM(user);
-            return SelectedUser;
+            try 
+            {
+                var login = options[0] as string;
+                var navigate = (bool)options[1];
+                if (navigate)
+                {
+                    var pageName = options[2] as string;
+
+                    if (login == null || pageName == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var user = await service.GetUserByLogin(login);
+                    SelectedUser = new UserVM(user);
+
+                    await _navigationService.NavigateToAsync(pageName);
+                }
+                else
+                {
+                    if (login == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var user = await service.GetUserByLogin(login);
+                    SelectedUser = new UserVM(user);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -148,44 +175,39 @@ namespace VMService
         /// </summary>
         /// <param name="login"></param>
         /// <returns> bool </returns>
-        private bool CanGetUser(string login) => service != null && !string.IsNullOrEmpty(login) && service.CurrentUser != null;
-
-
-        // Gestion de la commande pour récupérer l'utilisateur courant
-        public IAsyncRelayCommand GetCurrentUser { get; private set; }
-        /// <summary>
-        /// Permet de récupérer l'utilisateur courant, c'est à dire l'utilisateur connecté
-        /// </summary>
-        /// <returns> L'utilisateur connecté </returns>
-        public async Task<UserVM> GetCurrentAsync()
+        private bool CanGetUser(OptionCommand<object> options)
         {
-            var user = await service.GetCurrentUser();
-            SelectedUser = new UserVM(user);
-            return SelectedUser;
+            var login = options[0] as string;
+            var canExecute = !string.IsNullOrEmpty(login) && service.CurrentUser != null;
+            Debug.WriteLine($"CanGetUser: {canExecute}");
+            return canExecute;
         }
 
-        /// <summary>
-        /// Condition pour savoir si on peut récupérer l'utilisateur courant
-        /// </summary>
-        /// <returns> bool </returns>
-        private bool CanGetCurrentUser() => service != null && service.CurrentUser != null;
-
         // Gestion de la commande pour créer un utilisateur
-        public RelayCommand CreateUser { get; private set; }
+        public IAsyncRelayCommand<string> CreateUser { get; private set; }
+
         /// <summary>
         /// Méthode qui permet de créer un utilisateur
         /// </summary>
         /// <returns></returns>
-        private void CreateAnUserAsync()
+        private async Task CreateAnUserAsync(string page)
         {
             SelectedUser = new UserVM();
+            if (!string.IsNullOrEmpty(page))
+            {
+                await service.Navigation.NavigateToAsync(page);
+            }
         }
 
         /// <summary>
         /// Condition pour savoir si on peut créer un utilisateur
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanCreateUser() => service != null;
+        private bool CanCreateUser(string page)
+        {
+            return service != null && !string.IsNullOrEmpty(page) && service.CurrentUser!.UserRole == Role.Administrator;
+        }
+
 
         public IAsyncRelayCommand InsertUser { get; private set; }
         /// <summary>
@@ -197,7 +219,11 @@ namespace VMService
         {
             if (await service.CreateUser(SelectedUser.UserModel))
             {
+                // Pour être sur que le SelectedUser contient bien les informations auto généré.
+                SelectedUser.SyncWithModel();
+
                 users.Add(SelectedUser);
+                await service.Navigation.GoBackAsync();
                 return SelectedUser;
             }
             else
@@ -208,24 +234,36 @@ namespace VMService
         /// Condition pour savoir si on peut ajouter un utilisateur
         /// </summary>
         /// <returns> bool </returns>
-        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Login) && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
+        private bool CanInsertUser() => SelectedUser != null && !string.IsNullOrEmpty(SelectedUser.Name) && !string.IsNullOrEmpty(SelectedUser.Surname) && !string.IsNullOrEmpty(SelectedUser.Password) ;
 
         // Gestion de la commande pour mettre à jour un utilisateur
         public IAsyncRelayCommand UpdateUser { get; private set; }
-        /// <summary>
-        /// Permet de mettre à jour un utilisateur
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
         private async Task UpdateAnUserAsync(UserVM user)
         {
-            if (await service.UpdateUser(user.UserModel, user.UserModel.Login) != null)
+            try
             {
-                await LoadEquipementAfterUpdateAsync();
+                var updatedUser = await service.UpdateUser(user.UserModel);
+                if (updatedUser != null)
+                {
+                    // Remplace l'objet dans la collection
+                    var index = users.IndexOf(user);
+                    if (index >= 0)
+                    {
+                        users[index] = new UserVM(updatedUser);
+                    }
+
+                    // Recharge les données si nécessaire
+                    await service.Navigation.GoBackAsync();
+                }
+                else
+                {
+                    throw new Exception("An error occurred during the User update");
+                }
             }
-            else
-                throw new Exception("An error occured during the User update");
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occurred during the user update: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -244,14 +282,27 @@ namespace VMService
         /// <exception cref="Exception"> Problème lors de la suppression de l'utilisateur </exception>
         private async Task<bool> DeleteAnUserAsync()
         {
-            if (await service.DeleteUser(SelectedUser.UserModel.Login))
+            try
             {
-                users.Remove(SelectedUser);
-                SelectedUser = null!;
-                return true;
+                if (await service.DeleteUser(SelectedUser.UserModel.Login))
+                {
+                    users.Remove(SelectedUser);
+                    SelectedUser = null!;
+                    await service.Navigation.GoBackAsync();
+                    return true;
+                }
+
+                await Application.Current!.MainPage!.DisplayAlert("Erreur", "An error occured during the user deletion !", "OK");
+                await service.Navigation.GoBackAsync();
+                return false;
+
             }
-            else
-                throw new Exception("An error occured during the User deletion");
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user deletion : {ex.Message}");
+                return false;
+            }
+                
         }
 
         /// <summary>

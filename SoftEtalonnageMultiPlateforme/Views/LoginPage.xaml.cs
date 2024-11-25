@@ -2,7 +2,7 @@ using VMService;
 
 namespace SoftEtalonnageMultiPlateforme.Views;
 
-public partial class LoginPage : ContentPage
+public partial class LoginPage : ContentPage, IDisposable
 {
 
     public LoginPage(LoginServiceVM loginServiceVM)
@@ -10,5 +10,10 @@ public partial class LoginPage : ContentPage
         InitializeComponent();
 
         BindingContext = loginServiceVM;
+    }
+
+    public void Dispose()
+    {
+        Dispose();
     }
 }

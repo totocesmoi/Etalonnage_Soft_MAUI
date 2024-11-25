@@ -141,4 +141,70 @@
   <data name="EnterSurname" xml:space="preserve">
     <value>Enter your surname</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="Passwd" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create an user</value>
+  </data>
+  <data name="BackPage" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="UserNameSignature" xml:space="preserve">
+    <value>User name signature</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete user</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Enter your name</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update user</value>
+  </data>
+  <data name="UpdatePasswd" xml:space="preserve">
+    <value>Modify your password if you forget it </value>
+  </data>
+  <data name="EnterSignatureName" xml:space="preserve">
+    <value>Enter your signature name</value>
+  </data>
+  <data name="UserCatalogue" xml:space="preserve">
+    <value>User Catalogue</value>
+  </data>
+  <data name="PersonalInfo" xml:space="preserve">
+    <value>Personal Informations</value>
+  </data>
+  <data name="LoginPage" xml:space="preserve">
+    <value>Login Page</value>
+  </data>
+  <data name="UpdateUserPage" xml:space="preserve">
+    <value>Update User Page</value>
+  </data>
+  <data name="CreateUserPae" xml:space="preserve">
+    <value>Create User Page</value>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>Main Page</value>
+  </data>
+  <data name="UploadSignature" xml:space="preserve">
+    <value>Upload Signature</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
 </root>

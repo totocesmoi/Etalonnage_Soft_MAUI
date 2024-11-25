@@ -8,8 +8,8 @@ namespace Shared
 {
     public interface INavigationService
     {
-        Task NavigateToLoginAsync();
-        Task NavigateToMainPageAsync();
+        Task NavigateToAsync(string page);
+        Task GoBackAsync();
     }
 
     public class NavigationService : INavigationService
@@ -21,14 +21,14 @@ namespace Shared
             _serviceProvider = serviceProvider;
         }
 
-        public async Task NavigateToLoginAsync()
+        public async Task NavigateToAsync(string page)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync(page);
         }
 
-        public async Task NavigateToMainPageAsync()
+        public async Task GoBackAsync()
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

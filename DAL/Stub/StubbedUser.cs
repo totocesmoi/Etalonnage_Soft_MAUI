@@ -15,6 +15,9 @@ namespace DAL.Stub
     {
         public static UserCollection UserCollection { get; set; }
 
+
+        readonly static string userPath;
+
         static StubbedUser()
         {
             string directoryPath;
@@ -60,11 +63,8 @@ namespace DAL.Stub
                     }
                 }
             }
-
-            foreach (var user in UserCollection.UsersList)
-            {
-                Console.WriteLine("User loaded: " + user.ToString());
-            }
+            // On sauvearde le Path de manière globale a l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'applcation
+            userPath = filePathUsers;
         }
 
         /// <summary>
@@ -81,14 +81,14 @@ namespace DAL.Stub
                 signatureName: "Toto l'artiste"
             );
 
-            SetPasswd(newUser, newUser.Password);
+            newUser.SetPasswd(newUser.Password);
 
             UserCollection.UsersList.Add(newUser);
             Console.WriteLine("User created: " + newUser.Login);
         }
 
         /// <summary>
-        /// 
+        /// Permet de récupérer tout les utilsateurs
         /// </summary>
         /// <param name="index"></param>
         /// <param name="count"></param>
@@ -106,98 +106,73 @@ namespace DAL.Stub
             return await Task.FromResult(pagination);
         }
 
+        /// <summary>
+        /// Permet de récupérer un utilisateur par son login
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<User> GetAsyncUserByLogin(string login)
         {
             var user = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
-            return await Task.FromResult(user);
+            return await Task.FromResult(user) ?? null!;
         }
 
+        /// <summary>
+        /// Permet de créer un utilisateur
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<bool> CreateUser(User user)
         {
+            user.Login = user.GenerateLogin(user.Surname, user.Name);
             if (UserCollection.UsersList.Any(u => u.Login == user.Login))
             {
                 return await Task.FromResult(false);
             }
 
-            SetPasswd(user, user.Password);
+            user.SetPasswd(user.Password);
             UserCollection.UsersList.Add(user);
+            UserCollection.SaveUserFile(userPath);
             return await Task.FromResult(true);
         }
 
-        public async Task<User> UpdateUser(User user, string login)
+        /// <summary>
+        /// Permet de mettre à jour un utilisateur
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns> l'utilsateur modifier</returns>
+        public async Task<User> UpdateUser(User user)
         {
-            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+
+            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
             if (existingUser != null)
             {
-                existingUser.Name = user.Name;
-                existingUser.Surname = user.Surname;
-                existingUser.UserRole = user.UserRole;
-                existingUser.Signature = user.Signature;
-                existingUser.SignatureName = user.SignatureName;
+                existingUser = user;
 
-                if (!string.IsNullOrEmpty(user.Password))
-                {
-                    SetPasswd(existingUser, user.Password);
-                }
-
+                UserCollection.SaveUserFile(userPath);
                 return await Task.FromResult(existingUser);
             }
             return await Task.FromResult<User>(null!);
         }
 
+        /// <summary>
+        /// Permet de supprimer un utilisateur
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns>true ou false</returns>
         public async Task<bool> DeleteUser(string login)
         {
             var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
             if (existingUser != null)
             {
                 UserCollection.UsersList.Remove(existingUser);
+                UserCollection.SaveUserFile(userPath);
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);
         }
 
-        /// <summary>
-        /// Vérifie le mot de passe avec le hachage et le sel stockés
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="motDePasse"></param>
-        /// <returns></returns>
-        public static async Task<bool> VerifyMotDePasse(User user, string motDePasse)
-        {
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: motDePasse,
-                salt: user.Sel,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return await Task.FromResult(hashed == user.Password);
-        }
-
-        /// <summary>
-        /// Setteur du mot de passe avec génération de clé de hachage
-        /// </summary>
-        /// <param name="motDePasse"></param>
-        public static void SetPasswd(User user, string motDePasse)
-        {
-            // Générer un sel aléatoire
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-
-            // Hacher le mot de passe
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: motDePasse,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            user.Sel = salt;
-            user.Password = hashed;
-        }
+        
 
         public async Task<string> VerifyPassword(User user, string password)
         {

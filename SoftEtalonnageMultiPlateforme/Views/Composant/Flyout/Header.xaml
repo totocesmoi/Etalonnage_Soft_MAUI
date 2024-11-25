@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.Flyout.Header" >
-    
-    <VerticalStackLayout>
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.Flyout.Header"
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters">
 
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+
+    <VerticalStackLayout>
         <Grid ColumnDefinitions="3*, 7*" BackgroundColor="DarkGrey">
             <Image
                 Grid.Column="0"
                 Source="logo_dufournier.png"/>
 
             <Grid Grid.Column="1" RowDefinitions="*,*">
-
                 <Grid Grid.Row="0" ColumnDefinitions="*,*">
                     <Label 
                         Grid.Column="0"
-                        Text="Nom"
+                        Text="{Binding CurrentUser.Name}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center"/>
 
                     <Label 
                         Grid.Column="1"
-                        Text="Prénom"
+                        Text="{Binding CurrentUser.Surname}"
                         VerticalTextAlignment="Center"
                         HorizontalTextAlignment="Center"/>
                 </Grid>
 
                 <Label 
                     Grid.Row="1"
-                    Text="Mon role"
+                    Text="{Binding CurrentUser.UserRole, Converter={StaticResource RoleToStringConverter}}"
                     VerticalTextAlignment="Center"
                     HorizontalTextAlignment="Center"/>
-
             </Grid>
         </Grid>
-
     </VerticalStackLayout>
-    
 </ContentView>

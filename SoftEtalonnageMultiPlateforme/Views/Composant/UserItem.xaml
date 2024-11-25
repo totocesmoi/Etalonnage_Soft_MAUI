@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.UserItem"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+             xmlns:option="clr-namespace:Shared;assembly=Shared"
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
+             Background="{DynamicResource Background}">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:MultiParameterConverter x:Key="MultiParameterConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <VerticalStackLayout Padding="10">
+        <Frame BackgroundColor="LightCyan">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer>
+                    <TapGestureRecognizer.Command>
+                        <Binding Path="BindingContext.GetAnUser" Source="{RelativeSource AncestorType={x:Type views:UserCatalogue}}" />
+                    </TapGestureRecognizer.Command>
+                    <TapGestureRecognizer.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiParameterConverter}">
+                            <Binding Path="Login" />
+                            <Binding>
+                                <Binding.Source>
+                                    <x:Boolean>True</x:Boolean>
+                                </Binding.Source>
+                            </Binding>
+                            <Binding>
+                                <Binding.Source>
+                                    <x:String>UserUpdate</x:String>
+                                </Binding.Source>
+                            </Binding>
+                        </MultiBinding>
+                    </TapGestureRecognizer.CommandParameter>
+                </TapGestureRecognizer>
+            </Frame.GestureRecognizers>
+
+            <StackLayout>
+                <VerticalStackLayout>
+                    <Label Text="{Binding Name}" TextColor="Black"/>
+                    <Label Text="{Binding Surname}"/>
+                    <Label Text="{Binding Login}"/>
+                    <Label Text="{Binding SignatureName}"/>
+                    <Image Source="dotnet_bot.png" 
+                           HeightRequest="100"
+                           WidthRequest="100"
+                           Aspect="AspectFit"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </StackLayout>
+        </Frame>
+    </VerticalStackLayout>
+</ContentView>

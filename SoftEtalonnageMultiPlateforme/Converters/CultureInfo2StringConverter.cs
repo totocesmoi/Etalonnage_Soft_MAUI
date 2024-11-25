@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SoftEtalonnageMultiPlateforme.Converteur
+namespace SoftEtalonnageMultiPlateforme.Converters
 {
     public class CultureInfo2StringConverter : IValueConverter
     {

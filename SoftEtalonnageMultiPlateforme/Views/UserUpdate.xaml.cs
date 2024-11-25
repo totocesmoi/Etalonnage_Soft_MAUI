@@ -1,9 +1,12 @@
+using VMService;
+
 namespace SoftEtalonnageMultiPlateforme.Views;
 
 public partial class UserUpdate : ContentPage
 {
-	public UserUpdate()
-	{
-		InitializeComponent();
-	}
+    public UserUpdate(UserServiceVM userServiceVM)
+    {
+        InitializeComponent();
+        BindingContext = userServiceVM;
+    }
 }

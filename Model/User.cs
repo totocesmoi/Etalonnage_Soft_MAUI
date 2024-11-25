@@ -89,8 +89,14 @@ namespace Model
         /// </summary>
         public User()
         {
+            Name = "";
+            Surname = "";
+            Login = "";
+            Password = "";
+            Sel = [];
+            SignatureName = "";
             UserRole = Role.Operator;
-            actionsList = new List<Action>();
+            actionsList = [];
             Signature = new Picture();
         }
 
@@ -108,7 +114,8 @@ namespace Model
             Login = GenerateLogin(prenom, nom);
             Password = mdp;
             UserRole = role;
-            actionsList = new List<Action>();
+            Sel = [];
+            actionsList = [];
             Signature = picture ?? new Picture();
             SignatureName = signatureName;
 
@@ -132,17 +139,38 @@ namespace Model
         /// <param name="prenom"></param>
         /// <param name="nom"></param>
         /// <returns> login : string </returns>
-        public string GenerateLogin(string prenom, string nom)
+        public string GenerateLogin(string prenom, string nom) => $"{prenom[..2].ToLower()}{nom.ToLower()}";
+
+        /// <summary>
+        /// Setteur du mot de passe avec génération de clé de hachage
+        /// </summary>
+        /// <param name="motDePasse"></param>
+        public void SetPasswd(string motDePasse)
         {
-            string prefix = prenom.Substring(0, 2).ToLower();
-            return prefix + nom.ToLower();
+            // Générer un sel aléatoire
+            byte[] salt = new byte[128 / 8];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(salt);
+            }
+
+            // Hacher le mot de passe
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: motDePasse,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            Sel = salt;
+            Password = hashed;
         }
 
         /// <summary>
         /// Obtenir toutes les actions administrateur
         /// </summary>
         /// <returns></returns>
-        public List<Action> GetAdminActions()
+        static List<Action> GetAdminActions()
         {
             return new List<Action>((Action[])Enum.GetValues(typeof(Action)));
         }
@@ -151,18 +179,18 @@ namespace Model
         /// Obtenir toutes les actions de l'expert mesure
         /// </summary>
         /// <returns></returns>
-        public List<Action> GetMeasurementExpertActions()
+        static List<Action> GetMeasurementExpertActions()
         {
-            return new List<Action> { Action.DataPostTraitement, Action.GenerateCertificat };
+            return [Action.DataPostTraitement, Action.GenerateCertificat];
         }
 
         /// <summary>
         /// Obtenir toutes les actions de l'opérateur
         /// </summary>
         /// <returns></returns>
-        public List<Action> GetOperatorActions()
+        static List<Action> GetOperatorActions()
         {
-            return new List<Action> { Action.DataPostTraitement };
+            return [Action.DataPostTraitement];
         }
 
         public override string ToString()
