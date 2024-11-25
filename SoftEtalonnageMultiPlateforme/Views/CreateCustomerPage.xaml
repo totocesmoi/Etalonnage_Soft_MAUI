@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.CreateCustomerPage"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             BackgroundColor="{DynamicResource Background}"
+             Title="Créer un client">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15">
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Name}"
+                    Text="{Binding SelectedCustomer.Name}"/>
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Address}" 
+                    Text="{Binding SelectedCustomer.Address}"/>
+
+                <Entry 
+                    Placeholder="{language:LocalizedStringExtension Key=Email}"  
+                    Text="{Binding SelectedCustomer.Email}"/>
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button 
+                        Text="{language:LocalizedStringExtension Key=AddCustomer}">
+                        <Button.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InsertCustomer}" />
+                        </Button.GestureRecognizers>
+                    </Button>
+                    <Button 
+                        Text="{language:LocalizedStringExtension Key=Cancel}" />
+                   
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
