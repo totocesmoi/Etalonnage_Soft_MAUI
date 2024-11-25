@@ -16,7 +16,7 @@ namespace DAL.Stub
         public static UserCollection UserCollection { get; set; }
 
 
-        private static string userPath;
+        readonly static string userPath;
 
         static StubbedUser()
         {
@@ -81,7 +81,7 @@ namespace DAL.Stub
                 signatureName: "Toto l'artiste"
             );
 
-            SetPasswd(newUser, newUser.Password);
+            newUser.SetPasswd(newUser.Password);
 
             UserCollection.UsersList.Add(newUser);
             Console.WriteLine("User created: " + newUser.Login);
@@ -130,7 +130,7 @@ namespace DAL.Stub
                 return await Task.FromResult(false);
             }
 
-            SetPasswd(user, user.Password);
+            user.SetPasswd(user.Password);
             UserCollection.UsersList.Add(user);
             UserCollection.SaveUserFile(userPath);
             return await Task.FromResult(true);
@@ -147,16 +147,7 @@ namespace DAL.Stub
             var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
             if (existingUser != null)
             {
-                existingUser.Name = user.Name;
-                existingUser.Surname = user.Surname;
-                existingUser.UserRole = user.UserRole;
-                existingUser.Signature = user.Signature;
-                existingUser.SignatureName = user.SignatureName;
-
-                if (!string.IsNullOrEmpty(user.Password))
-                {
-                    SetPasswd(existingUser, user.Password);
-                }
+                existingUser = user;
 
                 UserCollection.SaveUserFile(userPath);
                 return await Task.FromResult(existingUser);
@@ -181,48 +172,7 @@ namespace DAL.Stub
             return await Task.FromResult(false);
         }
 
-        /// <summary>
-        /// Vérifie le mot de passe avec le hachage et le sel stockés
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="motDePasse"></param>
-        /// <returns></returns>
-        public static async Task<bool> VerifyMotDePasse(User user, string motDePasse)
-        {
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: motDePasse,
-                salt: user.Sel,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return await Task.FromResult(hashed == user.Password);
-        }
-
-        /// <summary>
-        /// Setteur du mot de passe avec génération de clé de hachage
-        /// </summary>
-        /// <param name="motDePasse"></param>
-        public static void SetPasswd(User user, string motDePasse)
-        {
-            // Générer un sel aléatoire
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-
-            // Hacher le mot de passe
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: motDePasse,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            user.Sel = salt;
-            user.Password = hashed;
-        }
+        
 
         public async Task<string> VerifyPassword(User user, string password)
         {

@@ -1,17 +1,24 @@
 ﻿using System.Globalization;
+using Model;
 using SoftEtalonnageMultiPlateforme.Resources.Theme;
 using SoftEtalonnageMultiPlateforme.Views;
+using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+
+        public AppShell(CurrentUserServiceVM currentUserServiceVM, LoginServiceVM loginServiceVM)
         {
             InitializeComponent();
 
+            Routing.RegisterRoute("LoginPage", typeof(LoginPage));
             Routing.RegisterRoute("UserUpdate", typeof(UserUpdate));
             Routing.RegisterRoute("CreateUserPage", typeof(CreateUserPage));
+
+            FlyoutHeader.BindingContext = currentUserServiceVM;
+            FlyoutFooter.BindingContext = loginServiceVM;
         }
 
         private void PreferenceLoading(object sender, EventArgs e)
@@ -28,7 +35,7 @@ namespace SoftEtalonnageMultiPlateforme
                     _ => new DufournierTheme()
                 };
 
-                ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+                ICollection<ResourceDictionary> mergedDictionaries = Application.Current!.Resources.MergedDictionaries;
                 if (mergedDictionaries != null)
                 {
                     foreach (var dico in mergedDictionaries.Where(d => d is IThemeManager).ToList())

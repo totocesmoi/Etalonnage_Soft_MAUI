@@ -12,7 +12,7 @@ public partial class PickerFontSize : ContentView
 
     private static string TextPickerFontSize()
     {
-        var fontSize = Application.Current.Resources["GlobalFontSize"];
+        var fontSize = Application.Current!.Resources["GlobalFontSize"];
 
         var size = (double)fontSize;
         return size switch
@@ -49,8 +49,8 @@ public partial class PickerFontSize : ContentView
             _ => 32
         };
 
-        Application.Current.Resources["GlobalFontSize"] = fontSize;
-        Application.Current.Resources["TitleFontSize"] = titleFontSize;
+        Application.Current!.Resources["GlobalFontSize"] = fontSize;
+        Application.Current!.Resources["TitleFontSize"] = titleFontSize;
         Preferences.Set("GlobalFontSize", fontSize);
         Preferences.Set("TitleFontSize", titleFontSize);
     }

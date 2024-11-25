@@ -3,9 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SoftEtalonnageMultiPlateforme.Views.LoginPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
-             Title="LoginPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="{language:LocalizedStringExtension Key=LoginPage}"
              BackgroundColor="{DynamicResource Background}"
              Shell.TabBarIsVisible="False">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding ResetLogin}" />
+    </ContentPage.Behaviors>
 
     <ScrollView>
         <VerticalStackLayout

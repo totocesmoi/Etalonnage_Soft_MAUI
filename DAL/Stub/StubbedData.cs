@@ -28,7 +28,7 @@ namespace DAL.Stub
 
         public void logout()
         {
-            currentUser = null;
+            currentUser = null!;
         }
 
         public Task<Pagination<User>> GetAsyncAllUser(int index, int count)

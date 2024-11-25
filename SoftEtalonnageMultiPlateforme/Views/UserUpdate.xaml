@@ -6,8 +6,15 @@
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}"
+             Title="{language:LocalizedStringExtension Key=UpdateUserPage}"
              Shell.TabBarIsVisible="False">
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RoleToStringConverter x:Key="RoleToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <VerticalStackLayout Padding="10">
         <Label Text="Add or Update User" />
         
@@ -25,14 +32,14 @@
 
             <Label Text="Signature Name:"/>
             <Entry 
-                Text="{Binding SelectedUser.SigntureName, Mode=TwoWay}" 
+                Text="{Binding SelectedUser.SignatureName, Mode=TwoWay}" 
                 IsEnabled="False"/>
 
             <Label Text="Password:"/>
-            <Entry Text="{Binding SelectedUser.Password, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
+            <Entry Text="{Binding SelectedUser.PlainPassword, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
 
             <Label Text="Role:"/>
-            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay, Converter={StaticResource converters:RoleToStringConverter}}">
+            <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay, Converter={StaticResource RoleToStringConverter}}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Administrator</x:String>
