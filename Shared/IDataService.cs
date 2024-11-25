@@ -13,15 +13,12 @@
         Task<bool> CreateAsyncUser(U user);
         Task<U> UpdateAsyncUser(U user);
         Task<bool> DeleteAsyncUser(string login);
-
+        
         Task<Pagination<C>> GetAsyncAllCustomer(int index, int count);
         Task<C> GetAsyncByName(string name);
         Task<bool> CreateAsyncCustomer(C customer);
         Task<C> UpdateAsyncCustomer(C customer);
         Task<bool> DeleteAsyncCustomer(string name);
-
-
-
     }
     
 }
