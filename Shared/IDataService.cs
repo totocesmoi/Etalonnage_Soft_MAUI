@@ -1,8 +1,9 @@
 ﻿namespace Shared
 {
-    public interface IDataService<U,C>
+    public interface IDataService<U,C,Cs>
         where U : class /* Pour User */
         where C : class /* Pour Customer */
+        where Cs : class /* Pour Contacts */
     {
         // Gestion des utilisateurs
         bool login(string login, string password);
@@ -21,7 +22,11 @@
         Task<bool> DeleteAsyncCustomer(string name);
 
 
-
+        Task<Pagination<Cs>> GetAsyncAllContact(int index, int count, string name);
+        Task<Cs> GetContactsByCustomer(string name);
+        Task<bool> CreateAsyncContact(Cs contact);
+        Task<Cs> UpdateAsyncContact(Cs contact); 
+        Task<bool> DeleteAsyncContact(string name); 
     }
-    
+
 }

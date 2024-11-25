@@ -1,16 +1,17 @@
 ﻿using Shared;
 using System.Xml.Linq;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Model
 {
     public class Manager
     {
         // Gestion des services + constructeur
-        public IDataService<User,Customer> Service { get; set; }
+        public IDataService<User,Customer,Contacts> Service { get; set; }
 
         public INavigationService Navigation { get; set; }
 
-        public Manager(IDataService<User,Customer> service, INavigationService navigation)
+        public Manager(IDataService<User,Customer,Contacts> service, INavigationService navigation)
         {
             Service = service;
             Navigation = navigation;
@@ -35,11 +36,16 @@ namespace Model
 
         // Gestion des clients
         public Task<Pagination<Customer>> GetAllCustomer(int index, int count) => Service.GetAsyncAllCustomer(index, count);
-        public Task<Customer> GetUserByNme(string name) => Service.GetAsyncByName(name);
+        public Task<Customer> GetUserByName(string name) => Service.GetAsyncByName(name);
         public Task<bool> CreateCustomer(Customer customer) => Service.CreateAsyncCustomer(customer);
         public Task<Customer> UpdateCustomer(Customer customer) => Service.UpdateAsyncCustomer(customer);
         public Task<bool> DeleteCustomer(string name) => Service.DeleteAsyncCustomer(name);
 
-
+        public Task<Pagination<Contacts>> GetAllContactByCustomer(int index, int count, string name) => Service.GetAsyncAllContact(index, count, name);
+        public Task<Contacts> GetContactByCustomer(string name) => Service.GetContactsByCustomer(name);
+        public Task<bool> CreateContact(Contacts contact) => Service.CreateAsyncContact(contact);
+        public Task<Contacts> UpdateContact(Contacts contact) => Service.UpdateAsyncContact(contact);
+        public Task<bool> DeleteContact(string name) => Service.DeleteAsyncContact(name);
     }
 }
+

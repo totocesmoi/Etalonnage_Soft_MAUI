@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Stub
 {
-    public class  StubbedCustomer : ICustomerService<Customer>
+    public class  StubbedCustomer : ICustomerService<Customer>, IContactService<Model.Contacts>
     {
         public static CustomerCollection CustomerCollection { get; set; }
         private static string CustomerPath;
@@ -102,7 +102,7 @@ namespace DAL.Stub
                 existingCustomer.Name = customer.Name;
                 existingCustomer.Address = customer.Address;
                 existingCustomer.Email = customer.Email;
-                existingCustomer.Contact = customer.Contact;
+                existingCustomer.Contacts = customer.Contacts;
                 existingCustomer.Machines = customer.Machines;
 
                 CustomerCollection.SaveCustomerFile(CustomerPath);
@@ -124,6 +124,29 @@ namespace DAL.Stub
             return await Task.FromResult(false);
         }
 
+        public Task<Pagination<Model.Contacts>> GetAsyncAllContact(int index, int count, string name)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<Model.Contacts> GetAsyncByCustomerName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> CreateContact(Model.Contacts contact)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Model.Contacts> UpdateContact(Model.Contacts contact)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteContact(string name)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

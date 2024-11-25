@@ -43,11 +43,55 @@ namespace VMService
 
         public void CreateCommands()
         {
+
             LoadCustomer = new AsyncRelayCommand(LoadCustomerAsync, CanLoadCustomer);
+            GetACustomer = new AsyncRelayCommand<OptionCommand<object>>(GetCustomerAsync!, CanGetCustomer!);
             CreateCustomer = new AsyncRelayCommand<string>(CreateCustomerAsync, CanCreateCustomer);
             InsertCustomer = new AsyncRelayCommand(InsertCustomerAsync, CanInsertCustomer);
             UpdateCustomer = new AsyncRelayCommand<CustomerVM>(UpdateCustomerAsync, CanUpdateCustomer);
             DeleteCustomer = new AsyncRelayCommand(DeleteCustomerAsync, CanDeleteCustomer);
+        }
+
+        public IAsyncRelayCommand<OptionCommand<object>> GetACustomer { get; private set; }
+        private async Task GetCustomerAsync(OptionCommand<object> options)
+        {
+            try
+            {
+                var name = options[0] as string;
+                var navigate = (bool)options[1];
+                if (navigate)
+                {
+                    var pageName = options[2] as string;
+
+                    if (name == null || pageName == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var customer = await service.GetUserByName(name);
+                    SelectedCustomer = new CustomerVM(customer);
+
+                    await service.Navigation.NavigateToAsync(pageName);
+                }
+                else
+                {
+                    if (name == null)
+                        throw new ArgumentNullException("Missing required parameters");
+
+                    var customer = await service.GetUserByName(name);
+                    SelectedCustomer = new CustomerVM(customer);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"An error occured during the user retrieval : {ex.Message}");
+            }
+        }
+
+        private bool CanGetCustomer(OptionCommand<object> options)
+        {
+            var name = options[0] as string;
+            var canExecute = !string.IsNullOrEmpty(name) && service.CurrentUser != null;
+            Debug.WriteLine($"CanGetCustomer: {canExecute}");
+            return canExecute;
         }
 
 
@@ -91,7 +135,7 @@ namespace VMService
         }
         private bool CanCreateCustomer(string page)
         {
-            return service != null && !string.IsNullOrEmpty(page) && service.CurrentUser.UserRole == Role.Administrator;
+            return service != null && !string.IsNullOrEmpty(page) && service.CurrentUser!.UserRole == Role.Administrator;
         }
 
         public IAsyncRelayCommand InsertCustomer { get; private set; }
@@ -101,74 +145,91 @@ namespace VMService
             if (await service.CreateCustomer(selectedCustomer.CustomerModel))
             {
                 // Pour être sur que le SelectedUser contient bien les informations auto généré.
-                selectedCustomer = new CustomerVM(await service.GetUserByNme(selectedCustomer.CustomerModel.Name));
+                selectedCustomer = new CustomerVM(await service.GetUserByName(selectedCustomer.CustomerModel.Name));
 
                 customers.Add(selectedCustomer);
-                await service.Navigation.GoBackAsync();
+                try
+                {
+                    await service.Navigation.GoBackAsync();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Navigation failed: {ex.Message}");
+                }
                 return selectedCustomer;
             }
             else
-                throw new Exception("An error occured during the User creation");
+                throw new Exception("An error occured during the Customer creation");
         }
 
         private bool CanInsertCustomer() => selectedCustomer != null && !string.IsNullOrEmpty(selectedCustomer.Name);
 
-        // Gestion de la commande pour mettre à jour un utilisateur
+        // Gestion de la commande pour mettre à jour un client
         public IAsyncRelayCommand UpdateCustomer { get; private set; }
 
         /// <summary>
-        /// Méthode qui permet de charger les utilisateurs après une mise à jour
+        /// Méthode qui permet de charger les clients après une mise à jour
         /// </summary>
         /// <returns></returns>
         private async Task LoadAfterUpdateAsync()
         {
-
             await GetCustomerAsync(currentPageIndex, pageSize);
         }
         /// <summary>
-        /// Permet de mettre à jour un utilisateur
+        /// Permet de mettre à jour un client
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        /// <exception cref="Exception"> Problème lors de la mise à jour de l'utilisateur </exception>
+        /// <exception cref="Exception"> Problème lors de la mise à jour du client </exception>
         private async Task UpdateCustomerAsync(CustomerVM customer)
         {
             try
             {
-                if (await service.UpdateCustomer(customer.CustomerModel) != null)
+                var updatedCustomer = await service.UpdateCustomer(customer.CustomerModel);
+                if (updatedCustomer != null)
                 {
-                    await LoadAfterUpdateAsync();
+                    // Remplace l'objet dans la collection
+                    var index = customers.IndexOf(customer);
+                    if (index >= 0)
+                    {
+                        customers[index] = new CustomerVM(updatedCustomer);
+                    }
+                    // Recharge les données si nécessaire
                     await service.Navigation.GoBackAsync();
                 }
                 else
-                    throw new Exception("An error occured during the User update");
+                {
+                    throw new Exception("An error occurred during the Customer update");
+                }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An error occured during the user update : {ex.Message}");
+                Debug.WriteLine($"An error occurred during the customer update: {ex.Message}");
             }
-
         }
 
+
+
+
         /// <summary>
-        /// Condition pour savoir si on peut mettre à jour un utilisateur
+        /// Condition pour savoir si on peut mettre à jour un client
         /// </summary>
         /// <param name="user"> SelectedUser dans notre cas </param>
         /// <returns> bool </returns>
         private bool CanUpdateCustomer(CustomerVM customer) => customer != null && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
 
-        // Gestion de la commande pour supprimer un utilisateur
+        // Gestion de la commande pour supprimer un client
         public IAsyncRelayCommand DeleteCustomer { get; private set; }
         /// <summary>
-        /// Permet de supprimer un utilisateur
+        /// Permet de supprimer un client
         /// </summary>
-        /// <returns> Vrai si l'utilisateur est supprimé sinon Faux </returns>
-        /// <exception cref="Exception"> Problème lors de la suppression de l'utilisateur </exception>
+        /// <returns> Vrai si l'client est supprimé sinon Faux </returns>
+        /// <exception cref="Exception"> Problème lors de la suppression du client </exception>
         private async Task<bool> DeleteCustomerAsync()
         {
             try
             {
-                if (await service.DeleteUser(SelectedCustomer.CustomerModel.Name))
+                if (await service.DeleteCustomer(SelectedCustomer.CustomerModel.Name))
                 {
                     customers.Remove(SelectedCustomer);
                     SelectedCustomer = null!;
@@ -176,25 +237,24 @@ namespace VMService
                     return true;
                 }
 
-                await Application.Current.MainPage.DisplayAlert("Erreur", "An error occured during the user deletion !", "OK");
+                await Application.Current.MainPage.DisplayAlert("Erreur", "An error occured during the customer deletion !", "OK");
                 await service.Navigation.GoBackAsync();
                 return false;
 
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"An error occured during the user deletion : {ex.Message}");
+                Debug.WriteLine($"An error occured during the customer deletion : {ex.Message}");
                 return false;
             }
 
         }
 
         /// <summary>
-        /// Condition pour savoir si on peut supprimer un utilisateur
+        /// Condition pour savoir si on peut supprimer un client
         /// </summary>
         /// <returns> bool </returns>
         private bool CanDeleteCustomer() => SelectedCustomer != null && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
     }
-
 }
 

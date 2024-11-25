@@ -48,6 +48,10 @@
     <ShellContent Title="CustomerUpdate" ContentTemplate="{DataTemplate views:CustomerUpdate}" Route="CustomerUpdate"/>
 
     <ShellContent Title="CreateCustomerUpdate" ContentTemplate="{DataTemplate views:CreateCustomerPage}" Route="CreateCustomerPage"/>
+    
+    <ShellContent Title="CustomerUpdate" ContentTemplate="{DataTemplate views:ContactUpdate}" Route="CustomerUpdate"/>
+
+    <ShellContent Title="CreateCustomerUpdate" ContentTemplate="{DataTemplate views:CreateContactPage}" Route="CreateCustomerPage"/>
 
     <TabBar>
         <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>

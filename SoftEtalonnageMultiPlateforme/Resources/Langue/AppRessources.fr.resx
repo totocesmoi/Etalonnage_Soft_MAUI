@@ -207,4 +207,40 @@
   <data name="Logout" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="AddCustomer" xml:space="preserve">
+    <value>Ajouter le client</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Saisir votre adresse</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Information contact</value>
+  </data>
+  <data name="CustomerCatalogue" xml:space="preserve">
+    <value>Catalogue des clients</value>
+  </data>
+  <data name="DeleteCustomer" xml:space="preserve">
+    <value>Supprimer un client</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Saisir votre E-mail</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Saisir votre numéro téléphone</value>
+  </data>
+  <data name="PhNum" xml:space="preserve">
+    <value>Numéro téléphone</value>
+  </data>
+  <data name="UpdateCustomer" xml:space="preserve">
+    <value>Modifier le client</value>
+  </data>
+  <data name="UpdateCustomerPage" xml:space="preserve">
+    <value>Page de modification client</value>
+  </data>
+  <data name="AddContact" xml:space="preserve">
+    <value>Ajouter un contact</value>
+  </data>
 </root>

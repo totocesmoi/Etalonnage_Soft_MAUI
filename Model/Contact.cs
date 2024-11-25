@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class Contact
+    public class Contacts
     {
 
         public string Name { get; set; }
@@ -15,14 +15,14 @@ namespace Model
 
         public string PhoneNumber { get; set; }
 
-        public Contact(string name, string surname, string PhNum = null!)
+        public Contacts(string name, string surname, string PhNum = null!)
         {
             Name = name;
             Surname = surname;
             PhoneNumber = PhNum;
         }
 
-        public Contact() { }
+        public Contacts() { }
    
 
     }

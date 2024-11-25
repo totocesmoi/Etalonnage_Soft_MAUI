@@ -30,7 +30,7 @@ namespace SoftEtalonnageMultiPlateforme
             // Gestion des injections de dépendances
 
             // Ajout des services de données
-            builder.Services.AddSingleton<IDataService<User,Customer>, StubbedData>();
+            builder.Services.AddSingleton<IDataService<User,Customer, Model.Contacts>, StubbedData>();
             // Ajout de la navigation
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             // Ajout des commandes utilisables dans l'application
@@ -38,6 +38,7 @@ namespace SoftEtalonnageMultiPlateforme
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
             builder.Services.AddSingleton<CustomerServiceVM>();
+            builder.Services.AddSingleton<ContactServiceVM>();
             // Ajout des commandes de l'utilisateur courant
             builder.Services.AddSingleton<CurrentUserServiceVM>();
             // Ajout des commandes de connexion
@@ -55,6 +56,10 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddTransient<CreateUserPage>();
             builder.Services.AddTransient<CustomerUpdate>();
             builder.Services.AddTransient<CreateCustomerPage>();
+            builder.Services.AddSingleton<ContactCatalogue>();
+            builder.Services.AddTransient<CreateContactPage>();
+            builder.Services.AddTransient<ContactUpdate>();
+            builder.Services.AddTransient<CreateContactPage>();
 
 
 

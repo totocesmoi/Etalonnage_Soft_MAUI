@@ -160,6 +160,31 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string EnterAddress
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterAddress", resourceCulture);
+            }
+        }
+
+        internal static string EnterEmail
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterEmail", resourceCulture);
+            }
+        }
+
+        internal static string EnterPhoneNumber
+        {
+            get
+            {
+                return ResourceManager.GetString("EnterPhoneNumber", resourceCulture);
+            }
+        }
+
+
         internal static string UpdatePasswd
         {
             get
@@ -207,12 +232,42 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
                 return ResourceManager.GetString("Role", resourceCulture);
             }
         }
+        internal static string Email
+        {
+            get
+            {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+
+        internal static string Address
+        {
+            get
+            {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+
+        internal static string PhoneNumber
+        {
+            get
+            {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
 
         internal static string AddUser
         {
             get
             {
                 return ResourceManager.GetString("AddUser", resourceCulture);
+            }
+        }
+        internal static string AddCustomer
+        {
+            get
+            {
+                return ResourceManager.GetString("AddCustomer", resourceCulture);
             }
         }
 
@@ -232,6 +287,22 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string CreateCustomer
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateCustomer", resourceCulture);
+            }
+        }
+
+        internal static string UpdateCustomer
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateCustomer", resourceCulture);
+            }
+        }
+
         internal static string DeleteUser
         {
             get
@@ -240,6 +311,13 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string DeleteCustomer
+        {
+            get
+            {
+                return ResourceManager.GetString("DeleteCustomer", resourceCulture);
+            }
+        }
         internal static string Logout
         {
             get
@@ -272,11 +350,28 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+
+        internal static string CustomerCatalogue
+        {
+            get
+            {
+                return ResourceManager.GetString("CustomerCatalogue", resourceCulture);
+            }
+        }
+
         internal static string PersonalInfo
         {
             get
             {
                 return ResourceManager.GetString("PersonalInfo", resourceCulture);
+            }
+        }
+
+        internal static string ContactInfo
+        {
+            get
+            {
+                return ResourceManager.GetString("ContactInfo", resourceCulture);
             }
         }
 
@@ -304,6 +399,22 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string UpdateCustomerPage
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateCustomerPage", resourceCulture);
+            }
+        }
+
+        internal static string CreateCustomerPage
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateCustomerPage", resourceCulture);
+            }
+        }
+
         internal static string MainPage
         {
             get
@@ -319,5 +430,6 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
                 return ResourceManager.GetString("UploadSignature", resourceCulture);
             }
         }
+    
     }
 }

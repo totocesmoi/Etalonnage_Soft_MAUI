@@ -195,7 +195,7 @@
   <data name="UpdateUserPage" xml:space="preserve">
     <value>Update User Page</value>
   </data>
-  <data name="CreateUserPae" xml:space="preserve">
+  <data name="CreateUserPage" xml:space="preserve">
     <value>Create User Page</value>
   </data>
   <data name="MainPage" xml:space="preserve">
@@ -206,5 +206,44 @@
   </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="AddCustomer" xml:space="preserve">
+    <value>Add Customer</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Contact Informations</value>
+  </data>
+  <data name="CreateCustomer" xml:space="preserve">
+    <value>Create Customer</value>
+  </data>
+  <data name="CreateCustomerPage" xml:space="preserve">
+    <value>Create Customer Page</value>
+  </data>
+  <data name="DeleteCustomer" xml:space="preserve">
+    <value>Delete Customer</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EnterAddress" xml:space="preserve">
+    <value>Enter your address</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Enter your phone number</value>
+  </data>
+  <data name="PhNum" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="UpdateCustomer" xml:space="preserve">
+    <value>Upadet Customer</value>
+  </data>
+  <data name="UpdateCustomerPage" xml:space="preserve">
+    <value>Update Customer Page</value>
+  </data>
+  <data name="AddContact" xml:space="preserve">
+    <value>Add client contact info</value>
   </data>
 </root>

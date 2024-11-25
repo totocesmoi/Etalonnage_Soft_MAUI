@@ -127,8 +127,7 @@ namespace VMWrapper
         /// <returns> true or false </returns>
         public bool Equals(UserVM? other)
         {
-            bool test = string.IsNullOrEmpty(other?.Login) ? false : other.Login.Equals(UserModel.Login);
-            return test;
+            return string.IsNullOrEmpty(other?.Login) ? false : other.Login.Equals(UserModel.Login);
         }
 
         public override string ToString()

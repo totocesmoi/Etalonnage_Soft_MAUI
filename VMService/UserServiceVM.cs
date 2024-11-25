@@ -31,8 +31,6 @@ namespace VMService
         /// </summary>
         private Manager service;
 
-        private readonly INavigationService _navigationService;
-
         /// <summary>
         /// Permet d'avoir ma propriété observable qui va notifier le modèle en cas de 
         /// </summary>
@@ -62,10 +60,9 @@ namespace VMService
         /// </summary>
         /// <param name="service"></param>
 #pragma warning disable CS8618 
-        public UserServiceVM(Manager manager, INavigationService navigationService)
+        public UserServiceVM(Manager manager)
 #pragma warning restore CS8618
         {
-            _navigationService = navigationService;
             service = manager;
             CreateCommands();
             
@@ -153,7 +150,7 @@ namespace VMService
                     var user = await service.GetUserByLogin(login);
                     SelectedUser = new UserVM(user);
 
-                    await _navigationService.NavigateToAsync(pageName);
+                    await service.Navigation.NavigateToAsync(pageName);
                 }
                 else
                 {

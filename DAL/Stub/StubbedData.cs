@@ -3,7 +3,7 @@ using Shared;
 
 namespace DAL.Stub
 {
-    public class StubbedData : IDataService<User, Customer>
+    public class StubbedData : IDataService<User, Customer, Model.Contacts>
     {
         private User? currentUser = null;
 
@@ -88,6 +88,31 @@ namespace DAL.Stub
         public Task<bool> DeleteAsyncCustomer(string name)
         {
             return CustomerService.DeleteCustomer(name);
+        }
+
+        public Task<Pagination<Model.Contacts>> GetAsyncAllContact(int index, int count, string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Model.Contacts> GetContactsByCustomer(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> CreateAsyncContact(Model.Contacts contact)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Model.Contacts> UpdateAsyncContact(Model.Contacts contact)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsyncContact(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }

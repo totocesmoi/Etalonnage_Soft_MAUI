@@ -5,7 +5,7 @@ using System.Reflection.PortableExecutable;
 
 namespace VMWrapper
 {
-    public partial class CustomerVM : ObservableObject
+    public partial class CustomerVM : ObservableObject, IEquatable<CustomerVM>
     {
         [ObservableProperty]
         private Customer customerModel;
@@ -13,12 +13,13 @@ namespace VMWrapper
         
         public CustomerVM(Customer customerModel)
         {
-            customerModel = customerModel ?? throw new ArgumentNullException(nameof(customerModel));
+            this.customerModel = customerModel ?? throw new ArgumentNullException(nameof(customerModel));
 
             Name = customerModel.Name;
             Address = customerModel.Address;
             PhNum = customerModel.PhoneNumber;
-            Contact = customerModel.Contact;
+
+            
         }
 
         public CustomerVM()
@@ -52,21 +53,16 @@ namespace VMWrapper
 
         [ObservableProperty]
         private string email;
-
         partial void OnEmailChanged(string value)
         {
             customerModel.Email = value;
         }
 
 
-        [ObservableProperty]
-        private Model.Contact contact;
 
-        partial void OnContactChanged(Model.Contact value)
+        public bool Equals(CustomerVM? other)
         {
-            customerModel.Contact = value;
+            return string.IsNullOrEmpty(other?.Name) ? false : other.Name.Equals(CustomerModel.Name);
         }
-
-
     }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.ContactCatalogue"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             BackgroundColor="{DynamicResource Background}">
+
+    <ContentView.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="" Command="{Binding ContactServiceVM.LoadContacts}" CommandParameter="SelectedCustomer.Name" />
+    </ContentView.Behaviors>
+
+    <ContentView.Content>
+        <VerticalStackLayout Padding="20">
+            <Label Text="{language:LocalizedStringExtension Key=ContactList}" 
+                   FontAttributes="Bold"
+                   FontSize="Large"
+                   HorizontalOptions="Center"/>
+            <CollectionView ItemsSource="{Binding Contacts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="10" Padding="10" Margin="5">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Name}" FontAttributes="Bold"/>
+                                <Label Text="{Binding Surname}" />
+                                <Label Text="{Binding PhoneNumber}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button 
+                Text="{language:LocalizedStringExtension Key=AddContact}"
+                Command="{Binding AddContactCommand}" />
+        </VerticalStackLayout>
+    </ContentView.Content>
+</ContentView>

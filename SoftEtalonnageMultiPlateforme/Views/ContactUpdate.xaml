@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.CustomerUpdate"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.ContactUpdate"
              xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
@@ -13,36 +13,28 @@
 
         <VerticalStackLayout>
             <Label Text="{language:LocalizedStringExtension Key=Name}"/>
-            <Entry Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" 
+            <Entry Text="{Binding SelectedContact.Name, Mode=TwoWay}" 
                    Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
 
-            <Label Text="{language:LocalizedStringExtension Key=Address}"/>
-            <Entry Text="{Binding SelectedCustomer.Address, Mode=TwoWay}" 
-                   Placeholder="{language:LocalizedStringExtension Key=EnterAddress}" />
-
-            <Label Text="{language:LocalizedStringExtension Key=Email}"/>
-            <Entry 
-                Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" 
-                Placeholder="{language:LocalizedStringExtension Key=EnterEmail}"/>
+            <Label Text="{language:LocalizedStringExtension Key=SurName}"/>
+            <Entry Text="{Binding SelectedContact.Surname, Mode=TwoWay}" 
+                   Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
             <Label Text="{language:LocalizedStringExtension Key=PhoneNumber}"/>
             <Entry 
-                Text="{Binding SelectedCustomer.PhNum, Mode=TwoWay}" 
+                Text="{Binding SelectedCustomer.PhoneNumber, Mode=TwoWay}" 
                 Placeholder="{language:LocalizedStringExtension Key=EnterNumber}"/>
-
-            <local:ContactCatalogue BindingContext="{RelativeSource AncestorType={x:Type local:CustomerCatalogue}}" />
-
             <Button
-                Text="{language:LocalizedStringExtension Key=UpdateCustomer}"
-                Command="{Binding UpdateCustomer}"
-                CommandParameter="{Binding SelectedCustomer}" />
+                Text="{language:LocalizedStringExtension Key=UpdateContact}"
+                Command="{Binding UpdateContact}"
+                CommandParameter="{Binding SelectedContact}" />
 
             <Button
                 Margin="15"
-                Text="{language:LocalizedStringExtension Key=DeleteCustomer}">
+                Text="{language:LocalizedStringExtension Key=DeleteContact}">
                 <Button.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding DeleteCustomer}"/>
+                    <TapGestureRecognizer  Command="{Binding DeleteContact}"/>
                 </Button.GestureRecognizers>
             </Button>
         </VerticalStackLayout>
