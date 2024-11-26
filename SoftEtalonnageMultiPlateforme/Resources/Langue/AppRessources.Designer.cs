@@ -192,6 +192,14 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string Signature
+        {
+            get
+            {
+                return ResourceManager.GetString("Signature", resourceCulture);
+            }
+        }
+
         internal static string UserNameSignature
         {
             get

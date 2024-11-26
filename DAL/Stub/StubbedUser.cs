@@ -15,7 +15,6 @@ namespace DAL.Stub
     {
         public static UserCollection UserCollection { get; set; }
 
-
         readonly static string userPath;
 
         static StubbedUser()

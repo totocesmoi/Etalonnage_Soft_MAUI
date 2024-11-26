@@ -3,7 +3,7 @@ using Shared;
 
 namespace DAL.Stub
 {
-    public class StubbedData : IDataService<User, Customer>
+    public class StubbedData : IDataService<User, Customer, PostTraitement>
     {
         private User? currentUser = null;
 
@@ -11,11 +11,14 @@ namespace DAL.Stub
 
         public ICustomerService<Customer> CustomerService { get; set; }
 
+        public IPostTraitementService<PostTraitement> PostTraitementService { get; set; }
+
 
         public StubbedData()
         {
             UserService = new StubbedUser();
             CustomerService = new StubbedCustomer();
+            PostTraitementService = new StubbedPostTraitement();
         }
 
         public bool login(string login, string password)
@@ -88,6 +91,21 @@ namespace DAL.Stub
         public Task<bool> DeleteAsyncCustomer(string name)
         {
             return CustomerService.DeleteCustomer(name);
+        }
+
+        public Task<bool> CreateAsyncPostTraitement(PostTraitement postTraitement)
+        {
+            return PostTraitementService.CreateAsyncPostTraitement(postTraitement);
+        }
+
+        public Task<PostTraitement> TestExcutionAsync(PostTraitement postTraitement)
+        {
+            return PostTraitementService.TestExcutionAsync(postTraitement);
+        }
+
+        public Task<bool> StopExcutionAsync(PostTraitement postTraitement)
+        {
+            return PostTraitementService.StopExcutionAsync(postTraitement);
         }
     }
 }

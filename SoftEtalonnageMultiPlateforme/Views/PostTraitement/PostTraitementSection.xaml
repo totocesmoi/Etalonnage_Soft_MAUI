@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.PostTraitement.PostTraitementSection"
+             Title="PostTraitementSection">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10">
+            <Label 
+                Text="{Binding TypeOfTest}" 
+                FontAttributes="Bold" 
+                HorizontalOptions="Center"/>
+
+            <Button 
+                Text="Prepare Post Traitement" 
+                Margin="10"/>
+            
+            <Entry 
+                Placeholder="Path" 
+                Margin="10"/>
+            
+            <HorizontalStackLayout Margin="10">
+                <Label 
+                    Text="Post Traitement Type:" 
+                    VerticalOptions="Center"/>
+                
+                <RadioButton 
+                    Content="Braking" 
+                    GroupName="PostTraitementType" 
+                    Margin="5"/>
+                
+                <RadioButton 
+                    Content="FM" 
+                    GroupName="PostTraitementType" 
+                    Margin="5"/>
+            </HorizontalStackLayout>
+            
+            <HorizontalStackLayout Margin="10">
+                <Label 
+                    Text="Report Generate:" 
+                    VerticalOptions="Center"
+                    />
+                
+                <RadioButton 
+                    Content="Yes" 
+                    GroupName="ReportGenerate" 
+                    Margin="5"/>
+                
+                <RadioButton 
+                    Content="No" 
+                    GroupName="ReportGenerate" 
+                    Margin="5"/>
+            </HorizontalStackLayout>
+            
+            <Frame Margin="10" Padding="10" BorderColor="Gray">
+                <VerticalStackLayout>
+                    <Label Text="Customer Informations" FontAttributes="Bold"/>
+                    <Entry Placeholder="Company" Margin="5"/>
+                    <Entry Placeholder="Name" Margin="5"/>
+                    <Entry Placeholder="Adress" Margin="5"/>
+                    <Entry Placeholder="Phone" Margin="5"/>
+                    <Entry Placeholder="Email" Margin="5"/>
+                    <Entry Placeholder="Contact" Margin="5"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame Margin="10" Padding="10" BorderColor="Gray">
+                <VerticalStackLayout>
+                    <Label Text="Machine" FontAttributes="Bold"/>
+                    <Entry Placeholder="Reference" Margin="5"/>
+                    <Entry Placeholder="Configuration" Margin="5"/>
+                    <Entry Placeholder="Reception date" Margin="5"/>
+                    <Entry Placeholder="Model" Margin="5"/>
+                    <Entry Placeholder="Serial Number" Margin="5"/>
+                    <Entry Placeholder="Temperature" Margin="5"/>
+                    <Entry Placeholder="SensorType" Margin="5"/>
+                    <Entry Placeholder="CertificatReference" Margin="5"/>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <HorizontalStackLayout HorizontalOptions="Center" Margin="10">
+                <Button Text="Execute" Margin="5"/>
+                <Button Text="STOP" Margin="5"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

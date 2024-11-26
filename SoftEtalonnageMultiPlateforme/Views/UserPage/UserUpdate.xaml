@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.UserUpdate"
-             xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserPage.UserUpdate"
+             xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}"

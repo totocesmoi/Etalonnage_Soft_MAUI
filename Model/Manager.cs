@@ -6,11 +6,11 @@ namespace Model
     public class Manager
     {
         // Gestion des services + constructeur
-        public IDataService<User,Customer> Service { get; set; }
+        public IDataService<User, Customer, PostTraitement> Service { get; set; }
 
         public INavigationService Navigation { get; set; }
 
-        public Manager(IDataService<User,Customer> service, INavigationService navigation)
+        public Manager(IDataService<User, Customer, PostTraitement> service, INavigationService navigation)
         {
             Service = service;
             Navigation = navigation;

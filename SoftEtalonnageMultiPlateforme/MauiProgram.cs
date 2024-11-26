@@ -6,6 +6,8 @@ using Model;
 using DAL.Stub;
 using VMService;
 using SoftEtalonnageMultiPlateforme.Views;
+using SoftEtalonnageMultiPlateforme.Views.UserPage;
+using SoftEtalonnageMultiPlateforme.Views.PostTraitement;
 using SoftEtalonnageMultiPlateforme.Resources.Langue;
 using SoftEtalonnageMultiPlateforme.Views.Composant;
 
@@ -30,17 +32,18 @@ namespace SoftEtalonnageMultiPlateforme
             // Gestion des injections de dépendances
 
             // Ajout des services de données
-            builder.Services.AddSingleton<IDataService<User,Customer>, StubbedData>();
+            builder.Services.AddSingleton<IDataService<User, Customer, PostTraitement>, StubbedData>();
             // Ajout de la navigation
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             // Ajout des commandes utilisables dans l'application
             builder.Services.AddSingleton<Manager>();
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
+            // Ajout des commndes de clients
             builder.Services.AddSingleton<CustomerServiceVM>();
             // Ajout des commandes de l'utilisateur courant
             builder.Services.AddSingleton<CurrentUserServiceVM>();
-            // Ajout des commandes de connexion
+            // Ajout des commandes de connexion / déconnexion
             builder.Services.AddTransient<LoginServiceVM>();
 
 
@@ -55,7 +58,7 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddTransient<CreateUserPage>();
             builder.Services.AddTransient<CustomerUpdate>();
             builder.Services.AddTransient<CreateCustomerPage>();
-
+            builder.Services.AddTransient<TraitementSelection>();
 
 
 #endif

@@ -2,6 +2,8 @@
 using Model;
 using SoftEtalonnageMultiPlateforme.Resources.Theme;
 using SoftEtalonnageMultiPlateforme.Views;
+using SoftEtalonnageMultiPlateforme.Views.UserPage;
+using SoftEtalonnageMultiPlateforme.Views.PostTraitement;
 using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
@@ -19,6 +21,8 @@ namespace SoftEtalonnageMultiPlateforme
 
             Routing.RegisterRoute("CustomerUpdate", typeof(CustomerUpdate));
             Routing.RegisterRoute("CreateCustomerPage", typeof(CreateCustomerPage));
+
+            Routing.RegisterRoute("PostTraitementSection", typeof(PostTraitementSection));
 
             FlyoutHeader.BindingContext = currentUserServiceVM;
             FlyoutFooter.BindingContext = loginServiceVM;
@@ -51,7 +55,7 @@ namespace SoftEtalonnageMultiPlateforme
 
             if (Preferences.Default.ContainsKey("Language"))
             {
-                string? chosenLanguage = Preferences.Default.Get("Language", "en");
+                string? chosenLanguage = Preferences.Default.Get("Language", "fr-FR");
                 CultureInfo newCulture = new CultureInfo(chosenLanguage);
                 CultureInfo.CurrentUICulture = newCulture;
                 CultureInfo.CurrentCulture = newCulture;

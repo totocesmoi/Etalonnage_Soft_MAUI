@@ -207,4 +207,7 @@
   <data name="Logout" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Signature numérique</value>
+  </data>
 </root>

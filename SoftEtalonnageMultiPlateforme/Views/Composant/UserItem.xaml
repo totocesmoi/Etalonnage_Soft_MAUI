@@ -4,6 +4,7 @@
              x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.UserItem"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+             xmlns:user="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
              xmlns:option="clr-namespace:Shared;assembly=Shared"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}">
@@ -19,7 +20,7 @@
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer>
                     <TapGestureRecognizer.Command>
-                        <Binding Path="BindingContext.GetAnUser" Source="{RelativeSource AncestorType={x:Type views:UserCatalogue}}" />
+                        <Binding Path="BindingContext.GetAnUser" Source="{RelativeSource AncestorType={x:Type user:UserCatalogue}}" />
                     </TapGestureRecognizer.Command>
                     <TapGestureRecognizer.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiParameterConverter}">
