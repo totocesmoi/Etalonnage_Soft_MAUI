@@ -1,15 +1,22 @@
-﻿using Model;
+﻿using Microsoft.Maui.ApplicationModel.Communication;
+using Model;
 using Shared;
 
 namespace DAL.Stub
 {
-    public class StubbedData : IDataService<User, Customer, Model.Contacts>
+    public class StubbedData : IDataService<User, Customer, Model.Contacts, Machine>
     {
         private User? currentUser = null;
 
         public IUserService<User> UserService { get; set; }
 
         public ICustomerService<Customer> CustomerService { get; set; }
+
+        public IContactService<Model.Contacts> ContactService { get; set; }
+
+        public IMachineService<Machine> MachineService { get; set; }
+
+        
 
 
         public StubbedData()
@@ -90,29 +97,56 @@ namespace DAL.Stub
             return CustomerService.DeleteCustomer(name);
         }
 
+        // Gestion des contacts
         public Task<Pagination<Model.Contacts>> GetAsyncAllContact(int index, int count, string name)
         {
-            throw new NotImplementedException();
+            return ContactService.GetAsyncAllContact(index, count, name);
         }
 
         public Task<Model.Contacts> GetContactsByCustomer(string name)
         {
-            throw new NotImplementedException();
+            return ContactService.GetAsyncByCustomerName(name);
         }
 
         public Task<bool> CreateAsyncContact(Model.Contacts contact)
         {
-            throw new NotImplementedException();
+            return ContactService.CreateContact(contact);
         }
 
         public Task<Model.Contacts> UpdateAsyncContact(Model.Contacts contact)
         {
-            throw new NotImplementedException();
+            return ContactService.UpdateContact(contact);
         }
 
         public Task<bool> DeleteAsyncContact(string name)
         {
-            throw new NotImplementedException();
+            return ContactService.DeleteContact(name);
+        }
+
+        // Gestion des machines
+        public Task<Pagination<Machine>> GetAsyncAllMachines(int index, int count)
+        {
+            return MachineService.GetAsyncAllMachines(index, count);
+        }
+
+        public Task<Machine> GetAsyncByReference(string reference)
+        {
+            return MachineService.GetAsyncByReference(reference);
+        }
+
+        public Task<bool> CreateAsyncMachine(Machine machine)
+        {
+            return MachineService.CreateMachine(machine);
+        }
+
+        public Task<Machine> UpdateAsyncMachine(Machine machine)
+        {
+            return MachineService.UpdateMachine(machine);
+        }
+
+        public Task<bool> DeleteAsyncMachine(string reference)
+        {
+            return MachineService.DeleteMachine(reference);
         }
     }
 }

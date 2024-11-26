@@ -13,36 +13,36 @@
 
         <VerticalStackLayout>
             <Label Text="{language:LocalizedStringExtension Key=Name}"/>
-            <Entry Text="{Binding SelectedCustomer.Name, Mode=TwoWay}" 
+            <Entry Text="{Binding CustomerServiceVM.SelectedCustomer.Name, Mode=TwoWay}" 
                    Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
 
             <Label Text="{language:LocalizedStringExtension Key=Address}"/>
-            <Entry Text="{Binding SelectedCustomer.Address, Mode=TwoWay}" 
+            <Entry Text="{Binding CustomerServiceVM.SelectedCustomer.Address, Mode=TwoWay}" 
                    Placeholder="{language:LocalizedStringExtension Key=EnterAddress}" />
 
             <Label Text="{language:LocalizedStringExtension Key=Email}"/>
             <Entry 
-                Text="{Binding SelectedCustomer.Email, Mode=TwoWay}" 
+                Text="{Binding CustomerServiceVM.SelectedCustomer.Email, Mode=TwoWay}" 
                 Placeholder="{language:LocalizedStringExtension Key=EnterEmail}"/>
 
             <Label Text="{language:LocalizedStringExtension Key=PhoneNumber}"/>
             <Entry 
-                Text="{Binding SelectedCustomer.PhNum, Mode=TwoWay}" 
+                Text="{Binding CustomerServiceVM.SelectedCustomer.PhNum, Mode=TwoWay}" 
                 Placeholder="{language:LocalizedStringExtension Key=EnterNumber}"/>
 
-            <local:ContactCatalogue BindingContext="{RelativeSource AncestorType={x:Type local:CustomerCatalogue}}" />
+            <StackLayout x:Name="ContactCatalogueLayout"/>
 
             <Button
                 Text="{language:LocalizedStringExtension Key=UpdateCustomer}"
-                Command="{Binding UpdateCustomer}"
-                CommandParameter="{Binding SelectedCustomer}" />
+                Command="{Binding CustomerServiceVM.UpdateCustomer}"
+                CommandParameter="{Binding CustomerServiceVM.SelectedCustomer}" />
 
             <Button
                 Margin="15"
                 Text="{language:LocalizedStringExtension Key=DeleteCustomer}">
                 <Button.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding DeleteCustomer}"/>
+                    <TapGestureRecognizer  Command="{Binding CustomerServiceVM.DeleteCustomer}"/>
                 </Button.GestureRecognizers>
             </Button>
         </VerticalStackLayout>

@@ -7,12 +7,12 @@
              Title="UserCatalogue"
              Background="{DynamicResource Background}">
     <ContentPage.Behaviors>
-        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding CustomerServiceVM.LoadCustomer}" />
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding LoadCustomer}" />
     </ContentPage.Behaviors>
     <VerticalStackLayout>
         <ScrollView HorizontalOptions="FillAndExpand" HorizontalScrollBarVisibility="Default">
-            <CollectionView ItemsSource="{Binding CustomerServiceVM.Customers}"
-                            RemainingItemsThresholdReachedCommand="{Binding CustomerServiceVM.LoadCustomer}"
+            <CollectionView ItemsSource="{Binding Customers}"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadCustomer}"
                             RemainingItemsThreshold="3">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -27,7 +27,7 @@
             HorizontalOptions="Center" />
         <Button Text="Créer un client"
                 Margin="50"
-            Command="{Binding CustomerServiceVM.CreateCustomer}"
+            Command="{Binding CreateCustomer}"
             CommandParameter="CreateCustomerPage" />
     </VerticalStackLayout>
 </ContentPage>

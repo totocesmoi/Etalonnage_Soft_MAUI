@@ -19,7 +19,7 @@
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer>
                     <TapGestureRecognizer.Command>
-                        <Binding Path="BindingContext.CustomerServiceVM.GetACustomer" Source="{RelativeSource AncestorType={Type views:CustomerCatalogue}}" />
+                        <Binding Path="BindingContext.GetACustomer" Source="{RelativeSource AncestorType={Type views:CustomerCatalogue}}" />
                     </TapGestureRecognizer.Command>
                     <TapGestureRecognizer.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiParameterConverter}">

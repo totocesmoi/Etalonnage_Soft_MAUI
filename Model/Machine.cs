@@ -12,7 +12,7 @@ namespace Model
 
         public string Configuration { get; set; }
 
-        public DateTime DateReception { get; set; }
+        public DateTime ReceptionDate { get; set; }
 
         public string Model { get; set; }
 
@@ -26,7 +26,7 @@ namespace Model
         {
             Reference = reference;
             Configuration = configuration;
-            DateReception = date;
+            ReceptionDate = date;
             Model = model;
             SerialNumber = serialNumber;
             Comment = comment;

@@ -7,11 +7,11 @@ namespace Model
     public class Manager
     {
         // Gestion des services + constructeur
-        public IDataService<User,Customer,Contacts> Service { get; set; }
+        public IDataService<User,Customer,Contacts,Machine> Service { get; set; }
 
         public INavigationService Navigation { get; set; }
 
-        public Manager(IDataService<User,Customer,Contacts> service, INavigationService navigation)
+        public Manager(IDataService<User,Customer,Contacts,Machine> service, INavigationService navigation)
         {
             Service = service;
             Navigation = navigation;
@@ -46,6 +46,14 @@ namespace Model
         public Task<bool> CreateContact(Contacts contact) => Service.CreateAsyncContact(contact);
         public Task<Contacts> UpdateContact(Contacts contact) => Service.UpdateAsyncContact(contact);
         public Task<bool> DeleteContact(string name) => Service.DeleteAsyncContact(name);
+
+        public Task<Pagination<Machine>> GetAllMachines(int index, int count) => Service.GetAsyncAllMachines(index, count);
+        public Task<Machine> GetMachineByReference(string reference) => Service.GetAsyncByReference(reference);
+        public Task<bool> CreateMachine(Machine machine) => Service.CreateAsyncMachine(machine);
+        public Task<Machine> UpdateMachine(Machine machine) => Service.UpdateAsyncMachine(machine);
+        public Task<bool> DeleteMachine(string reference) => Service.DeleteAsyncMachine(reference);
+
+       
     }
 }
 

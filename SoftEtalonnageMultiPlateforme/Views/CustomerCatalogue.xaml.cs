@@ -4,15 +4,10 @@ namespace SoftEtalonnageMultiPlateforme.Views;
 
 public partial class CustomerCatalogue : ContentPage
 {
-    public CustomerServiceVM CustomerServiceVM { get; }
-    public ContactServiceVM ContactServiceVM { get; }
-
-    public CustomerCatalogue(CustomerServiceVM customerServiceVM, ContactServiceVM contactServiceVM)
+   
+    public CustomerCatalogue(CustomerServiceVM customerServiceVM)
 	{
-		CustomerServiceVM = customerServiceVM;
-        ContactServiceVM = contactServiceVM;
-
 		InitializeComponent();
-        BindingContext = this;
+        BindingContext = customerServiceVM;
     }
 }
