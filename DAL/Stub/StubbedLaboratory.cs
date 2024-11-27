@@ -63,9 +63,9 @@ namespace DAL.Stub
 
         private static void InitializeLaboratory()
         {
-            // Charger l'image depuis les ressources
+            // Lister toutes les ressources disponibles
             var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "SoftEtalonnageMultiPlateforme.Resources.Images.Tampon_DI.png";
+            var resourceName = "DAL.Image.tampon_di.png";
 
             byte[] imageData;
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
@@ -90,7 +90,6 @@ namespace DAL.Stub
             );
 
             LaboratoryCollection.Items.Add(newLaboratory);
-            Console.WriteLine("Laboratory created: " + newLaboratory.Name);
         }
 
         public async Task<bool> CreateObject(Laboratory genericObject)

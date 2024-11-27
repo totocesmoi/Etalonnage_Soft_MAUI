@@ -35,7 +35,7 @@ namespace Model
 
         // Gestion des clients
         public Task<Pagination<Customer>> GetAllCustomer(int index, int count) => Service.GetAsyncAllCustomer(index, count);
-        public Task<Customer> GetUserByName(string name) => Service.GetAsyncByName(name);
+        public Task<Customer> GetUserByNme(string name) => Service.GetAsyncByName(name);
         public Task<bool> CreateCustomer(Customer customer) => Service.CreateAsyncCustomer(customer);
         public Task<Customer> UpdateCustomer(Customer customer) => Service.UpdateAsyncCustomer(customer);
         public Task<bool> DeleteCustomer(string name) => Service.DeleteAsyncCustomer(name);

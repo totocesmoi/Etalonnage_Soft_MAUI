@@ -11,7 +11,6 @@ namespace DAL.Stub
 {
     public class StubbedPostTraitement : IPostTraitementService<PostTraitement>
     {
-
         static StubbedPostTraitement()
         {
 
@@ -31,8 +30,6 @@ namespace DAL.Stub
         {
             throw new NotImplementedException();
         }
-
-
 
         public static string ToJson(PostTraitement postTraitement)
         {
