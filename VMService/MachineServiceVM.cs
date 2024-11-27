@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace VMService
 {
-    internal class MachineServiceVM
+    public class MachineServiceVM
     {
+
     }
 }

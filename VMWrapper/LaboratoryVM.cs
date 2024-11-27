@@ -16,8 +16,8 @@ namespace VMWrapper
         public LaboratoryVM()
         {
             LaboratoryModel = new Laboratory();
-            Name = "";
-            Adress = "";
+            NameLaboratory = "";
+            AdressLaboratory = "";
             LaboritoryLocation = "";
             CachetEntreprise = new Picture();
         }
@@ -25,31 +25,28 @@ namespace VMWrapper
         public LaboratoryVM(Laboratory laboratoryModel)
         {
             LaboratoryModel = laboratoryModel ?? throw new ArgumentNullException(nameof(laboratoryModel));
-            Name = laboratoryModel.Name;
-            Adress = laboratoryModel.Adress;
+            NameLaboratory = laboratoryModel.Name;
+            AdressLaboratory = laboratoryModel.Address;
             LaboritoryLocation = laboratoryModel.LaboritoryLocation;
             CachetEntreprise = laboratoryModel.CachetEntreprise;
         }
 
         [ObservableProperty]
-        private string name;
-
-        partial void OnNameChanged(string value)
+        private string nameLaboratory;
+        partial void OnNameLaboratoryChanged(string value)
         {
             LaboratoryModel.Name = value;
         }
 
         [ObservableProperty]
-        private string adress;
-
-        partial void OnAdressChanged(string value)
+        private string adressLaboratory;
+        partial void OnAdressLaboratoryChanged(string value)
         {
-            LaboratoryModel.Adress = value;
+            LaboratoryModel.Address = value;
         }
 
         [ObservableProperty]
         private string laboritoryLocation;
-
         partial void OnLaboritoryLocationChanged(string value)
         {
             LaboratoryModel.LaboritoryLocation = value;
@@ -57,7 +54,6 @@ namespace VMWrapper
 
         [ObservableProperty]
         private Picture cachetEntreprise;
-
         partial void OnCachetEntrepriseChanged(Picture value)
         {
             LaboratoryModel.CachetEntreprise = value;
@@ -65,7 +61,7 @@ namespace VMWrapper
 
         public bool Equals(LaboratoryVM? other)
         {
-            return string.IsNullOrEmpty(other?.Name) ? false : other.Name.Equals(LaboratoryModel.Name);        
+            return string.IsNullOrEmpty(other?.NameLaboratory) ? false : other.NameLaboratory.Equals(LaboratoryModel.Name);        
         }
     }
 }

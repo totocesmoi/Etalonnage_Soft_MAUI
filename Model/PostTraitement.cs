@@ -32,15 +32,5 @@ namespace Model
             Laboratory = new Laboratory();
             User = new User();
         }
-
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this);
-        }
-
-        public static PostTraitement? FromJson(string json)
-        {
-            return JsonConvert.DeserializeObject<PostTraitement>(json);
-        }
     }
 }

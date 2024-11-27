@@ -1,6 +1,6 @@
 ﻿namespace Shared
 {
-    public interface IDataService<U, C, T>
+    public interface IDataService<U, C, T, L>
         where U : class /* Pour User */
         where C : class /* Pour Customer */
         where T : class /* Pour PostTraitement */
@@ -24,6 +24,12 @@
         Task<bool> CreateAsyncPostTraitement(T postTraitement);
         Task<T> TestExcutionAsync(T postTraitement);
         Task<bool> StopExcutionAsync(T postTraitement);
+
+        Task<Pagination<L>> GetAsyncAllLaboratory(int index, int count);
+        Task<L> GetLaboratoryAsyncByName(string name);
+        Task<bool> CreateAsyncLaboratory(L laboratory);
+        Task<L> UpdateAsyncLaboratory(L laboratory);
+        Task<bool> DeleteAsyncLaboratory(string name);
     }
     
 }

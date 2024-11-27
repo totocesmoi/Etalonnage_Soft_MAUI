@@ -6,11 +6,11 @@ namespace Model
     public class Manager
     {
         // Gestion des services + constructeur
-        public IDataService<User, Customer, PostTraitement> Service { get; set; }
+        public IDataService<User, Customer, PostTraitement, Laboratory> Service { get; set; }
 
         public INavigationService Navigation { get; set; }
 
-        public Manager(IDataService<User, Customer, PostTraitement> service, INavigationService navigation)
+        public Manager(IDataService<User, Customer, PostTraitement, Laboratory> service, INavigationService navigation)
         {
             Service = service;
             Navigation = navigation;
@@ -35,10 +35,17 @@ namespace Model
 
         // Gestion des clients
         public Task<Pagination<Customer>> GetAllCustomer(int index, int count) => Service.GetAsyncAllCustomer(index, count);
-        public Task<Customer> GetUserByNme(string name) => Service.GetAsyncByName(name);
+        public Task<Customer> GetUserByName(string name) => Service.GetAsyncByName(name);
         public Task<bool> CreateCustomer(Customer customer) => Service.CreateAsyncCustomer(customer);
         public Task<Customer> UpdateCustomer(Customer customer) => Service.UpdateAsyncCustomer(customer);
         public Task<bool> DeleteCustomer(string name) => Service.DeleteAsyncCustomer(name);
+
+        // Gestion des laboratoires
+        public Task<Pagination<Laboratory>> GetAllLaboratories(int index, int count) => Service.GetAsyncAllLaboratory(index, count);
+        public Task<Laboratory> GetLaboratoryByName(string name) => Service.GetLaboratoryAsyncByName(name);
+        public Task<bool> CreateLaboratory(Laboratory laboratory) => Service.CreateAsyncLaboratory(laboratory);
+        public Task<Laboratory> UpdateLaboratory(Laboratory laboratory) => Service.UpdateAsyncLaboratory(laboratory);
+        public Task<bool> DeleteLaboratory(string name) => Service.DeleteAsyncLaboratory(name);
 
 
     }

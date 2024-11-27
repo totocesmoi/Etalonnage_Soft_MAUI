@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace DAL.Stub
 {
-    public class StubbedUser : IUserService<User>
+    public class StubbedUser : ICRUDService<User>
     {
-        public static UserCollection UserCollection { get; set; }
+        public static CollectionManager<User> UserCollection { get; set; }
 
         readonly static string userPath;
 
@@ -30,7 +30,7 @@ namespace DAL.Stub
             filePathUsers = Path.Combine(directoryPath, "users.xml");
 #endif
 
-            UserCollection = new UserCollection();
+            UserCollection = new CollectionManager<User>();
 
             Console.WriteLine($"Checking directory: {directoryPath}");
             Console.WriteLine($"Checking file: {filePathUsers}");
@@ -40,7 +40,7 @@ namespace DAL.Stub
                 Console.WriteLine($"Directory not found: {directoryPath}");
                 Directory.CreateDirectory(directoryPath);
                 InitializeUsers();
-                UserCollection.SaveUserFile(filePathUsers);
+                UserCollection.SaveToFile(filePathUsers);
             }
             else
             {
@@ -49,16 +49,16 @@ namespace DAL.Stub
                 {
                     Console.WriteLine($"File not found: {filePathUsers}");
                     InitializeUsers();
-                    UserCollection.SaveUserFile(filePathUsers);
+                    UserCollection.SaveToFile(filePathUsers);
                 }
                 else
                 {
-                    UserCollection.LoadUserFile(filePathUsers);
-                    if (UserCollection.UsersList.Count == 0)
+                    UserCollection.LoadFromFile(filePathUsers);
+                    if (UserCollection.Items.Count == 0)
                     {
                         Console.WriteLine("No user found, creating default users");
                         InitializeUsers();
-                        UserCollection.SaveUserFile(filePathUsers);
+                        UserCollection.SaveToFile(filePathUsers);
                     }
                 }
             }
@@ -82,7 +82,7 @@ namespace DAL.Stub
 
             newUser.SetPasswd(newUser.Password);
 
-            UserCollection.UsersList.Add(newUser);
+            UserCollection.Items.Add(newUser);
             Console.WriteLine("User created: " + newUser.Login);
         }
 
@@ -92,12 +92,12 @@ namespace DAL.Stub
         /// <param name="index"></param>
         /// <param name="count"></param>
         /// <returns></returns>
-        public async Task<Pagination<User>> GetAsyncAllUser(int index, int count)
+        public async Task<Pagination<User>> GetAsyncAllObject(int index, int count)
         {
-            var users = UserCollection.UsersList.Skip(index * count).Take(count).ToList();
+            var users = UserCollection.Items.Skip(index * count).Take(count).ToList();
             var pagination = new Pagination<User>
             {
-                TotalCount = UserCollection.UsersList.Count,
+                TotalCount = UserCollection.Items.Count,
                 Index = index,
                 Cout = count,
                 Items = users
@@ -108,47 +108,47 @@ namespace DAL.Stub
         /// <summary>
         /// Permet de récupérer un utilisateur par son login
         /// </summary>
-        /// <param name="login"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<User> GetAsyncUserByLogin(string login)
+        public async Task<User> GetObjectAsyncById(string id)
         {
-            var user = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+            var user = UserCollection.Items.FirstOrDefault(u => u.Login == id);
             return await Task.FromResult(user) ?? null!;
         }
 
         /// <summary>
         /// Permet de créer un utilisateur
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="genericObject"></param>
         /// <returns></returns>
-        public async Task<bool> CreateUser(User user)
+        public async Task<bool> CreateObject(User genericObject)
         {
-            user.Login = user.GenerateLogin(user.Surname, user.Name);
-            if (UserCollection.UsersList.Any(u => u.Login == user.Login))
+            genericObject.Login = genericObject.GenerateLogin(genericObject.Surname, genericObject.Name);
+            if (UserCollection.Items.Any(u => u.Login == genericObject.Login))
             {
                 return await Task.FromResult(false);
             }
 
-            user.SetPasswd(user.Password);
-            UserCollection.UsersList.Add(user);
-            UserCollection.SaveUserFile(userPath);
+            genericObject.SetPasswd(genericObject.Password);
+            UserCollection.Items.Add(genericObject);
+            UserCollection.SaveToFile(userPath);
             return await Task.FromResult(true);
         }
 
         /// <summary>
         /// Permet de mettre à jour un utilisateur
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="genericObject"></param>
         /// <returns> l'utilsateur modifier</returns>
-        public async Task<User> UpdateUser(User user)
+        public async Task<User> UpdateObject(User genericObject)
         {
 
-            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == user.Login);
+            var existingUser = UserCollection.Items.FirstOrDefault(u => u.Login == genericObject.Login);
             if (existingUser != null)
             {
-                existingUser = user;
+                existingUser = genericObject;
 
-                UserCollection.SaveUserFile(userPath);
+                UserCollection.SaveToFile(userPath);
                 return await Task.FromResult(existingUser);
             }
             return await Task.FromResult<User>(null!);
@@ -157,32 +157,18 @@ namespace DAL.Stub
         /// <summary>
         /// Permet de supprimer un utilisateur
         /// </summary>
-        /// <param name="login"></param>
+        /// <param name="id"></param>
         /// <returns>true ou false</returns>
-        public async Task<bool> DeleteUser(string login)
+        public async Task<bool> DeleteObject(string id)
         {
-            var existingUser = UserCollection.UsersList.FirstOrDefault(u => u.Login == login);
+            var existingUser = UserCollection.Items.FirstOrDefault(u => u.Login == id);
             if (existingUser != null)
             {
-                UserCollection.UsersList.Remove(existingUser);
-                UserCollection.SaveUserFile(userPath);
+                UserCollection.Items.Remove(existingUser);
+                UserCollection.SaveToFile(userPath);
                 return await Task.FromResult(true);
             }
             return await Task.FromResult(false);
-        }
-
-        
-
-        public async Task<string> VerifyPassword(User user, string password)
-        {
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: user.Sel,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return await Task.FromResult(hashed == user.Password ? hashed : String.Empty);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Model
         /// <summary>
         /// Adresse du laboratoire
         /// </summary>
-        public string Adress { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Lieu du laboratoire, pouvant se trouver à la même adresse
@@ -34,7 +34,7 @@ namespace Model
         public Laboratory(string name, string adress, string laboritoryLocation, Picture cachetEntreprise = null)
         {
             Name = name;
-            Adress = adress;
+            Address = adress;
             LaboritoryLocation = laboritoryLocation;
             CachetEntreprise = cachetEntreprise ?? new Picture();
         }

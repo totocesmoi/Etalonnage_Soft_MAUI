@@ -32,7 +32,7 @@ namespace SoftEtalonnageMultiPlateforme
             // Gestion des injections de dépendances
 
             // Ajout des services de données
-            builder.Services.AddSingleton<IDataService<User, Customer, PostTraitement>, StubbedData>();
+            builder.Services.AddSingleton<IDataService<User, Customer, PostTraitement, Laboratory>, StubbedData>();
             // Ajout de la navigation
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             // Ajout des commandes utilisables dans l'application
