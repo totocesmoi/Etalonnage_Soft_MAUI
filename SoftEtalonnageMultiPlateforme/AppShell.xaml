@@ -7,6 +7,9 @@
     xmlns:Flyout="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant.Flyout"
     xmlns:picker="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Picker"
     xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+    xmlns:laboratory="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Laboratory"
+    xmlns:user="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
+    xmlns:test="clr-namespace:SoftEtalonnageMultiPlateforme.Views.PostTraitement"
     Shell.FlyoutBehavior="Flyout"
     Shell.BackgroundColor="{DynamicResource Navigation}"
     Shell.TitleColor="{DynamicResource Text2}" 
@@ -41,9 +44,9 @@
     <!-- Informations sur mes routes -->
     <ShellContent Title="Login" ContentTemplate="{DataTemplate views:LoginPage}" Route="LoginPage"/>
 
-    <ShellContent Title="CreateUserPage" ContentTemplate="{DataTemplate views:CreateUserPage}" Route="CreateUserPage"/>
+    <ShellContent Title="CreateUserPage" ContentTemplate="{DataTemplate user:CreateUserPage}" Route="CreateUserPage"/>
 
-    <ShellContent Title="UserUpdate" ContentTemplate="{DataTemplate views:UserUpdate}" Route="UserUpdate"/>
+    <ShellContent Title="UserUpdate" ContentTemplate="{DataTemplate user:UserUpdate}" Route="UserUpdate"/>
     
     <ShellContent Title="CustomerUpdate" ContentTemplate="{DataTemplate views:CustomerUpdate}" Route="CustomerUpdate"/>
 
@@ -53,10 +56,19 @@
 
     <ShellContent Title="CreateCustomerUpdate" ContentTemplate="{DataTemplate views:CreateContactPage}" Route="CreateCustomerPage"/>
 
+    <ShellContent Title="CreateLaboratoryPage" ContentTemplate="{DataTemplate laboratory:CreateLaboratoryPage}" Route="CreateLaboratoryPage"/>
+
+    <ShellContent Title="UpdateLaboratory" ContentTemplate="{DataTemplate laboratory:UpdateLaboratory}" Route="UpdateLaboratory"/>
+
+    <ShellContent Title="Post Traitement" ContentTemplate="{DataTemplate test:PostTraitementSection}" Route="PostTraitementSection"/>
+    
+
     <TabBar>
         <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" Route="MainPage"/>
-        <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate views:UserInfo}" Route="UserInfo"/>
-        <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate views:UserCatalogue}" Route="UserCatalogue"/>
+        <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate user:UserInfo}" Route="UserInfo"/>
+        <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate user:UserCatalogue}" Route="UserCatalogue"/>
         <ShellContent Title="CustomerCatalogue" ContentTemplate="{DataTemplate views:CustomerCatalogue}" Route="CustomerCatalogue"/>
+        <ShellContent Title="LaboratoryCatalogue" ContentTemplate="{DataTemplate laboratory:LaboratoryCatalogue}" Route="LaboratoryCatalogue"/>
+        <ShellContent Title="Test Selection" ContentTemplate="{DataTemplate test:TraitementSelection}" Route="TraitementSelection"/>
     </TabBar>
 </Shell>

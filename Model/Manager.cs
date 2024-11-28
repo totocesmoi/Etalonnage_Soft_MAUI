@@ -7,11 +7,11 @@ namespace Model
     public class Manager
     {
         // Gestion des services + constructeur
-        public IDataService<User,Customer,Contacts,Machine> Service { get; set; }
+        public IDataService<User,Customer,Contacts, Machine, PostTraitement, Laboratory> Service { get; set; }
 
         public INavigationService Navigation { get; set; }
 
-        public Manager(IDataService<User,Customer,Contacts,Machine> service, INavigationService navigation)
+        public Manager(IDataService<User,Customer,Contacts,Machine, PostTraitement, Laboratory> service, INavigationService navigation)
         {
             Service = service;
             Navigation = navigation;
@@ -41,12 +41,21 @@ namespace Model
         public Task<Customer> UpdateCustomer(Customer customer) => Service.UpdateAsyncCustomer(customer);
         public Task<bool> DeleteCustomer(string name) => Service.DeleteAsyncCustomer(name);
 
+        // Gestion des contacts
         public Task<Pagination<Contacts>> GetAllContactByCustomer(int index, int count, string name) => Service.GetAsyncAllContact(index, count, name);
         public Task<Contacts> GetContactByCustomer(string name) => Service.GetContactsByCustomer(name);
         public Task<bool> CreateContact(Contacts contact) => Service.CreateAsyncContact(contact);
         public Task<Contacts> UpdateContact(Contacts contact) => Service.UpdateAsyncContact(contact);
         public Task<bool> DeleteContact(string name) => Service.DeleteAsyncContact(name);
 
+        // Gestion des laboratoires
+        public Task<Pagination<Laboratory>> GetAllLaboratories(int index, int count) => Service.GetAsyncAllLaboratory(index, count);
+        public Task<Laboratory> GetLaboratoryByName(string name) => Service.GetLaboratoryAsyncByName(name);
+        public Task<bool> CreateLaboratory(Laboratory laboratory) => Service.CreateAsyncLaboratory(laboratory);
+        public Task<Laboratory> UpdateLaboratory(Laboratory laboratory) => Service.UpdateAsyncLaboratory(laboratory);
+        public Task<bool> DeleteLaboratory(string name) => Service.DeleteAsyncLaboratory(name);
+
+        // Gestion des machines
         public Task<Pagination<Machine>> GetAllMachines(int index, int count) => Service.GetAsyncAllMachines(index, count);
         public Task<Machine> GetMachineByReference(string reference) => Service.GetAsyncByReference(reference);
         public Task<bool> CreateMachine(Machine machine) => Service.CreateAsyncMachine(machine);

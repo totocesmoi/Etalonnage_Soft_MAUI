@@ -1,6 +1,6 @@
 using VMService;
 
-namespace SoftEtalonnageMultiPlateforme.Views;
+namespace SoftEtalonnageMultiPlateforme.Views.UserPage;
 
 public partial class UserCatalogue : ContentPage
 {

@@ -217,6 +217,14 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             }
         }
 
+        internal static string Signature
+        {
+            get
+            {
+                return ResourceManager.GetString("Signature", resourceCulture);
+            }
+        }
+
         internal static string UserNameSignature
         {
             get
@@ -412,6 +420,70 @@ namespace SoftEtalonnageMultiPlateforme.Resources.Langue {
             get
             {
                 return ResourceManager.GetString("CreateCustomerPage", resourceCulture);
+            }
+        }
+
+        internal static string CreateLaboratoryPage
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateLaboratoryPage", resourceCulture);
+            }
+        }
+
+        internal static string CreateLaboratory
+        {
+            get
+            {
+                return ResourceManager.GetString("CreateLaboratory", resourceCulture);
+            }
+        }
+        
+        internal static string LaboritoryLocation
+        {
+            get
+            {
+                return ResourceManager.GetString("LaboritoryLocation", resourceCulture);
+            }
+        }
+        
+        internal static string SignCompany
+        {
+            get
+            {
+                return ResourceManager.GetString("SignCompany", resourceCulture);
+            }
+        }
+
+        internal static string AddLaboratory
+        {
+            get
+            {
+                return ResourceManager.GetString("AddLaboratory", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateLaboratory
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateLaboratory", resourceCulture);
+            }
+        }
+        
+        internal static string DeleteLaboratory
+        {
+            get
+            {
+                return ResourceManager.GetString("DeleteLaboratory", resourceCulture);
+            }
+        }
+        
+        internal static string UpdateLaboratoryPage
+        {
+            get
+            {
+                return ResourceManager.GetString("UpdateLaboratoryPage", resourceCulture);
             }
         }
 

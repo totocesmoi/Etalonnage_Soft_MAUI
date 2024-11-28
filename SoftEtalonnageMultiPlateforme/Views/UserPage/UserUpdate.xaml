@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.UserUpdate"
-             xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserPage.UserUpdate"
+             xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}"
@@ -15,30 +15,28 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <VerticalStackLayout Padding="10">
-        <Label Text="Add or Update User" />
-        
+    <ScrollView Padding="10">
         <VerticalStackLayout>
-            <Label Text="Name:"/>
+            <Label Text="{language:LocalizedStringExtension Key=Name}"/>
             <Entry Text="{Binding SelectedUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
-            <Label Text="Surname:"/>
+            <Label Text="{language:LocalizedStringExtension Key=Surname}"/>
             <Entry Text="{Binding SelectedUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
-            <Label Text="Login:"/>
+            <Label Text="{language:LocalizedStringExtension Key=Login}"/>
             <Entry 
                 Text="{Binding SelectedUser.Login, Mode=TwoWay}" 
                 IsEnabled="False"/>
 
-            <Label Text="Signature Name:"/>
+            <Label Text="{language:LocalizedStringExtension Key=UserNameSignature}"/>
             <Entry 
                 Text="{Binding SelectedUser.SignatureName, Mode=TwoWay}" 
                 IsEnabled="False"/>
 
-            <Label Text="Password:"/>
+            <Label Text="{language:LocalizedStringExtension Key=Passwd}"/>
             <Entry Text="{Binding SelectedUser.PlainPassword, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterPasswd}" />
 
-            <Label Text="Role:"/>
+            <Label Text="{language:LocalizedStringExtension Key=Role}"/>
             <Picker SelectedItem="{Binding SelectedUser.UserRole, Mode=TwoWay, Converter={StaticResource RoleToStringConverter}}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
@@ -49,21 +47,23 @@
                 </Picker.ItemsSource>
             </Picker>
 
+            <Grid ColumnDefinitions="*,2*,*,2*,*"
+                  Margin="10">
+                <Button Grid.Column="1"
+                        Text="{language:LocalizedStringExtension Key=UpdateUser}"
+                        Command="{Binding UpdateUser}"
+                        CommandParameter="{Binding SelectedUser}" />
 
-            <Button
-                Text="{language:LocalizedStringExtension Key=UpdateUser}"
-                Command="{Binding UpdateUser}"
-                CommandParameter="{Binding SelectedUser}" />
+                <Button Grid.Column="3"
+                        Text="{language:LocalizedStringExtension Key=DeleteUser}">
+                    <Button.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
+                    </Button.GestureRecognizers>
+                </Button>
+            </Grid>
             
-            <Button
-                Margin="15"
-                Text="{language:LocalizedStringExtension Key=DeleteUser}">
-                <Button.GestureRecognizers>
-                    <TapGestureRecognizer  Command="{Binding DeleteUser}"/>
-                </Button.GestureRecognizers>
-            </Button>
         </VerticalStackLayout>
         
-    </VerticalStackLayout>
+    </ScrollView>
     
 </ContentPage>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.CreateUserPage"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserPage.CreateUserPage"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Title="{language:LocalizedStringExtension Key=CreateUserPage}">
@@ -61,7 +61,6 @@
                             <TapGestureRecognizer Command="{Binding InsertUser}" />
                         </Button.GestureRecognizers>
                     </Button>
-                        
                         
                     <Button 
                         Text="{language:LocalizedStringExtension Key=Cancel}" />

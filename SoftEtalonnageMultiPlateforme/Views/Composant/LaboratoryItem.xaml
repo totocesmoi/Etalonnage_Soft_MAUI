@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.UserItem"
-             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Composant.LaboratoryItem"
              xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
-             xmlns:user="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
+             xmlns:laboratory="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Laboratory"
              xmlns:option="clr-namespace:Shared;assembly=Shared"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              Background="{DynamicResource Background}">
@@ -12,19 +11,20 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:MultiParameterConverter x:Key="MultiParameterConverter" />
+            <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <VerticalStackLayout Padding="10">
         <Frame BackgroundColor="LightCyan">
             <Frame.GestureRecognizers>
                 <TapGestureRecognizer>
                     <TapGestureRecognizer.Command>
-                        <Binding Path="BindingContext.GetAnUser" Source="{RelativeSource AncestorType={x:Type user:UserCatalogue}}" />
+                        <Binding Path="BindingContext.GetLaboratory" Source="{RelativeSource AncestorType={Type laboratory:LaboratoryCatalogue}}" />
                     </TapGestureRecognizer.Command>
                     <TapGestureRecognizer.CommandParameter>
                         <MultiBinding Converter="{StaticResource MultiParameterConverter}">
-                            <Binding Path="Login" />
+                            <Binding Path="NameLaboratory" />
                             <Binding>
                                 <Binding.Source>
                                     <x:Boolean>True</x:Boolean>
@@ -32,7 +32,7 @@
                             </Binding>
                             <Binding>
                                 <Binding.Source>
-                                    <x:String>UserUpdate</x:String>
+                                    <x:String>UpdateLaboratory</x:String>
                                 </Binding.Source>
                             </Binding>
                         </MultiBinding>
@@ -41,18 +41,21 @@
             </Frame.GestureRecognizers>
 
             <StackLayout>
-                <VerticalStackLayout>
-                    <Label Text="{Binding Name}" TextColor="Black"/>
-                    <Label Text="{Binding Surname}"/>
-                    <Label Text="{Binding Login}"/>
-                    <Label Text="{Binding SignatureName}"/>
-                    <Image Source="dotnet_bot.png" 
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Aspect="AspectFit"
-                           HorizontalOptions="Center" />
-                </VerticalStackLayout>
+                <Grid ColumnDefinitions="2*, *" >
+                    <VerticalStackLayout Grid.Column="0">
+                        <Label Text="{Binding NameLaboratory}" TextColor="Black"/>
+                        <Label Text="{Binding AdressLaboratory}"/>
+                        <Label Text="{Binding LaboritoryLocation}"/>
+                    </VerticalStackLayout>
+
+                    <Image Source="{Binding CachetEntreprise.ImageData, Converter={StaticResource ByteArrayToImageConverter}}" 
+                            HeightRequest="100"
+                            WidthRequest="100"
+                            Aspect="AspectFit"
+                            HorizontalOptions="Center"
+                            Grid.Column="1" />
+                </Grid>
             </StackLayout>
         </Frame>
     </VerticalStackLayout>
-</ContentView>
+ </ContentView>

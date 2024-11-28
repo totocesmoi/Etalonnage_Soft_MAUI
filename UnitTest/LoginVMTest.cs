@@ -9,17 +9,19 @@ namespace UnitTest
 {
     public class LoginVMTest
     {
-        private readonly Mock<IDataService<User>> _dataServiceMock;
+        private readonly Mock<IDataService<User, Customer, PostTraitement>> _dataServiceMock;
         private readonly Mock<INavigationService> _navigationServiceMock;
         private readonly Manager _manager;
         private readonly LoginServiceVM _loginServiceVM;
+        private readonly CurrentUserServiceVM _currentUserServiceVM;
 
         public LoginVMTest()
         {
-            _dataServiceMock = new Mock<IDataService<User>>();
+            _dataServiceMock = new Mock<IDataService<User, Customer, PostTraitement>>();
             _navigationServiceMock = new Mock<INavigationService>();
+            _currentUserServiceVM = new Mock<CurrentUserServiceVM>().Object;
             _manager = new Manager(_dataServiceMock.Object, _navigationServiceMock.Object);
-            _loginServiceVM = new LoginServiceVM(_manager);
+            _loginServiceVM = new LoginServiceVM(_manager, _currentUserServiceVM);
         }
 
         [Fact]
@@ -144,7 +146,7 @@ namespace UnitTest
         public void CanLogout_ShouldReturnFalse_WhenNoUserIsLoggedIn()
         {
             // Arrange
-            _dataServiceMock.Setup(ds => ds.GetAsyncCurrentUser()).ReturnsAsync((User)null);
+            _dataServiceMock.Setup(ds => ds.GetAsyncCurrentUser()).ReturnsAsync((User)null!);
 
             // Act
             var canLogout = _loginServiceVM.LogoutCommand.CanExecute(null);

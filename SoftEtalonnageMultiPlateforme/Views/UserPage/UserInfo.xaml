@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.UserInfo"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserPage.UserInfo"
              xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
@@ -14,24 +14,24 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <VerticalStackLayout Padding="10">
+    <ScrollView Padding="10">
         <VerticalStackLayout>
-            <Label Text="Name:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=Name}" />
             <Entry Text="{Binding CurrentUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
 
-            <Label Text="Surname:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=Surname}"/>
             <Entry Text="{Binding CurrentUser.Surname, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSurname}" />
 
-            <Label Text="Login:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=Login}" />
             <Entry Text="{Binding CurrentUser.Login, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterLogin}" />
 
-            <Label Text="Password:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=Passwd}" />
             <Entry Text="{Binding CurrentUser.PlainPassword, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=UpdatePasswd}" />
 
-            <Label Text="Signature Name:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=SignatureName}"/>
             <Entry Text="{Binding CurrentUser.SignatureName, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterSignatureName}" />
 
-            <Label Text="Signature:" TextColor="DeepSkyBlue" />
+            <Label Text="{language:LocalizedStringExtension Key=Signature}" />
             <Image Source="{Binding CurrentUser.Signature.ImageData, Converter={StaticResource ByteArrayToImageConverter}}" HeightRequest="100" WidthRequest="100" />
 
             <HorizontalStackLayout>
@@ -45,5 +45,5 @@
                 
             </HorizontalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

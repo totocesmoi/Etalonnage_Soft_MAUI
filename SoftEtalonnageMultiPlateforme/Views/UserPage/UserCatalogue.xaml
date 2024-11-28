@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SoftEtalonnageMultiPlateforme.Views.UserCatalogue"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.UserPage.UserCatalogue"
              xmlns:composant="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
@@ -22,6 +22,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
+<<<<<<< HEAD:SoftEtalonnageMultiPlateforme/Views/UserCatalogue.xaml
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
@@ -30,5 +31,13 @@
                 Margin="50"
             Command="{Binding CreateUser}"
             CommandParameter="CreateUserPage" />
+=======
+
+        <Button Text="{language:LocalizedStringExtension Key=CreateUser}"
+                Margin="50"
+            Command="{Binding CreateUser}"
+            CommandParameter="CreateUserPage" />
+        
+>>>>>>> python_script:SoftEtalonnageMultiPlateforme/Views/UserPage/UserCatalogue.xaml
     </VerticalStackLayout>
 </ContentPage>

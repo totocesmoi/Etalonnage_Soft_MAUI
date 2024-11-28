@@ -14,12 +14,7 @@ namespace Shared
 
     public class NavigationService : INavigationService
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        public NavigationService(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+        public NavigationService() { }
 
         public async Task NavigateToAsync(string page)
         {

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Laboratory.LaboratoryCatalogue"
+             xmlns:composant="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             Title="{language:LocalizedStringExtension Key=LaboratoryCatalogue}"
+             Background="{DynamicResource Background}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding LoadLaboratories}" />
+    </ContentPage.Behaviors>
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+        <ScrollView HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Default"
+                    VerticalScrollBarVisibility="Default">
+            
+            <CollectionView ItemsSource="{Binding Laboratories}"
+                        RemainingItemsThresholdReachedCommand="{Binding LoadLaboratories}"
+                        RemainingItemsThreshold="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <composant:LaboratoryItem/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <Grid ColumnDefinitions="*,2*,*">
+            <Button Text="{language:LocalizedStringExtension Key=CreateLaboratory}"
+                     Margin="50"
+                     Command="{Binding CreateLaboratory}"
+                     CommandParameter="CreateLaboratoryPage" 
+                     Grid.Column="1"/>
+        </Grid>
+       
+    </VerticalStackLayout>
+</ContentPage>

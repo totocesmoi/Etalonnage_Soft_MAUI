@@ -6,6 +6,9 @@ using Model;
 using DAL.Stub;
 using VMService;
 using SoftEtalonnageMultiPlateforme.Views;
+using SoftEtalonnageMultiPlateforme.Views.UserPage;
+using SoftEtalonnageMultiPlateforme.Views.PostTraitement;
+using SoftEtalonnageMultiPlateforme.Views.Laboratory;
 using SoftEtalonnageMultiPlateforme.Resources.Langue;
 using SoftEtalonnageMultiPlateforme.Views.Composant;
 
@@ -30,19 +33,24 @@ namespace SoftEtalonnageMultiPlateforme
             // Gestion des injections de dépendances
 
             // Ajout des services de données
-            builder.Services.AddSingleton<IDataService<User,Customer, Model.Contacts,Machine>, StubbedData>();
+            builder.Services.AddSingleton<IDataService<User,Customer, Model.Contacts,Machine, PostTraitement, Laboratory>, StubbedData>();
             // Ajout de la navigation
             builder.Services.AddSingleton<INavigationService, NavigationService>();
             // Ajout des commandes utilisables dans l'application
             builder.Services.AddSingleton<Manager>();
             // Ajout des commandes de l'utilisateurs
             builder.Services.AddSingleton<UserServiceVM>();
+            // Ajout des commndes de clients
             builder.Services.AddSingleton<CustomerServiceVM>();
+            // Ajout des commandes de contact
             builder.Services.AddSingleton<ContactServiceVM>();
             // Ajout des commandes de l'utilisateur courant
             builder.Services.AddSingleton<CurrentUserServiceVM>();
-            // Ajout des commandes de connexion
+            // Ajout des commandes de laboratoire
+            builder.Services.AddSingleton<LaboratoryServiceVM>();
+            // Ajout des commandes de connexion / déconnexion
             builder.Services.AddTransient<LoginServiceVM>();
+            
 
 
             // Gestion des injection de views 
@@ -50,17 +58,25 @@ namespace SoftEtalonnageMultiPlateforme
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<UserCatalogue>();
             builder.Services.AddSingleton<CustomerCatalogue>();
+            builder.Services.AddSingleton<LaboratoryCatalogue>();
+            builder.Services.AddSingleton<ContactCatalogue>();
+
             builder.Services.AddTransient<LoginPage>();
+
             builder.Services.AddTransient<UserInfo>();
             builder.Services.AddTransient<UserUpdate>();
             builder.Services.AddTransient<CreateUserPage>();
+
             builder.Services.AddTransient<CustomerUpdate>();
             builder.Services.AddTransient<CreateCustomerPage>();
-            builder.Services.AddSingleton<ContactCatalogue>();
+            
             builder.Services.AddTransient<CreateContactPage>();
             builder.Services.AddTransient<ContactUpdate>();
-            builder.Services.AddTransient<CreateContactPage>();
 
+            builder.Services.AddTransient<CreateLaboratoryPage>();
+            builder.Services.AddTransient<UpdateLaboratory>();
+
+            builder.Services.AddTransient<TraitementSelection>();
 
 
 #endif

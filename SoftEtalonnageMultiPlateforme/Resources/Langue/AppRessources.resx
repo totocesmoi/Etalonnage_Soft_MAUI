@@ -154,7 +154,7 @@
     <value>Role</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
-    <value>Create an user</value>
+    <value>Create user</value>
   </data>
   <data name="BackPage" xml:space="preserve">
     <value>Back</value>
@@ -196,7 +196,7 @@
     <value>Update User Page</value>
   </data>
   <data name="CreateUserPage" xml:space="preserve">
-    <value>Create User Page</value>
+    <value>Create User Section</value>
   </data>
   <data name="MainPage" xml:space="preserve">
     <value>Main Page</value>
@@ -207,43 +207,34 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
-  <data name="AddCustomer" xml:space="preserve">
-    <value>Add Customer</value>
+  <data name="Signature" xml:space="preserve">
+    <value>Numeric Signature</value>
   </data>
-  <data name="ContactInfo" xml:space="preserve">
-    <value>Contact Informations</value>
+  <data name="CreateLaboratory" xml:space="preserve">
+    <value>Create Laboratory</value>
   </data>
-  <data name="CreateCustomer" xml:space="preserve">
-    <value>Create Customer</value>
+  <data name="CreateLaboratoryPage" xml:space="preserve">
+    <value>Create Laboratory Section</value>
   </data>
-  <data name="CreateCustomerPage" xml:space="preserve">
-    <value>Create Customer Page</value>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
   </data>
-  <data name="DeleteCustomer" xml:space="preserve">
-    <value>Delete Customer</value>
+  <data name="SignCompany" xml:space="preserve">
+    <value>Company stamp</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="LaboritoryLocation" xml:space="preserve">
+    <value>Laboratory location</value>
   </data>
-  <data name="EnterAddress" xml:space="preserve">
-    <value>Enter your address</value>
+  <data name="AddLaboratory" xml:space="preserve">
+    <value>Add Laboratory</value>
   </data>
-  <data name="EnterEmail" xml:space="preserve">
-    <value>Enter your email</value>
+  <data name="UpdateLaboratory" xml:space="preserve">
+    <value>Update Laboratory</value>
   </data>
-  <data name="EnterPhoneNumber" xml:space="preserve">
-    <value>Enter your phone number</value>
+  <data name="DeleteLaboratory" xml:space="preserve">
+    <value>Delete Laboratory</value>
   </data>
-  <data name="PhNum" xml:space="preserve">
-    <value>Phone Number</value>
-  </data>
-  <data name="UpdateCustomer" xml:space="preserve">
-    <value>Upadet Customer</value>
-  </data>
-  <data name="UpdateCustomerPage" xml:space="preserve">
-    <value>Update Customer Page</value>
-  </data>
-  <data name="AddContact" xml:space="preserve">
-    <value>Add client contact info</value>
+  <data name="UpdateLaboratoryPage" xml:space="preserve">
+    <value>Update Laboratory Section</value>
   </data>
 </root>
