@@ -62,7 +62,6 @@
                         </Button.GestureRecognizers>
                     </Button>
                         
-                        
                     <Button 
                         Text="{language:LocalizedStringExtension Key=Cancel}" />
 

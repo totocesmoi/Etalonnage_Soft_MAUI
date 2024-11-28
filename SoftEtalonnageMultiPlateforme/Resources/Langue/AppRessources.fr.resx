@@ -154,7 +154,7 @@
     <value>Rôle</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
-    <value>Créer un nouvel utilisateur</value>
+    <value>Créer un utilisateur</value>
   </data>
   <data name="BackPage" xml:space="preserve">
     <value>Retour</value>
@@ -195,7 +195,7 @@
   <data name="UpdateUserPage" xml:space="preserve">
     <value>Page de modification utilisateur</value>
   </data>
-  <data name="CreateUserPae" xml:space="preserve">
+  <data name="CreateUserPage" xml:space="preserve">
     <value>Page ajout utilisateur</value>
   </data>
   <data name="MainPage" xml:space="preserve">
@@ -209,5 +209,32 @@
   </data>
   <data name="Signature" xml:space="preserve">
     <value>Signature numérique</value>
+  </data>
+  <data name="CreateLaboratory" xml:space="preserve">
+    <value>Créer un laboratoire</value>
+  </data>
+  <data name="CreateLaboratoryPage" xml:space="preserve">
+    <value>Page ajout laboratoire</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="SignCompany" xml:space="preserve">
+    <value>Cachet d'entreprise</value>
+  </data>
+  <data name="LaboritoryLocation" xml:space="preserve">
+    <value>Précision sur l'adresse du laboratoire</value>
+  </data>
+  <data name="AddLaboratory" xml:space="preserve">
+    <value>Ajout du laboratoire</value>
+  </data>
+  <data name="UpdateLaboratory" xml:space="preserve">
+    <value>Modifier le laboratoire</value>
+  </data>
+  <data name="DeleteLaboratory" xml:space="preserve">
+    <value>Supprimer le laboratoire</value>
+  </data>
+  <data name="UpdateLaboratoryPage" xml:space="preserve">
+    <value>Page de modification du laboratoire</value>
   </data>
 </root>

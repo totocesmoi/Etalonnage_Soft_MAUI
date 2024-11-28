@@ -14,7 +14,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <VerticalStackLayout Padding="10">
+    <ScrollView Padding="10">
         <VerticalStackLayout>
             <Label Text="{language:LocalizedStringExtension Key=Name}" />
             <Entry Text="{Binding CurrentUser.Name, Mode=TwoWay}" Placeholder="{language:LocalizedStringExtension Key=EnterName}" />
@@ -45,5 +45,5 @@
                 
             </HorizontalStackLayout>
         </VerticalStackLayout>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

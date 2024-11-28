@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Laboratory.CreateLaboratoryPage"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
+             Title="{language:LocalizedStringExtension Key=CreateUserPage}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Default"
+                    VerticalScrollBarVisibility="Default">
+
+            <VerticalStackLayout Padding="20" Spacing="10">
+                <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=Name}"
+                Text="{Binding SelectedLaboratory.NameLaboratory}"/>
+
+                <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=Address}" 
+                Text="{Binding SelectedLaboratory.AdressLaboratory}"/>
+
+                <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=LaboritoryLocation}" 
+                Text="{Binding SelectedLaboratory.LaboritoryLocation}"/>
+
+                <Label Text="{language:LocalizedStringExtension Key=SignCompany}" />
+                <Grid ColumnDefinitions="*,2*">
+                    <Button Text="{language:LocalizedStringExtension Key=UploadSignature}"
+                            Command="{Binding SelectSignatureCommand}" 
+                            Grid.Column="0"/>
+
+                    <Image Source="{Binding SelectedLaboratory.CachetEntreprise.ImageData, Converter={StaticResource ByteArrayToImageConverter}}" 
+                           HeightRequest="100" 
+                           WidthRequest="100" 
+                           Grid.Column="1"/>
+                </Grid>
+
+
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                    <Button 
+                    Text="{language:LocalizedStringExtension Key=AddLaboratory}">
+                        <Button.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InsertLaboratory}" />
+                        </Button.GestureRecognizers>
+                    </Button>
+
+                    <Button 
+                    Text="{language:LocalizedStringExtension Key=Cancel}" />
+                </HorizontalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

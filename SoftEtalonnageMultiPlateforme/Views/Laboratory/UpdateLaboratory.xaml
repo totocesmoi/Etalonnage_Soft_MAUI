@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SoftEtalonnageMultiPlateforme.Views.Laboratory.UpdateLaboratory"
+             xmlns:local="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Laboratory"
+             xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
+             xmlns:converters="clr-namespace:SoftEtalonnageMultiPlateforme.Converters"
+             Background="{DynamicResource Background}"
+             Title="{language:LocalizedStringExtension Key=UpdateLaboratoryPage}"
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ByteArrayToImageConverter x:Key="ByteArrayToImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout Padding="10">
+        <VerticalStackLayout>
+            <Label Text="{language:LocalizedStringExtension Key=Name}" />
+            <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=Name}"
+                Text="{Binding SelectedLaboratory.NameLaboratory, Mode=TwoWay}"/>
+
+            <Label Text="{language:LocalizedStringExtension Key=Address}"/>
+            <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=Address}" 
+                Text="{Binding SelectedLaboratory.AdressLaboratory, Mode=TwoWay}"/>
+
+            <Label Text="{language:LocalizedStringExtension Key=LaboritoryLocation}" />
+            <Entry 
+                Placeholder="{language:LocalizedStringExtension Key=LaboritoryLocation}" 
+                Text="{Binding SelectedLaboratory.LaboritoryLocation, Mode=TwoWay}"/>
+
+            <Label Text="{language:LocalizedStringExtension Key=SignCompany}" />
+            <Grid ColumnDefinitions="*,2*">
+                <Button Text="{language:LocalizedStringExtension Key=UploadSignature}"
+                        Command="{Binding SelectSignatureCommand}" 
+                        Grid.Column="0"/>
+
+                <Image Source="{Binding SelectedLaboratory.CachetEntreprise.ImageData, Converter={StaticResource ByteArrayToImageConverter}}" 
+                       HeightRequest="100" 
+                       WidthRequest="100" 
+                       Grid.Column="1"/>
+            </Grid>
+
+
+            <Grid ColumnDefinitions="*,2*,*,2*,*">
+                <Button Text="{language:LocalizedStringExtension Key=UpdateLaboratory}"
+                        Command="{Binding UpdateLaboratory}"
+                        CommandParameter="{Binding SelectedLaboratory}" 
+                        Grid.Column="1"/>
+
+                <Button Grid.Column="3"
+                        Text="{language:LocalizedStringExtension Key=DeleteLaboratory}">
+                    <Button.GestureRecognizers>
+                        <TapGestureRecognizer  Command="{Binding DeleteLaboratory}"/>
+                    </Button.GestureRecognizers>
+                </Button>
+            </Grid>
+            
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+
+</ContentPage>

@@ -50,6 +50,7 @@ namespace VMService
             InsertLaboratory = new AsyncRelayCommand(InsertLaboratoryAsync, CanInsertLaboratory);
             UpdateLaboratory = new AsyncRelayCommand<LaboratoryVM>(UpdateLaboratoryAsync, CanUpdateLaboratory);
             DeleteLaboratory = new AsyncRelayCommand(DeleteLaboratoryAsync, CanDeleteLaboratory);
+            SelectSignatureCommand = new AsyncRelayCommand(SelectSignatureAsync);
         }
 
         /// <summary>
@@ -153,7 +154,10 @@ namespace VMService
                 throw new Exception("An error occured during the User creation");
         }
 
-        private bool CanInsertLaboratory() => selectedLaboratory != null && !string.IsNullOrEmpty(selectedLaboratory.NameLaboratory);
+        private bool CanInsertLaboratory() => selectedLaboratory != null 
+            && !string.IsNullOrEmpty(selectedLaboratory.NameLaboratory)
+            && !string.IsNullOrEmpty(selectedLaboratory.AdressLaboratory)
+            && !string.IsNullOrEmpty(selectedLaboratory.LaboritoryLocation);
 
         /// <summary>
         /// Commande pour mettre à jour un laboratoire
@@ -198,7 +202,7 @@ namespace VMService
         {
             try
             {
-                if (await service.DeleteUser(SelectedLaboratory.LaboratoryModel.Name))
+                if (await service.DeleteLaboratory(SelectedLaboratory.LaboratoryModel.Name))
                 {
                     laboratories.Remove(SelectedLaboratory);
                     SelectedLaboratory = null!;
@@ -220,5 +224,33 @@ namespace VMService
         }
 
         private bool CanDeleteLaboratory() => SelectedLaboratory != null && service.CurrentUser != null && service.CurrentUser.UserRole == Role.Administrator;
+
+        /// <summary>
+        /// Commande pour sélectionner une image de signature
+        /// </summary>
+        public IAsyncRelayCommand SelectSignatureCommand { get; private set; }
+        private async Task SelectSignatureAsync()
+        {
+            try
+            {
+                var result = await FilePicker.PickAsync(new PickOptions
+                {
+                    PickerTitle = "Please select a signature image",
+                    FileTypes = FilePickerFileType.Images
+                });
+
+                if (result != null)
+                {
+                    using var stream = await result.OpenReadAsync();
+                    var memoryStream = new MemoryStream();
+                    await stream.CopyToAsync(memoryStream);
+                    SelectedLaboratory.CachetEntreprise = new Picture(memoryStream.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"An error occured during the selection of the signature : {ex.Message}");
+            }
+        }
     }
 }

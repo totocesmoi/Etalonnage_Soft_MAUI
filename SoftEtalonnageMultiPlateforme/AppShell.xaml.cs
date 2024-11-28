@@ -4,6 +4,7 @@ using SoftEtalonnageMultiPlateforme.Resources.Theme;
 using SoftEtalonnageMultiPlateforme.Views;
 using SoftEtalonnageMultiPlateforme.Views.UserPage;
 using SoftEtalonnageMultiPlateforme.Views.PostTraitement;
+using SoftEtalonnageMultiPlateforme.Views.Laboratory;
 using VMService;
 
 namespace SoftEtalonnageMultiPlateforme
@@ -21,6 +22,9 @@ namespace SoftEtalonnageMultiPlateforme
 
             Routing.RegisterRoute("CustomerUpdate", typeof(CustomerUpdate));
             Routing.RegisterRoute("CreateCustomerPage", typeof(CreateCustomerPage));
+
+            Routing.RegisterRoute("CreateLaboratoryPage", typeof(CreateLaboratoryPage));
+            Routing.RegisterRoute("UpdateLaboratory", typeof(UpdateLaboratory));
 
             Routing.RegisterRoute("PostTraitementSection", typeof(PostTraitementSection));
 

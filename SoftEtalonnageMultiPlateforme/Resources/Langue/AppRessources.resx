@@ -154,7 +154,7 @@
     <value>Role</value>
   </data>
   <data name="CreateUser" xml:space="preserve">
-    <value>Create an user</value>
+    <value>Create user</value>
   </data>
   <data name="BackPage" xml:space="preserve">
     <value>Back</value>
@@ -195,8 +195,8 @@
   <data name="UpdateUserPage" xml:space="preserve">
     <value>Update User Page</value>
   </data>
-  <data name="CreateUserPae" xml:space="preserve">
-    <value>Create User Page</value>
+  <data name="CreateUserPage" xml:space="preserve">
+    <value>Create User Section</value>
   </data>
   <data name="MainPage" xml:space="preserve">
     <value>Main Page</value>
@@ -209,5 +209,32 @@
   </data>
   <data name="Signature" xml:space="preserve">
     <value>Numeric Signature</value>
+  </data>
+  <data name="CreateLaboratory" xml:space="preserve">
+    <value>Create Laboratory</value>
+  </data>
+  <data name="CreateLaboratoryPage" xml:space="preserve">
+    <value>Create Laboratory Section</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="SignCompany" xml:space="preserve">
+    <value>Company stamp</value>
+  </data>
+  <data name="LaboritoryLocation" xml:space="preserve">
+    <value>Laboratory location</value>
+  </data>
+  <data name="AddLaboratory" xml:space="preserve">
+    <value>Add Laboratory</value>
+  </data>
+  <data name="UpdateLaboratory" xml:space="preserve">
+    <value>Update Laboratory</value>
+  </data>
+  <data name="DeleteLaboratory" xml:space="preserve">
+    <value>Delete Laboratory</value>
+  </data>
+  <data name="UpdateLaboratoryPage" xml:space="preserve">
+    <value>Update Laboratory Section</value>
   </data>
 </root>

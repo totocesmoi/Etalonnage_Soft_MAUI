@@ -7,6 +7,7 @@
     xmlns:Flyout="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Composant.Flyout"
     xmlns:picker="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Picker"
     xmlns:views="clr-namespace:SoftEtalonnageMultiPlateforme.Views"
+    xmlns:laboratory="clr-namespace:SoftEtalonnageMultiPlateforme.Views.Laboratory"
     xmlns:user="clr-namespace:SoftEtalonnageMultiPlateforme.Views.UserPage"
     xmlns:test="clr-namespace:SoftEtalonnageMultiPlateforme.Views.PostTraitement"
     Shell.FlyoutBehavior="Flyout"
@@ -51,6 +52,10 @@
 
     <ShellContent Title="CreateCustomerUpdate" ContentTemplate="{DataTemplate views:CreateCustomerPage}" Route="CreateCustomerPage"/>
 
+    <ShellContent Title="CreateLaboratoryPage" ContentTemplate="{DataTemplate laboratory:CreateLaboratoryPage}" Route="CreateLaboratoryPage"/>
+
+    <ShellContent Title="UpdateLaboratory" ContentTemplate="{DataTemplate laboratory:UpdateLaboratory}" Route="UpdateLaboratory"/>
+
     <ShellContent Title="Post Traitement" ContentTemplate="{DataTemplate test:PostTraitementSection}" Route="PostTraitementSection"/>
     
 
@@ -59,6 +64,7 @@
         <ShellContent Title="User Personal Information" ContentTemplate="{DataTemplate user:UserInfo}" Route="UserInfo"/>
         <ShellContent Title="UserCatalogue" ContentTemplate="{DataTemplate user:UserCatalogue}" Route="UserCatalogue"/>
         <ShellContent Title="CustomerCatalogue" ContentTemplate="{DataTemplate views:CustomerCatalogue}" Route="CustomerCatalogue"/>
+        <ShellContent Title="LaboratoryCatalogue" ContentTemplate="{DataTemplate laboratory:LaboratoryCatalogue}" Route="LaboratoryCatalogue"/>
         <ShellContent Title="Test Selection" ContentTemplate="{DataTemplate test:TraitementSelection}" Route="TraitementSelection"/>
     </TabBar>
 </Shell>

@@ -28,7 +28,7 @@ namespace VMWrapper
             NameLaboratory = laboratoryModel.Name;
             AdressLaboratory = laboratoryModel.Address;
             LaboritoryLocation = laboratoryModel.LaboritoryLocation;
-            CachetEntreprise = laboratoryModel.CachetEntreprise;
+            CachetEntreprise = laboratoryModel.CachetEntreprise ?? new Picture();
         }
 
         [ObservableProperty]
