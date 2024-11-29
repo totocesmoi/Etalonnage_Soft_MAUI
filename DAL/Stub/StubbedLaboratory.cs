@@ -22,8 +22,8 @@ namespace DAL.Stub
             string filePathUsers;
 
 #if WINDOWS
-            directoryPath = Path.Combine("C:", "Soft_Etalonnage", "Configuration");
-            filePathUsers = Path.Combine(directoryPath, "laboratories.xml");
+                directoryPath = Path.Combine("C:", "Soft_Etalonnage", "Configuration");
+                filePathUsers = Path.Combine(directoryPath, "laboratories.xml");
 #else
             directoryPath = FileSystem.AppDataDirectory;
             filePathUsers = Path.Combine(directoryPath, "laboratories.xml");
@@ -57,7 +57,7 @@ namespace DAL.Stub
                     }
                 }
             }
-            // On sauvearde le Path de manière globale a l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'applcation
+            // On sauvegarde le Path de manière globale à l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'application
             laboratoryPath = filePathUsers;
         }
 
@@ -92,31 +92,34 @@ namespace DAL.Stub
             LaboratoryCollection.Items.Add(newLaboratory);
         }
 
+        // Méthodes sans paramètre customerName
+        public async Task<Pagination<Laboratory>> GetAsyncAllObject(int index, int count)
+        {
+            return await GetAsyncAllObject(index, count, null);
+        }
+
+        public async Task<Laboratory> GetObjectAsyncById(string id)
+        {
+            return await GetObjectAsyncById(id, null);
+        }
+
         public async Task<bool> CreateObject(Laboratory genericObject)
         {
-            if (LaboratoryCollection.Items.Any(u => u.Name == genericObject.Name))
-            {
-                return await Task.FromResult(false);
-            }
+            return await CreateObject(genericObject, null);
+        }
 
-            LaboratoryCollection.Items.Add(genericObject);
-            LaboratoryCollection.SaveToFile(laboratoryPath);
-            return await Task.FromResult(true);
+        public async Task<Laboratory> UpdateObject(Laboratory genericObject)
+        {
+            return await UpdateObject(genericObject, null);
         }
 
         public async Task<bool> DeleteObject(string id)
         {
-            var existingLaboratory = LaboratoryCollection.Items.FirstOrDefault(u => u.Name == id);
-            if (existingLaboratory != null)
-            {
-                LaboratoryCollection.Items.Remove(existingLaboratory);
-                LaboratoryCollection.SaveToFile(laboratoryPath);
-                return await Task.FromResult(true);
-            }
-            return await Task.FromResult(false);
+            return await DeleteObject(id, null);
         }
 
-        public async Task<Pagination<Laboratory>> GetAsyncAllObject(int index, int count)
+        // Méthodes avec paramètre customerName
+        public async Task<Pagination<Laboratory>> GetAsyncAllObject(int index, int count, string? customerName)
         {
             var laboratories = LaboratoryCollection.Items.Skip(index * count).Take(count).ToList();
             var pagination = new Pagination<Laboratory>
@@ -129,13 +132,25 @@ namespace DAL.Stub
             return await Task.FromResult(pagination);
         }
 
-        public async Task<Laboratory> GetObjectAsyncById(string id)
+        public async Task<Laboratory> GetObjectAsyncById(string id, string? customerName)
         {
             var laboratory = LaboratoryCollection.Items.FirstOrDefault(u => u.Name == id);
             return await Task.FromResult(laboratory ?? null!);
         }
 
-        public async Task<Laboratory> UpdateObject(Laboratory genericObject)
+        public async Task<bool> CreateObject(Laboratory genericObject, string? customerName)
+        {
+            if (LaboratoryCollection.Items.Any(u => u.Name == genericObject.Name))
+            {
+                return await Task.FromResult(false);
+            }
+
+            LaboratoryCollection.Items.Add(genericObject);
+            LaboratoryCollection.SaveToFile(laboratoryPath);
+            return await Task.FromResult(true);
+        }
+
+        public async Task<Laboratory> UpdateObject(Laboratory genericObject, string? customerName)
         {
             var existingLaboratory = LaboratoryCollection.Items.FirstOrDefault(u => u.Name == genericObject.Name);
             if (existingLaboratory != null)
@@ -149,6 +164,18 @@ namespace DAL.Stub
                 return await Task.FromResult(existingLaboratory);
             }
             return await Task.FromResult<Laboratory>(null!);
+        }
+
+        public async Task<bool> DeleteObject(string id, string? customerName)
+        {
+            var existingLaboratory = LaboratoryCollection.Items.FirstOrDefault(u => u.Name == id);
+            if (existingLaboratory != null)
+            {
+                LaboratoryCollection.Items.Remove(existingLaboratory);
+                LaboratoryCollection.SaveToFile(laboratoryPath);
+                return await Task.FromResult(true);
+            }
+            return await Task.FromResult(false);
         }
     }
 }

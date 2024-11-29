@@ -23,8 +23,8 @@ namespace DAL.Stub
             string filePathUsers;
 
 #if WINDOWS
-            directoryPath = Path.Combine("C:", "Soft_Etalonnage", "Configuration");
-            filePathUsers = Path.Combine(directoryPath, "users.xml");
+                directoryPath = Path.Combine("C:", "Soft_Etalonnage", "Configuration");
+                filePathUsers = Path.Combine(directoryPath, "users.xml");
 #else
             directoryPath = FileSystem.AppDataDirectory;
             filePathUsers = Path.Combine(directoryPath, "users.xml");
@@ -62,12 +62,12 @@ namespace DAL.Stub
                     }
                 }
             }
-            // On sauvearde le Path de manière globale a l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'applcation
+            // On sauvegarde le Path de manière globale à l'application ici, puisqu'on ne peut pas l'utiliser avant le build de l'application
             userPath = filePathUsers;
         }
 
         /// <summary>
-        /// Utilisateurs par défaut pour ne pas bloqué la connexion durant les tests
+        /// Utilisateurs par défaut pour ne pas bloquer la connexion durant les tests
         /// </summary>
         private static void InitializeUsers()
         {
@@ -86,13 +86,34 @@ namespace DAL.Stub
             Console.WriteLine("User created: " + newUser.Login);
         }
 
-        /// <summary>
-        /// Permet de récupérer tout les utilsateurs
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
+        // Méthodes sans paramètre customerName
         public async Task<Pagination<User>> GetAsyncAllObject(int index, int count)
+        {
+            return await GetAsyncAllObject(index, count, null);
+        }
+
+        public async Task<User> GetObjectAsyncById(string id)
+        {
+            return await GetObjectAsyncById(id, null);
+        }
+
+        public async Task<bool> CreateObject(User genericObject)
+        {
+            return await CreateObject(genericObject, null);
+        }
+
+        public async Task<User> UpdateObject(User genericObject)
+        {
+            return await UpdateObject(genericObject, null);
+        }
+
+        public async Task<bool> DeleteObject(string id)
+        {
+            return await DeleteObject(id, null);
+        }
+
+        // Méthodes avec paramètre customerName
+        public async Task<Pagination<User>> GetAsyncAllObject(int index, int count, string? customerName)
         {
             var users = UserCollection.Items.Skip(index * count).Take(count).ToList();
             var pagination = new Pagination<User>
@@ -105,23 +126,13 @@ namespace DAL.Stub
             return await Task.FromResult(pagination);
         }
 
-        /// <summary>
-        /// Permet de récupérer un utilisateur par son login
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public async Task<User> GetObjectAsyncById(string id)
+        public async Task<User> GetObjectAsyncById(string id, string? customerName)
         {
             var user = UserCollection.Items.FirstOrDefault(u => u.Login == id);
             return await Task.FromResult(user) ?? null!;
         }
 
-        /// <summary>
-        /// Permet de créer un utilisateur
-        /// </summary>
-        /// <param name="genericObject"></param>
-        /// <returns></returns>
-        public async Task<bool> CreateObject(User genericObject)
+        public async Task<bool> CreateObject(User genericObject, string? customerName)
         {
             genericObject.Login = genericObject.GenerateLogin(genericObject.Surname, genericObject.Name);
             if (UserCollection.Items.Any(u => u.Login == genericObject.Login))
@@ -135,14 +146,8 @@ namespace DAL.Stub
             return await Task.FromResult(true);
         }
 
-        /// <summary>
-        /// Permet de mettre à jour un utilisateur
-        /// </summary>
-        /// <param name="genericObject"></param>
-        /// <returns> l'utilsateur modifier</returns>
-        public async Task<User> UpdateObject(User genericObject)
+        public async Task<User> UpdateObject(User genericObject, string? customerName)
         {
-
             var existingUser = UserCollection.Items.FirstOrDefault(u => u.Login == genericObject.Login);
             if (existingUser != null)
             {
@@ -154,12 +159,7 @@ namespace DAL.Stub
             return await Task.FromResult<User>(null!);
         }
 
-        /// <summary>
-        /// Permet de supprimer un utilisateur
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>true ou false</returns>
-        public async Task<bool> DeleteObject(string id)
+        public async Task<bool> DeleteObject(string id, string? customerName)
         {
             var existingUser = UserCollection.Items.FirstOrDefault(u => u.Login == id);
             if (existingUser != null)

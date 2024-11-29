@@ -89,15 +89,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Update="Resources\Langue\AppRessources.fr.resx">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</EmbeddedResource>
-		<EmbeddedResource Update="Resources\Langue\AppRessources.resx">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Resources\Langue\LocalizationDictionary.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

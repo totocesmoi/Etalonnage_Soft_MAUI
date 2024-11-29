@@ -13,21 +13,26 @@ namespace DAL.Stub
 
         public ICRUDService<Laboratory> LaboratoryService { get; set; }
 
-        public ICustomerService<Customer> CustomerService { get; set; }
+        public ICRUDService<Customer> CustomerService { get; set; }
 
-        public IContactService<Model.Contacts> ContactService { get; set; }
+        public ICRUDService<Model.Contacts> ContactService { get; set; }
 
-        public IMachineService<Machine> MachineService { get; set; }
-        
+        public ICRUDService<Machine> MachineService { get; set; }
+
         public IPostTraitementService<PostTraitement> PostTraitementService { get; set; }
-
 
         public StubbedData()
         {
             UserService = new StubbedUser();
-            CustomerService = new StubbedCustomer();
+            // Ici je suis obligé de créer un StubbedCustomer pour pouvoir instancier un StubbedMachine et un StubbedContact
+            var stubbedCustomer = new StubbedCustomer();
+            CustomerService = stubbedCustomer;
+
             PostTraitementService = new StubbedPostTraitement();
             LaboratoryService = new StubbedLaboratory();
+
+            MachineService = new StubbedMachine(stubbedCustomer);
+            ContactService = new StubbedContact(stubbedCustomer);
         }
 
         public bool login(string login, string password)
@@ -91,79 +96,79 @@ namespace DAL.Stub
 
         public Task<Pagination<Customer>> GetAsyncAllCustomer(int index, int count)
         {
-            return CustomerService.GetAsyncAllCustomer(index, count);
+            return CustomerService.GetAsyncAllObject(index, count);
         }
 
         public Task<Customer> GetAsyncByName(string name)
         {
-            return CustomerService.GetAsyncByName(name);
+            return CustomerService.GetObjectAsyncById(name);
         }
 
         public Task<bool> CreateAsyncCustomer(Customer customer)
         {
-            return CustomerService.CreateCustomer(customer);
+            return CustomerService.CreateObject(customer);
         }
 
         public Task<Customer> UpdateAsyncCustomer(Customer customer)
         {
-            return CustomerService.UpdateCustomer(customer);
+            return CustomerService.UpdateObject(customer);
         }
 
         public Task<bool> DeleteAsyncCustomer(string name)
         {
-            return CustomerService.DeleteCustomer(name);
+            return CustomerService.DeleteObject(name);
         }
 
         // Gestion des contacts
         public Task<Pagination<Model.Contacts>> GetAsyncAllContact(int index, int count, string name)
         {
-            return ContactService.GetAsyncAllContact(index, count, name);
+            return ContactService.GetAsyncAllObject(index, count, name);
         }
 
         public Task<Model.Contacts> GetContactsByCustomer(string name)
         {
-            return ContactService.GetAsyncByCustomerName(name);
+            return ContactService.GetObjectAsyncById(name);
         }
 
         public Task<bool> CreateAsyncContact(Model.Contacts contact)
         {
-            return ContactService.CreateContact(contact);
+            return ContactService.CreateObject(contact);
         }
 
         public Task<Model.Contacts> UpdateAsyncContact(Model.Contacts contact)
         {
-            return ContactService.UpdateContact(contact);
+            return ContactService.UpdateObject(contact);
         }
 
         public Task<bool> DeleteAsyncContact(string name)
         {
-            return ContactService.DeleteContact(name);
+            return ContactService.DeleteObject(name);
         }
 
         // Gestion des machines
         public Task<Pagination<Machine>> GetAsyncAllMachines(int index, int count)
         {
-            return MachineService.GetAsyncAllMachines(index, count);
+            return MachineService.GetAsyncAllObject(index, count);
         }
 
         public Task<Machine> GetAsyncByReference(string reference)
         {
-            return MachineService.GetAsyncByReference(reference);
+            return MachineService.GetObjectAsyncById(reference);
         }
 
         public Task<bool> CreateAsyncMachine(Machine machine)
         {
-            return MachineService.CreateMachine(machine);
+            return MachineService.CreateObject(machine);
         }
 
         public Task<Machine> UpdateAsyncMachine(Machine machine)
         {
-            return MachineService.UpdateMachine(machine);
+            return MachineService.UpdateObject(machine);
         }
 
         public Task<bool> DeleteAsyncMachine(string reference)
         {
-            return MachineService.DeleteMachine(reference);
+            return MachineService.DeleteObject(reference);
         }
 
         public Task<bool> CreateAsyncPostTraitement(PostTraitement postTraitement)

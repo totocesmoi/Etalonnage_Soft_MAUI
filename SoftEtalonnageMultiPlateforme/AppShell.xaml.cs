@@ -22,13 +22,9 @@ namespace SoftEtalonnageMultiPlateforme
 
             Routing.RegisterRoute("CustomerUpdate", typeof(CustomerUpdate));
             Routing.RegisterRoute("CreateCustomerPage", typeof(CreateCustomerPage));
-            //Routing.RegisterRoute("CustomerCatalogue", typeof(CustomerCatalogue));
 
-            Routing.RegisterRoute("ContactCatalogue", typeof(ContactCatalogue));
             Routing.RegisterRoute("ContactUpdate", typeof(ContactUpdate));
             Routing.RegisterRoute("CreateContactPage", typeof(CreateContactPage));
-
-
 
             Routing.RegisterRoute("CreateLaboratoryPage", typeof(CreateLaboratoryPage));
             Routing.RegisterRoute("UpdateLaboratory", typeof(UpdateLaboratory));

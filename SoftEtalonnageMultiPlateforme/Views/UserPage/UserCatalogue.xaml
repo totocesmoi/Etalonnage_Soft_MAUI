@@ -7,9 +7,11 @@
              xmlns:language="clr-namespace:SoftEtalonnageMultiPlateforme.Resources.Langue"
              Title="{language:LocalizedStringExtension Key=UserCatalogue}"
              Background="{DynamicResource Background}">
+    
     <ContentPage.Behaviors>
         <toolkit:EventToCommandBehavior EventName="Appearing" Command="{Binding LoadUsers}" />
     </ContentPage.Behaviors>
+    
     <VerticalStackLayout>
         <ScrollView HorizontalOptions="FillAndExpand" HorizontalScrollBarVisibility="Default">
             <CollectionView ItemsSource="{Binding Users}"
@@ -22,22 +24,11 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
-<<<<<<< HEAD:SoftEtalonnageMultiPlateforme/Views/UserCatalogue.xaml
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Créer un utilisateur"
-                Margin="50"
-            Command="{Binding CreateUser}"
-            CommandParameter="CreateUserPage" />
-=======
-
+        
         <Button Text="{language:LocalizedStringExtension Key=CreateUser}"
                 Margin="50"
             Command="{Binding CreateUser}"
             CommandParameter="CreateUserPage" />
         
->>>>>>> python_script:SoftEtalonnageMultiPlateforme/Views/UserPage/UserCatalogue.xaml
     </VerticalStackLayout>
 </ContentPage>
